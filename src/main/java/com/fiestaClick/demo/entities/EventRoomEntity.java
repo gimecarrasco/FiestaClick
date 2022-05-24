@@ -1,6 +1,7 @@
 
 package com.fiestaClick.demo.entities;
 
+import com.fiestaClick.demo.Enum.City;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
-
 
 @Entity
 public class EventRoomEntity {
@@ -19,6 +19,7 @@ public class EventRoomEntity {
     private String Id;
     private Integer capacity;
     private String adress;
+    private City city;
     private String name;
     private Boolean register;
     private String description;
@@ -28,16 +29,14 @@ public class EventRoomEntity {
     private Date date;
     private String picture;
     private Double price;
-    
-//    @OneToOne
-//    private Party party;
 
     public EventRoomEntity() {
     }
 
-    public EventRoomEntity(Integer capacity, String adress, String name, Boolean register, String description, String decor, Date date, String picture, Double price) {
+    public EventRoomEntity(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, String picture, Double price) {
         this.capacity = capacity;
         this.adress = adress;
+        this.city = city;
         this.name = name;
         this.register = register;
         this.description = description;
@@ -55,8 +54,6 @@ public class EventRoomEntity {
         this.Id = Id;
     }
 
-    
-
     public Integer getCapacity() {
         return capacity;
     }
@@ -71,6 +68,14 @@ public class EventRoomEntity {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getName() {
@@ -128,4 +133,11 @@ public class EventRoomEntity {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "EventRoomEntity{" + "capacity=" + capacity + ", adress=" + adress + ", city=" + city + ", name=" + name + ", register=" + register + ", description=" + description + ", decor=" + decor + ", date=" + date + ", picture=" + picture + ", price=" + price + '}';
+    }
+    
+    
 }
