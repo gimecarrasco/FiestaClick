@@ -1,4 +1,3 @@
-
 package com.fiestaClick.demo.entities;
 
 import com.fiestaClick.demo.Enum.City;
