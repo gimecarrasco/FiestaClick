@@ -15,7 +15,7 @@ public class UserEntity {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private String names;
+    private String name;
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     private String email;
@@ -25,8 +25,8 @@ public class UserEntity {
     public UserEntity() {
     }
     
-    public UserEntity(String names, Date dateOfBirth, String email, String password, Boolean register) {
-        this.names = names;
+    public UserEntity(String name, Date dateOfBirth, String email, String password, Boolean register) {
+        this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
@@ -42,11 +42,11 @@ public class UserEntity {
     }
 
     public String getName() {
-        return names;
+        return name;
     }
 
-    public void setName(String names) {
-        this.names = names;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDateOfBirth() {
@@ -83,6 +83,6 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" + "names=" + names + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + '}';
+        return "UserEntity{" + "names=" + name + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + '}';
     }
 }
