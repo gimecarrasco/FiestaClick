@@ -1,6 +1,7 @@
 package com.fiestaClick.demo.entities;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,22 +32,20 @@ public class PartyEntity {
     private CateringEntity cateringEntity;
 
     @OneToMany
-    private ExtraServiceEntity extraServiceEntity;
+    private List<ExtraServiceEntity> extraServiceEntity;
 
     @OneToMany
-    private UserEntity userEntity;
-
-    @OneToOne
+    private List<UserEntity> userEntity;
+    
     @Temporal(TemporalType.DATE)
     private Date create;
 
-    @OneToOne
     private Integer total;
 
     public PartyEntity() {
     }
 
-    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, UserEntity userEntity, Date create, Integer total) {
+    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, List<UserEntity> userEntity, Date create, Integer total) {
         this.id = id;
         this.eventRoomEntity = eventRoomEntity;
         this.cateringEntity = cateringEntity;
@@ -55,6 +54,8 @@ public class PartyEntity {
         this.create = create;
         this.total = total;
     }
+
+    
 
     public String getId() {
         return id;
@@ -80,21 +81,23 @@ public class PartyEntity {
         this.cateringEntity = cateringEntity;
     }
 
-    public ExtraServiceEntity getExtraServiceEntity() {
+    public List<ExtraServiceEntity> getExtraServiceEntity() {
         return extraServiceEntity;
     }
 
-    public void setExtraServiceEntity(ExtraServiceEntity extraServiceEntity) {
+    public void setExtraServiceEntity(List<ExtraServiceEntity> extraServiceEntity) {
         this.extraServiceEntity = extraServiceEntity;
     }
 
-    public UserEntity getUserEntity() {
+    public List<UserEntity> getUserEntity() {
         return userEntity;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
+    public void setUserEntity(List<UserEntity> userEntity) {
         this.userEntity = userEntity;
     }
+
+    
 
     public Date getCreate() {
         return create;

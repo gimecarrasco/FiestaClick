@@ -1,13 +1,18 @@
 
 package com.fiestaClick.demo.entities;
 
+import com.fiestaClick.demo.enumerations.Role;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class UserEntity {
@@ -21,17 +26,34 @@ public class UserEntity {
     private String email;
     private String password;
     private Boolean register;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public UserEntity() {
     }
-    
-    public UserEntity(String name, Date dateOfBirth, String email, String password, Boolean register) {
+
+    public UserEntity(String id, String name, Date dateOfBirth, String email, String password, Boolean register, Role role) {
+        this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
         this.register = register;
+        this.role = role;
     }
+
+    public UserEntity(String email, String password, List<GrantedAuthority> permisos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }        
 
     public String getId() {
         return id;
@@ -83,6 +105,8 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" + "names=" + name + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + '}';
+        return "UserEntity{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + ", rol=" + role + '}';
     }
+
+    
 }
