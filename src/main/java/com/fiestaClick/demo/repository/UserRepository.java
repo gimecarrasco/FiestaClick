@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity,String> {
     public List <UserEntity> findByName(@Param("name") String name);
     
      @Query("SELECT u from UserEntity u WHERE u.register = true ")
-    public List<UserEntity> listCatering();
+    public List<UserEntity> listUser();
     
     
 }
