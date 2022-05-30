@@ -4,6 +4,7 @@ package com.fiestaClick.demo.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -17,23 +18,24 @@ public class CateringEntity {
     
     private String name;
     private Integer price;
-    private String description;
-    private String photo;
+    private String description;    
     private Boolean register;
+    
+    @OneToMany
+    private PhotoEntity photoEntity;
 
     public CateringEntity() {
     }
 
-    public CateringEntity(String name, Integer price, String description, String photo, Boolean register) {
+    public CateringEntity(String id, String name, Integer price, String description, Boolean register, PhotoEntity photoEntity) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.photo = photo;
         this.register = register;
-    }
-
+        this.photoEntity = photoEntity;
+    }  
  
-
     public String getId() {
         return id;
     }
@@ -66,14 +68,15 @@ public class CateringEntity {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public PhotoEntity getPhotoEntity() {
+        return photoEntity;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoEntity(PhotoEntity photoEntity) {
+        this.photoEntity = photoEntity;
     }
 
+    
     public Boolean getRegister() {
         return register;
     }
@@ -84,6 +87,8 @@ public class CateringEntity {
 
     @Override
     public String toString() {
-        return "Catering{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", photo=" + photo + ", register=" + register + '}';
+        return "CateringEntity{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", photoEntity=" + photoEntity + '}';
     }
+
+    
 }

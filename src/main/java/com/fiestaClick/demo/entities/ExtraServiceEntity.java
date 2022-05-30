@@ -4,6 +4,7 @@ package com.fiestaClick.demo.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -15,20 +16,23 @@ public class ExtraServiceEntity {
     
     private String name;
     private Integer price;
-    private String description;
-    private String photo;
+    private String description;    
     private Boolean register;
+    
+    @OneToMany  
+    private PhotoEntity photoEntity;
 
     public ExtraServiceEntity() {
     }
 
-    public ExtraServiceEntity(String name, Integer price, String description, String photo, Boolean register) {
+    public ExtraServiceEntity(String id, String name, Integer price, String description, Boolean register, PhotoEntity photoEntity) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.photo = photo;
         this.register = register;
-    }
+        this.photoEntity = photoEntity;
+    }    
 
     public String getId() {
         return id;
@@ -62,13 +66,13 @@ public class ExtraServiceEntity {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public PhotoEntity getPhotoEntity() {
+        return photoEntity;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+    public void setPhotoEntity(PhotoEntity photoEntity) {
+        this.photoEntity = photoEntity;
+    }   
 
     public Boolean getRegister() {
         return register;
@@ -80,7 +84,9 @@ public class ExtraServiceEntity {
 
     @Override
     public String toString() {
-        return "Extra{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", photo=" + photo + ", register=" + register + '}';
+        return "ExtraServiceEntity{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", photoEntity=" + photoEntity + '}';
     }
+
+    
       
 }
