@@ -54,7 +54,6 @@ public class PartyEntity {
         this.create = create;
         this.total = total;
     }
-
     
 
     public String getId() {

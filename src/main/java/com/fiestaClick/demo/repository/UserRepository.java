@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,String> {
-     @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
+    @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
     public UserEntity findByEmail(@Param("email") String email);
     
     @Query("SELECT u FROM UserEntity u WHERE u.name = :name")
-    public List <UserEntity> findByName(@Param("name") String name);
+    public List<UserEntity> findByName(@Param("name") String name);
     
 //     @Query("SELECT u from UserEntity u WHERE u.register = true ")
 //    public List<UserEntity> listCatering();
