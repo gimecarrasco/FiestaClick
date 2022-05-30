@@ -1,6 +1,7 @@
 package com.fiestaClick.demo.repository;
 
 import com.fiestaClick.demo.entities.EventRoomEntity;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,9 +19,9 @@ public interface EventRoomRepository extends JpaRepository<EventRoomEntity, Stri
     public EventRoomEntity findByName(@Param("name") String name);
     
     @Query("SELECT e FROM EvenRoomEntity e WHERE c.city = :city")
-    public EventRoomEntity findByCity(@Param("city") String city);
-    
-    @Query("SELECT e FROM EvenRoomEntity e WHERE c.adress = :adress")
-    public EventRoomEntity findByAdress(@Param("adress") String adress);
+    public List<EventRoomEntity> findByCity(@Param("city") String city);
+//    
+//    @Query("SELECT e FROM EvenRoomEntity e WHERE c.adress = :adress")
+//    public EventRoomEntity findByAdress(@Param("adress") String adress);
 }
 
