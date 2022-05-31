@@ -2,6 +2,7 @@
 package com.fiestaClick.demo.services;
 
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
+import com.fiestaClick.demo.entities.PhotoEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.ExtraServiceRepository;
 import javax.transaction.Transactional;
@@ -17,7 +18,7 @@ public class ExtraServiceService {
     
     
     
-     public void validate(String name, Integer price, String description, photo) throws Exception{
+     public void validate(String name, Integer price, String description) throws Exception{
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
@@ -27,24 +28,21 @@ public class ExtraServiceService {
        if (description == null || description.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
-        if (photo == null) {
-            throw new ErrorService("No puede ser nulo este valor");  
-        }
         
     }
     
      
      @Transactional
-    public ExtraServiceEntity save(String name, Integer price, String description,String photo) throws Exception{
+    public ExtraServiceEntity save(String name, Integer price, String description,PhotoEntity photoEntity) throws Exception{
         
-        validate(name,price,description,photo);
+        validate(name,price,description);
         
         ExtraServiceEntity extraService= new ExtraServiceEntity();
         
         extraService.setName(name);
         extraService.setPrice(price);
         extraService.setDescription(description);
-        extraService.setPhoto(photo);
+        extraService.setPhotoEntity(photoEntity);
         
         return extraServiceRepository.save(extraService);
         
