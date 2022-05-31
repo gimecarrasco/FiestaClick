@@ -17,7 +17,7 @@ public class ExtraServiceService {
     
     
     
-     public void validate(String name, Integer price, String description,String photo) throws Exception{
+     public void validate(String name, Integer price, String description, photo) throws Exception{
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
@@ -27,7 +27,7 @@ public class ExtraServiceService {
        if (description == null || description.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
-        if (photo == null || photo.trim().isEmpty()) {
+        if (photo == null) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
         
