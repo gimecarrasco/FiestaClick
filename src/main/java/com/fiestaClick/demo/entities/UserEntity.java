@@ -21,6 +21,7 @@ public class UserEntity {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String name;
+    private String lastName;
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     private String email;
@@ -33,15 +34,18 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String id, String name, Date dateOfBirth, String email, String password, Boolean register, Role role) {
+    public UserEntity(String id, String name, String lastName, Date dateOfBirth, String email, String password, Boolean register, Role role) {
         this.id = id;
         this.name = name;
+        this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.password = password;
         this.register = register;
         this.role = role;
     }
+
+
 
     public UserEntity(String email, String password, List<GrantedAuthority> permisos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -71,6 +75,14 @@ public class UserEntity {
         this.name = name;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -103,10 +115,9 @@ public class UserEntity {
         this.register = register;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "UserEntity{" + "id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + ", rol=" + role + '}';
+        return "UserEntity{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + ", role=" + role + '}';
     }
-
     
 }
