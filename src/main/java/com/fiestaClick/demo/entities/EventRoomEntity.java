@@ -1,9 +1,10 @@
-
 package com.fiestaClick.demo.entities;
 
-import com.fiestaClick.demo.Enum.City;
+import com.fiestaClick.demo.enumerations.City;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -19,6 +20,8 @@ public class EventRoomEntity {
     private String Id;
     private Integer capacity;
     private String adress;
+    
+    @Enumerated(EnumType.STRING)
     private City city;
     private String name;
     private Boolean register;

@@ -1,4 +1,4 @@
-package com.fiestaClick.demo.Enum;
+package com.fiestaClick.demo.enumerations;
 
 public enum City {
     LAS_HERAS ("Las Heras"), 
