@@ -1,6 +1,7 @@
 
 package com.fiestaClick.demo.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,19 +21,21 @@ public class ExtraServiceEntity {
     private Boolean register;
     
     @OneToMany  
-    private PhotoEntity photoEntity;
+    private List <PhotoEntity> photoEntity;
 
     public ExtraServiceEntity() {
     }
 
-    public ExtraServiceEntity(String id, String name, Integer price, String description, Boolean register, PhotoEntity photoEntity) {
+    public ExtraServiceEntity(String id, String name, Integer price, String description, Boolean register, List<PhotoEntity> photoEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.register = register;
         this.photoEntity = photoEntity;
-    }    
+    }
+
+       
 
     public String getId() {
         return id;
@@ -66,13 +69,13 @@ public class ExtraServiceEntity {
         this.description = description;
     }
 
-    public PhotoEntity getPhotoEntity() {
+    public List<PhotoEntity> getPhotoEntity() {
         return photoEntity;
     }
 
-    public void setPhotoEntity(PhotoEntity photoEntity) {
+    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
         this.photoEntity = photoEntity;
-    }   
+    }
 
     public Boolean getRegister() {
         return register;

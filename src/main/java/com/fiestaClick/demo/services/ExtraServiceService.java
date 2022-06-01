@@ -5,6 +5,7 @@ import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.ExtraServiceRepository;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class ExtraServiceService {
         extraService.setName(name);
         extraService.setPrice(price);
         extraService.setDescription(description);
-        extraService.setPhotoEntity(photoEntity);
+        extraService.setPhotoEntity((List<PhotoEntity>) photoEntity);
         
         return extraServiceRepository.save(extraService);
         
