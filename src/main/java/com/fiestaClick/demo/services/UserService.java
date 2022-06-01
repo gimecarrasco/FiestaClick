@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String email, String password, Date dateOfBirth){
+    public void save(String name, String lastName, String email, String password, Date dateOfBirth){
         UserEntity userEntity = new UserEntity();
         userEntity.setName(name);
         userEntity.setEmail(email);
