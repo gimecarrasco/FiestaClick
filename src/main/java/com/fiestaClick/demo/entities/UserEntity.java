@@ -34,8 +34,7 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String id, String name, String lastName, Date dateOfBirth, String email, String password, Boolean register, Role role) {
-        this.id = id;
+    public UserEntity(String name, String lastName, Date dateOfBirth, String email, String password, Boolean register, Role role) {
         this.name = name;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -45,8 +44,7 @@ public class UserEntity {
         this.role = role;
     }
 
-
-
+    
     public UserEntity(String email, String password, List<GrantedAuthority> permisos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -1,6 +1,7 @@
 
 package com.fiestaClick.demo.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class CateringEntity {
     private Boolean register;
     
     @OneToMany
-    private PhotoEntity photoEntity;
+    private List<PhotoEntity> photoEntity;
 
     public CateringEntity() {
     }
@@ -33,7 +34,7 @@ public class CateringEntity {
         this.price = price;
         this.description = description;
         this.register = register;
-        this.photoEntity = photoEntity;
+        this.photoEntity = (List<PhotoEntity>) photoEntity;
     }  
  
     public String getId() {
@@ -69,11 +70,11 @@ public class CateringEntity {
     }
 
     public PhotoEntity getPhotoEntity() {
-        return photoEntity;
+        return (PhotoEntity) photoEntity;
     }
 
     public void setPhotoEntity(PhotoEntity photoEntity) {
-        this.photoEntity = photoEntity;
+        this.photoEntity = (List<PhotoEntity>) photoEntity;
     }
 
     
