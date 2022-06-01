@@ -27,7 +27,6 @@ public class EventRoomService {
         eventRoom.setDescription(description);
         eventRoom.setDecor(decor);
         eventRoom.setDate(new Date());
-        eventRoom.setPicture(picture);
         eventRoom.setPrice(price);
         
         

@@ -2,11 +2,13 @@ package com.fiestaClick.demo.entities;
 
 import com.fiestaClick.demo.enumerations.City;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,13 +32,16 @@ public class EventRoomEntity {
     
     @Temporal(TemporalType.DATE)
     private Date date;
-    private String picture;
+   @OneToMany  
+    private List <PhotoEntity> photoEntity;
     private Double price;
+    
 
     public EventRoomEntity() {
     }
 
-    public EventRoomEntity(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, String picture, Double price) {
+    public EventRoomEntity(String Id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, List<PhotoEntity> photoEntity, Double price) {
+        this.Id = Id;
         this.capacity = capacity;
         this.adress = adress;
         this.city = city;
@@ -45,9 +50,11 @@ public class EventRoomEntity {
         this.description = description;
         this.decor = decor;
         this.date = date;
-        this.picture = picture;
+        this.photoEntity = photoEntity;
         this.price = price;
     }
+
+
 
     public String getId() {
         return Id;
@@ -121,13 +128,14 @@ public class EventRoomEntity {
         this.date = date;
     }
 
-    public String getPicture() {
-        return picture;
+    public List<PhotoEntity> getPhotoEntity() {
+        return photoEntity;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
+        this.photoEntity = photoEntity;
     }
+
 
     public Double getPrice() {
         return price;
@@ -139,7 +147,7 @@ public class EventRoomEntity {
 
     @Override
     public String toString() {
-        return "EventRoomEntity{" + "capacity=" + capacity + ", adress=" + adress + ", city=" + city + ", name=" + name + ", register=" + register + ", description=" + description + ", decor=" + decor + ", date=" + date + ", picture=" + picture + ", price=" + price + '}';
+        return "EventRoomEntity{" + "Id=" + Id + ", capacity=" + capacity + ", adress=" + adress + ", city=" + city + ", name=" + name + ", register=" + register + ", description=" + description + ", decor=" + decor + ", date=" + date + ", photoEntity=" + photoEntity + ", price=" + price + '}';
     }
     
     

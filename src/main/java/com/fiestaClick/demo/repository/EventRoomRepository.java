@@ -18,8 +18,8 @@ public interface EventRoomRepository extends JpaRepository<EventRoomEntity, Stri
     @Query("SELECT e FROM EventRoomEntity e WHERE e.name = :name")
     public EventRoomEntity findByName(@Param("name") String name);
     
-    @Query("SELECT e FROM EvenRoomEntity e WHERE c.city = :city")
-    public List<EventRoomEntity> findByCity(@Param("city") String city);
+//    @Query("SELECT e FROM EvenRoomEntity e WHERE c.city = :city")
+//    public List<EventRoomEntity> findByCity(@Param("city") String city);
 //    
 //    @Query("SELECT e FROM EvenRoomEntity e WHERE c.adress = :adress")
 //    public EventRoomEntity findByAdress(@Param("adress") String adress);
