@@ -1,4 +1,3 @@
-
 package com.fiestaClick.demo.entities;
 
 import java.util.List;
@@ -10,18 +9,17 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class CateringEntity {
-   
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String name;
     private Integer price;
-    private String description;    
+    private String description;
     private Boolean register;
-    
+
     @OneToMany
     private List<PhotoEntity> photoEntity;
 
@@ -35,8 +33,8 @@ public class CateringEntity {
         this.description = description;
         this.register = register;
         this.photoEntity = (List<PhotoEntity>) photoEntity;
-    }  
- 
+    }
+
     public String getId() {
         return id;
     }
@@ -69,15 +67,14 @@ public class CateringEntity {
         this.description = description;
     }
 
-    public PhotoEntity getPhotoEntity() {
-        return (PhotoEntity) photoEntity;
+    public List<PhotoEntity> getPhotoEntity() {
+        return photoEntity;
     }
 
-    public void setPhotoEntity(PhotoEntity photoEntity) {
-        this.photoEntity = (List<PhotoEntity>) photoEntity;
+    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
+        this.photoEntity = photoEntity;
     }
 
-    
     public Boolean getRegister() {
         return register;
     }
@@ -91,5 +88,4 @@ public class CateringEntity {
         return "CateringEntity{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", photoEntity=" + photoEntity + '}';
     }
 
-    
 }
