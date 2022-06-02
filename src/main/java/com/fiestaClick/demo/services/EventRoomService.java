@@ -1,24 +1,30 @@
 package com.fiestaClick.demo.services;
 
-
 import com.fiestaClick.demo.entities.EventRoomEntity;
+import com.fiestaClick.demo.entities.PhotoEntity;
 import com.fiestaClick.demo.enumerations.City;
 import com.fiestaClick.demo.repository.EventRoomRepository;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fiestaClick.demo.errors.ErrorService;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EventRoomService {
+
     @Autowired
     private EventRoomRepository eventRoomRepository;
+
     
-    public void save(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, String picture, Double price) throws ErrorService{
+    @Transactional
+    public void save(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
         EventRoomEntity eventRoom = new EventRoomEntity();
-        
-        validate(capacity, adress, city, name, register, description, decor, picture, price);
-        
+
+        validate(capacity, adress, city, name, register, description, decor, photoEntity, price);
+
         eventRoom.setCapacity(capacity);
         eventRoom.setAdress(adress);
         eventRoom.setCity(city);
@@ -27,14 +33,67 @@ public class EventRoomService {
         eventRoom.setDescription(description);
         eventRoom.setDecor(decor);
         eventRoom.setDate(new Date());
+        eventRoom.setPhotoEntity(photoEntity);
         eventRoom.setPrice(price);
-        
-        
+
         eventRoomRepository.save(eventRoom);
+    }
+
+    @Transactional
+    public void modify(String id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
+        validate(capacity, adress, city, name, register, description, decor, photoEntity, price);
+        
+        Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
+        if(answer.isPresent()){
+            EventRoomEntity eventRoom = answer.get();
+            eventRoom.setCapacity(capacity);
+            eventRoom.setAdress(adress);
+            eventRoom.setCity(city);
+            eventRoom.setName(name);
+            eventRoom.setRegister(register);
+            eventRoom.setDescription(description);
+            eventRoom.setDecor(decor);
+            //revisar
+            eventRoom.setDate(new Date());
+            eventRoom.setPhotoEntity(photoEntity);
+            eventRoom.setPrice(price);
+            
+            eventRoomRepository.save(eventRoom);
+            
+        } else {
+            throw new ErrorService("No existe el salón solicitado");
+        }
+        
     }
     
     
-    public void validate(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, String picture, Double price) throws ErrorService{
+    @Transactional
+    public void enable(String id) throws ErrorService {
+        Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
+        if (answer.isPresent()) {
+            EventRoomEntity eventRoom = answer.get();
+            eventRoom.setRegister(Boolean.TRUE);
+            eventRoomRepository.save(eventRoom);
+        } else {
+            throw new ErrorService("No existe el salón solicitado");
+        }
+    }
+    
+    @Transactional
+    public void disable(String id) throws ErrorService {
+        Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
+        if (answer.isPresent()) {
+            EventRoomEntity eventRoom = answer.get();
+            eventRoom.setRegister(Boolean.FALSE);
+            eventRoomRepository.save(eventRoom);
+        } else {
+            throw new ErrorService("No existe el salón solicitado");
+        }
+    }
+    
+    
+    @Transactional
+    private void validate(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
         if (capacity == null || capacity == 0) {
             throw new ErrorService("La capacidad no puede ser nula");
         }
@@ -50,14 +109,35 @@ public class EventRoomService {
         if (description == null || description.isEmpty()) {
             throw new ErrorService("La descripción no puede ser nula");
         }
+        if (decor == null || decor.isEmpty()) {
+            throw new ErrorService("La decoración no puede ser nula");
+        }
         
-        //falta validar el resto de los atributos
-      
+        //revisar
+        if (photoEntity.isEmpty()) {
+            throw new ErrorService("Es necesario agregar al menos una foto");
+        }
+        if (price == null || price == 0) {
+            throw new ErrorService("El precio no puede ser nulo");
+        }
     }
     
+
+    @Transactional
+    public List<EventRoomEntity> listEventRoom(){
+        return eventRoomRepository.findAll();
+    }
     
+    @Transactional
+    public EventRoomEntity findEventRoomByName(String eventRoomName){
+        return eventRoomRepository.findByName(eventRoomName);
+    }
+
+    @Transactional
+    public void deleteById(String id){
+        eventRoomRepository.deleteById(id);
+    }
+
     
-    
-    
-    
+
 }
