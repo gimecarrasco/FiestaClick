@@ -24,13 +24,13 @@ public class UserController {
     
     @GetMapping("/login")
     public String form(ModelMap modelo)  {
-        return "/login";
+        return "juli";
     }
     
     @PostMapping("/login")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam String email, @RequestParam String password, @RequestParam Date dateOfBirth)  {
+    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Date dateOfBirth)  {
         try {
-              userService.save(name,"lastName", email, password, dateOfBirth);
+              userService.save(name,lastName, email, password, dateOfBirth);
             model.put("exito", "Persona guardada con exito");
         } catch (Exception e) {
             model.put("error", "Error al registrarse");
