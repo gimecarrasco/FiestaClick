@@ -346,7 +346,6 @@
 /* FIN SLIDER3 */
 
 
-
 /* Boton Slider */
 button.btn.btn-dark {
     font-family: patchwork;
@@ -365,3 +364,5 @@ button.btn.btn-dark:hover{
     background: linear-gradient(to left, #da627d, #ffa5ab); 
    
 }
+
+/* Fin boton slider */

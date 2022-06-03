@@ -24,7 +24,7 @@ public class UserController {
     
     @GetMapping("/login")
     public String form(ModelMap modelo)  {
-        return "juli";
+        return "/login";
     }
     
     @PostMapping("/login")
