@@ -20,10 +20,10 @@ public class EventRoomService {
 
     
     @Transactional
-    public void save(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
+    public EventRoomEntity save(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
         EventRoomEntity eventRoom = new EventRoomEntity();
 
-        validate(capacity, adress, city, name, register, description, decor, photoEntity, price);
+        validate(capacity, adress, city, name, description, decor, price);
 
         eventRoom.setCapacity(capacity);
         eventRoom.setAdress(adress);
@@ -36,12 +36,12 @@ public class EventRoomService {
         eventRoom.setPhotoEntity(photoEntity);
         eventRoom.setPrice(price);
 
-        eventRoomRepository.save(eventRoom);
+        return eventRoomRepository.save(eventRoom);
     }
 
     @Transactional
-    public void modify(String id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
-        validate(capacity, adress, city, name, register, description, decor, photoEntity, price);
+    public EventRoomEntity modify(String id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
+        validate(capacity, adress, city, name, description, decor, price);
         
         Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
         if(answer.isPresent()){
@@ -58,7 +58,7 @@ public class EventRoomService {
             eventRoom.setPhotoEntity(photoEntity);
             eventRoom.setPrice(price);
             
-            eventRoomRepository.save(eventRoom);
+            return eventRoomRepository.save(eventRoom);
             
         } else {
             throw new ErrorService("No existe el salón solicitado");
@@ -68,24 +68,24 @@ public class EventRoomService {
     
     
     @Transactional
-    public void enable(String id) throws ErrorService {
+    public EventRoomEntity enable(String id) throws ErrorService {
         Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
         if (answer.isPresent()) {
             EventRoomEntity eventRoom = answer.get();
             eventRoom.setRegister(Boolean.TRUE);
-            eventRoomRepository.save(eventRoom);
+            return eventRoomRepository.save(eventRoom);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
     }
     
     @Transactional
-    public void disable(String id) throws ErrorService {
+    public EventRoomEntity disable(String id) throws ErrorService {
         Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
         if (answer.isPresent()) {
             EventRoomEntity eventRoom = answer.get();
             eventRoom.setRegister(Boolean.FALSE);
-            eventRoomRepository.save(eventRoom);
+            return eventRoomRepository.save(eventRoom);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
@@ -93,7 +93,7 @@ public class EventRoomService {
     
     
     @Transactional
-    private void validate(Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, List<PhotoEntity> photoEntity, Double price) throws ErrorService {
+    private void validate(Integer capacity, String adress, City city, String name, String description, String decor, Double price) throws ErrorService {
         if (capacity == null || capacity == 0) {
             throw new ErrorService("La capacidad no puede ser nula");
         }
@@ -111,11 +111,6 @@ public class EventRoomService {
         }
         if (decor == null || decor.isEmpty()) {
             throw new ErrorService("La decoración no puede ser nula");
-        }
-        
-        //revisar
-        if (photoEntity.isEmpty()) {
-            throw new ErrorService("Es necesario agregar al menos una foto");
         }
         if (price == null || price == 0) {
             throw new ErrorService("El precio no puede ser nulo");
