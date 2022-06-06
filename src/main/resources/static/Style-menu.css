@@ -1,3 +1,5 @@
+/* NavBar */
+
 #menu-bar {
     display: none;
   
@@ -10,11 +12,12 @@ header label {
     cursor: pointer;
    
 }
-/* Barra de busqueda en menu de navegacion */
+
 header #carrito {
     float: right;
     cursor: pointer;
-    transform: translateY(13px);
+    margin-top: 10px;
+    transform: translateX(13px);
     
 }
 
@@ -31,6 +34,7 @@ header #lupa {
     top: 0;
     right: 0;
     background: linear-gradient(to left, #272640 , #3e1f47, #621662d7);  
+    /* background: linear-gradient(to left,#355070,#6d597a,#b94c64);  */
     width: 25px;
     height: 30px;
     color: antiquewhite;
@@ -41,15 +45,15 @@ header #lupa {
 }
 
 #carrito:hover input {
-    width: 240px;
+    width: 130px;
     transition: all 0.6s ease;
 }
 
 #carrito input:focus {
-    width: 240px;
+    width: 130px;
     transition: all 0.6s ease;
 }
- /* Fin Barra de busqueda en menu de navegacion*/
+
 
 .menu {
     position: absolute;
@@ -57,7 +61,8 @@ header #lupa {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(to right, #3e1f47, #58295886); 
+    background: linear-gradient(to right, #381f48, #58295886); 
+    /* background: linear-gradient(to right,#6c567b50,#b56576);  */
     transition: all 0.7s;
     transform: translateX(100%);
 }
@@ -116,3 +121,5 @@ header #lupa {
         display: block;
     }
 }
+
+ /* NavBar END*/

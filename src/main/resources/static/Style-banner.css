@@ -1,76 +1,77 @@
 @font-face {
-    font-family: wallNotes;
-    src: url(Wall\ Notes.otf);
+    font-family: chasing;
+    src: url(/font/KGChasingCars.ttf);
 }
 
-#banner{
+@font-face {
+    font-family: pesta;
+    src: url(/font/PestaTahunBaru.ttf);
+}
+
+
+#banner {
     margin-top: 50px;
     position: relative;
-    
+    margin-bottom: 1cm;
 }
 
-#banner img{
+#banner img {
     width: 100%;
     height: 100%;
-    
+    /* opacity: 0.9; */
+    opacity: 1;
 }
 
-#banner .contenedor{
+#banner .contenedor {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 40%;
+    left: 60%;
     transform: translateX(-50%) translateY(-50%);
-    color: white;
+    font-family: serif;
 }
 
-#banner h2{
-    font-size: 28px;
-   
-}
-#banner p{
-    font-size: 17px;
-    
-}
-
-#banner a{
-    display: block;
-    width: 100px;
-    color:white;
-    text-decoration: none;
-    padding: 7px;
-    margin-top: 10px;
-    border: 3px solid white;
+section#banner h2 {
+    font-size: 1.7cm;
+    color: rgb(245, 239, 239);
+    -webkit-text-stroke: 1.7px #621662d7;
+    /* -webkit-text-stroke: 1.7px #355070; */
+    font-family: chasing;
 }
 
-#banner a:hover{
-    background: rgba(51,51,51,0.5);
+#banner p {
+    font-size: 1cm;
+    color: rgb(245, 239, 239);
+    -webkit-text-stroke: 0.8px #621662d7;
+    /* -webkit-text-stroke: 0.8px #355070; */
+    font-family: pesta;
+    position: absolute;
+    left: 8%;
 }
 
-@media (min-width:480px){
-    #banner h2{
+@media (min-width:480px) {
+    #banner h2 {
         font-size: 40px;
     }
-    #banner a{
+
+    #banner a {
         margin-top: 25px;
     }
 }
 
-@media (min-width:768px){
-    #banner{
+@media (min-width:768px) {
+    #banner {
         height: 300px;
         overflow: hidden;
     }
-    #banner img{
+
+    #banner img {
         height: auto;
         margin-top: -100px;
     }
-
 }
-@media (min-width:1024px){
- 
-    #banner img{
+
+@media (min-width:1024px) {
+    #banner img {
         margin-top: -200px;
     }
-
 }
-
