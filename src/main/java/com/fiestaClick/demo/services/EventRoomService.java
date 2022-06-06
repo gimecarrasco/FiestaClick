@@ -53,8 +53,6 @@ public class EventRoomService {
             eventRoom.setRegister(register);
             eventRoom.setDescription(description);
             eventRoom.setDecor(decor);
-            //revisar
-            eventRoom.setDate(new Date());
             eventRoom.setPhotoEntity(photoEntity);
             eventRoom.setPrice(price);
             
