@@ -1,5 +1,6 @@
 package com.fiestaClick.demo.controllers;
 
+import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.UserRepository;
 import com.fiestaClick.demo.services.UserService;
 import java.util.Date;
@@ -24,18 +25,25 @@ public class UserController {
     
     @GetMapping("/login")
     public String form(ModelMap modelo)  {
-        return "juli";
+        return "login.html";
     }
     
-    @PostMapping("/login")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Date dateOfBirth)  {
+    @PostMapping("/register")
+    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
         try {
-              userService.save(name,lastName, email, password, dateOfBirth);
-            model.put("exito", "Persona guardada con exito");
+            System.out.println("Nombre: " + name );
+            System.out.println("Apellido: " + lastName );
+            System.out.println("Fecha de nacimiento: " + dateOfBirth );
+            System.out.println("Mail: " + email );
+            System.out.println("Contraseña: " + password );
+              userService.save(name,lastName, dateOfBirth, email, password);
+            model.put("exito", "Has sido registrado exitosamente.");
         } catch (Exception e) {
+            e.printStackTrace();
             model.put("error", "Error al registrarse");
+            return "login.html";
         }
-        return "juli_registro";
+        return "index.html";
     }
 
 }
