@@ -18,7 +18,7 @@ public class CateringService {
     private CateringRepository cateringRepository;
 
     @Transactional
-    public CateringEntity save(String name, Integer price, String description, PhotoEntity photoEntity) throws Exception {
+    public CateringEntity save(String name, Double price, String description, PhotoEntity photoEntity) throws Exception {
 
         validate(name, price, description);
 
@@ -33,11 +33,11 @@ public class CateringService {
 
     }
 
-    public void validate(String name, Integer price, String description) throws Exception {
+    public void validate(String name, Double price, String description) throws Exception {
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");
         }
-        if (price == null || price.toString().trim().isEmpty()) {
+        if (price == null || price == 0) {
             throw new ErrorService("No puede ser nulo este valor");
         }
         if (description == null || description.trim().isEmpty() || description.length() < 200) {
@@ -71,7 +71,7 @@ public class CateringService {
     }
     
      @Transactional
-    public CateringEntity modify(String id, String name, Integer price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
+    public CateringEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
          Optional<CateringEntity> answer = cateringRepository.findById(id);
          
           validate(name, price, description);

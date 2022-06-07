@@ -20,11 +20,11 @@ public class ExtraServiceService {
     
     
     
-     public void validate(String name, Integer price, String description) throws Exception{
+     public void validate(String name, Double price, String description) throws Exception{
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
-         if (price == null || price.toString().trim().isEmpty()) {
+         if (price == null || price == 0) {
             throw new ErrorService("No puede ser nulo este valor");  
         }
        if (description == null || description.trim().isEmpty()) {
@@ -35,7 +35,7 @@ public class ExtraServiceService {
     
      
      @Transactional
-    public ExtraServiceEntity save(String name, Integer price, String description,PhotoEntity photoEntity) throws Exception{
+    public ExtraServiceEntity save(String name, Double price, String description,PhotoEntity photoEntity) throws Exception{
         
         validate(name,price,description);
         
@@ -76,7 +76,7 @@ public class ExtraServiceService {
     }
     
      @Transactional
-    public ExtraServiceEntity modify(String id, String name, Integer price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
+    public ExtraServiceEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
          Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
          
           validate(name, price, description);
