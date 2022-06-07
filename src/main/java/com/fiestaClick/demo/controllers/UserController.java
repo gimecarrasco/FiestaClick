@@ -29,14 +29,14 @@ public class UserController {
     }
     
     @PostMapping("/register")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam Date dateOfBirth, @RequestParam String password)  throws ErrorService{
+    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
         try {
             System.out.println("Nombre: " + name );
             System.out.println("Apellido: " + lastName );
-            System.out.println("Mail: " + email );
             System.out.println("Fecha de nacimiento: " + dateOfBirth );
+            System.out.println("Mail: " + email );
             System.out.println("Contraseña: " + password );
-              userService.save(name,lastName, email, dateOfBirth, password);
+              userService.save(name,lastName, dateOfBirth, email, password);
             model.put("exito", "Has sido registrado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();

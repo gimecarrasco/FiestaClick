@@ -31,15 +31,17 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String lastName, String email, Date dateOfBirth, String password){
+    public void save(String name, String lastName, Date dateOfBirth,String email, String password){
         
         UserEntity userEntity = new UserEntity();
         
         userEntity.setName(name);
         userEntity.setLastName(lastName);
+        userEntity.setDateOfBirth(dateOfBirth);
         userEntity.setEmail(email);
         
         userEntity.setPassword(password);
+        userEntity.setRegister(Boolean.TRUE);
         userEntity.setRole(Role.USER);
          
         userRepository.save(userEntity);
