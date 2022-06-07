@@ -16,7 +16,7 @@ public class CateringEntity {
     private String id;
 
     private String name;
-    private Integer price;
+    private Double price;
     private String description;
     private Boolean register;
 
@@ -26,7 +26,7 @@ public class CateringEntity {
     public CateringEntity() {
     }
 
-    public CateringEntity(String id, String name, Integer price, String description, Boolean register, PhotoEntity photoEntity) {
+    public CateringEntity(String id, String name, Double price, String description, Boolean register, PhotoEntity photoEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -51,11 +51,11 @@ public class CateringEntity {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
