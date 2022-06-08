@@ -6,85 +6,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style-index.css">
-    <link rel="stylesheet" type="text/css" href="fontello.css">
+    <link rel="stylesheet" href="/../../Style-index.css">
+    <link rel="stylesheet" href="/../../Style-login.css">
+    <link rel="stylesheet" href="/../../Style-footer.css">
+    <link rel="stylesheet" type="text/css" href="/../../fontello.css">
     <title>Fiesta Click</title>
 </head>
 
-<body>
+  <body>
     <!-- NavBar -->
     <header>
         <div class="contenedor">
-            <a href="/">          
-                 <h1>Fiesta Click</h1> 
+            <a href="/">
+                <h1>Fiesta Click</h1>
             </a>
             <input type="checkbox" id="menu-bar">
             <label class="icon-th-list" for="menu-bar"></label>
+            <form class="form-inline" id="carrito">
+                <input class="form-control" type="search" placeholder="Buscar">
+                <button class="submit" id="lupa">
+                    <span class="icon-search"></span>
+                </button>
+            </form>
             <nav class="menu">
                 <a href="salones.html"><span class="icon-home"></span> Salones</a>
-                <a href="/catering/saveCateringAndExtra"><span class="icon-food"></span> Caterings</a>
-                <a href="/login"><span class="icon-user"></span> Usuario</a>
+                <a href="#"><span class="icon-food"></span> Caterings</a>
+                <a href="/login"><span class="icon-user"></span>Usuario</a>
                 <a href="#"><span class="icon-user"></span> Extras</a>
                 <a href=""><span class="icon-basket"></span> Carrito</a>
-                <form class="form-inline" id="carrito">
-                    <input class="form-control" type="search" placeholder="Buscar">
-                    <button class="submit" id="lupa">
-                        <span class="icon-search"></span>
-                    </button>
-                </form>
             </nav>
         </div>
     </header>
-       <!-- End NavBar -->
-    <main>
-        <!-- Banner -->
-        <section id="banner">
-            <img src="/images/img1.jpg" width="100%" height="50%" alt="fiesta">
-            <div class="contenedor">
-                <h2>Armá tu fiesta de cumpleaños</h2>
-                <p> La mejor fiesta, a un click de distancia</p>
-            </div>
-        </section>
 
-        <!-- Cards -->
-        <section id="cards">
-            <div class="container__cards">
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/salon.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Salón la Carlota</h2>
-                    <p class="card-text">Atendido por sus propios Dueños</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="salones.html"><button type="submit" class="btn btn-dark">Ver más</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/catering3.jpg" alt="catering">
-                    </div>
-                    <h2 class="card-title">Catering Zeta-Jones</h2>
-                    <p class="card-text">No creemos en la vergüenza</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="salones.html"><button type="submit" class="btn btn-dark">Ver más</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/extra2.jpg" alt="extra">
-                    </div>
-                    <h2 class="card-title">Payasos</h2>
-                    <p class="card-text">Para niños y grandes</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="salones.html"><button type="submit" class="btn btn-dark">Ver más</button></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- Cards -->
+    <section class="formulary">
+        
+        <div th:if="${exito}!=null">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+
+    </div>
+
+    <div th:if="${error}!=null">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+        
+        <div class="container-form">
+            <form  action="/catering/register" method="POST"  class="formulario" enctype="multipart/form-data" >
+                <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>
+                <label>Nombre Catering</label>
+                <input type="text" name="name" required autofocus>
+                <label>Precio</label>
+                <input type="number" name="price" required autofocus>
+                <label>Descripción</label>
+                <input type="text" name="description" required autofocus>
+                <label>Foto</label>
+              <input type="file" class="form-control" name="photo" required autofocus />
+                <button type="submit">Cargar</button>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -126,12 +111,12 @@
         <!-- Copyrights -->
         <div class="bg-light py-4">
             <div class="container text-center">
-                <img src="/images/logo.png" alt="logo">
+                <img src="/images/logo.png" alt="logo"> 
                 <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
             </div>
         </div>
     </footer>
     <!-- End -->
-</body>
 
+</body>
 </html>

@@ -16,7 +16,7 @@ public class ExtraServiceEntity {
     private String id;
     
     private String name;
-    private Integer price;
+    private Double price;
     private String description;    
     private Boolean register;
     
@@ -26,7 +26,7 @@ public class ExtraServiceEntity {
     public ExtraServiceEntity() {
     }
 
-    public ExtraServiceEntity(String id, String name, Integer price, String description, Boolean register, List<PhotoEntity> photoEntity) {
+    public ExtraServiceEntity(String id, String name, Double price, String description, Boolean register, List<PhotoEntity> photoEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -53,11 +53,11 @@ public class ExtraServiceEntity {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

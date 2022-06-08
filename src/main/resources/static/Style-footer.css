@@ -1,0 +1,90 @@
+:root {
+    --facebook: #3b5999;
+    --instagram: #e4405f;
+    --twitter: #55acee;
+}
+
+.footer-dark {
+    padding: 50px 0;
+    color: #f0f9ff;
+    background-color: #282d32;
+    margin: auto;
+    display: flex;
+    position: relative;
+    margin-top: 2cm;
+}
+
+.footer-dark h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: serif;
+}
+
+.footer-dark ul {
+    padding: 0;
+    list-style: none;
+    line-height: 1.6;
+    font-size: 16px;
+    margin-bottom: 0;
+    font-family: serif;
+}
+
+.footer-dark ul a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.6;
+
+}
+
+.footer-dark ul a:hover {
+    opacity: 0.8;
+}
+
+.footer-dark p {
+    font-family: serif;
+}
+
+
+.footer-dark .copyright {
+    text-align: center;
+    padding-top: 24px;
+    opacity: 0.3;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.container.text-center img{
+    width: 110px;
+    height: 110px;
+
+    
+}
+
+#iconos {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+
+}
+
+#iconos a {
+    text-decoration: none;
+    color: white;
+}
+
+#iconos #facebook:hover {
+    background: var(--facebook);
+}
+
+#iconos #twitter:hover {
+    background: var(--twitter);
+}
+
+#iconos #instagram:hover {
+    background: var(--instagram);
+
+}

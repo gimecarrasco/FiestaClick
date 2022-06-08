@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +31,17 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String lastName, String email, String password, Date dateOfBirth){
+    public void save(String name, String lastName, Date dateOfBirth,String email, String password){
+        
         UserEntity userEntity = new UserEntity();
+        
         userEntity.setName(name);
+        userEntity.setLastName(lastName);
+        userEntity.setDateOfBirth(dateOfBirth);
         userEntity.setEmail(email);
+        
         userEntity.setPassword(password);
+        userEntity.setRegister(Boolean.TRUE);
         userEntity.setRole(Role.USER);
          
         userRepository.save(userEntity);

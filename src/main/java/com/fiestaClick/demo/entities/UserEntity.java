@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -22,6 +23,7 @@ public class UserEntity {
     private String id;
     private String name;
     private String lastName;
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     private String email;
