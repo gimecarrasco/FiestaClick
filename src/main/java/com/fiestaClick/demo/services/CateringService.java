@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -16,9 +17,11 @@ public class CateringService {
 
     @Autowired
     private CateringRepository cateringRepository;
+   @Autowired
+   private PhotoService photoService;
 
     @Transactional
-    public CateringEntity save(String name, Double price, String description, PhotoEntity photoEntity) throws Exception {
+    public CateringEntity save(String name, Double price, String description, MultipartFile photoEntity) throws Exception {
 
         validate(name, price, description);
 
@@ -27,7 +30,10 @@ public class CateringService {
         catering.setName(name);
         catering.setPrice(price);
         catering.setDescription(description);
-        catering.setPhotoEntity((List<PhotoEntity>) photoEntity);
+        
+        PhotoEntity photo= photoService.save((MultipartFile) photoEntity);
+        catering.setPhotoEntity((List<PhotoEntity>) photo);
+        catering.setRegister(Boolean.TRUE);
 
         return cateringRepository.save(catering);
 
@@ -35,13 +41,13 @@ public class CateringService {
 
     public void validate(String name, Double price, String description) throws Exception {
         if (name == null || name.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");
+            throw new ErrorService("No puede ser nulo el nombre ");
         }
         if (price == null || price == 0) {
-            throw new ErrorService("No puede ser nulo este valor");
+            throw new ErrorService("No puede ser nulo el precio");
         }
-        if (description == null || description.trim().isEmpty() || description.length() < 200) {
-            throw new ErrorService("No puede ser nulo este valor");
+        if (description == null || description.trim().isEmpty()) {
+            throw new ErrorService("No puede ser nula la descripción");
         }
     }
     
