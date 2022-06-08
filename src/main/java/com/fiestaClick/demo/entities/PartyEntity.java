@@ -41,12 +41,13 @@ public class PartyEntity {
     @Temporal(TemporalType.DATE)
     private Date partyDate;
 
-    private Integer total;
+    private Double total;
 
     public PartyEntity() {
     }
 
-    public PartyEntity(EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, UserEntity userEntity, Date partyDate, Integer total) {
+    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, UserEntity userEntity, Date partyDate, Double total) {
+        this.id = id;
         this.eventRoomEntity = eventRoomEntity;
         this.cateringEntity = cateringEntity;
         this.extraServiceEntity = extraServiceEntity;
@@ -54,8 +55,7 @@ public class PartyEntity {
         this.partyDate = partyDate;
         this.total = total;
     }
-
-    
+   
     public String getId() {
         return id;
     }
@@ -103,15 +103,15 @@ public class PartyEntity {
     public void setPartyDate(Date partyDate) {
         this.partyDate = partyDate;
     }
-    
-    public Integer getTotal() {
+
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
-    }
-
+    }    
+    
     @Override
     public String toString() {
         return "PartyEntity{" + "id=" + id + ", eventRoomEntity=" + eventRoomEntity + ", cateringEntity=" + cateringEntity + ", extraServiceEntity=" + extraServiceEntity + ", userEntity=" + userEntity + ", partyDate=" + partyDate + ", total=" + total + '}';
