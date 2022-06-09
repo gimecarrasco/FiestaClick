@@ -1,0 +1,10 @@
+@import url(/../../Style-menu.css);
+@import url(/../../Style-footer.css);
+@import url(/../../Style-index.css);
+@import url(/../../Style-blog.css);
+
+
+
+#banner h2{
+    font-weight: 5cm;
+}
