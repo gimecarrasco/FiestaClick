@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -30,8 +32,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private JavaMailSender emailSender;
+    
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String lastName, Date dateOfBirth,String email, String password){
+    public void save(String name, String lastName, Date dateOfBirth, String email, String password){
         
         UserEntity userEntity = new UserEntity();
         
@@ -44,6 +49,12 @@ public class UserService implements UserDetailsService {
         userEntity.setRegister(Boolean.TRUE);
         userEntity.setRole(Role.USER);
          
+        String subject = "Inscripcion a FiestaClick";
+
+        String content = "Gracias por registrarse " + userEntity.getName() + "!";        
+        sendEmail(email, subject, content);
+
+        
         userRepository.save(userEntity);
     }
 
@@ -68,6 +79,14 @@ public class UserService implements UserDetailsService {
             return null;
         }
 
+    }
+    
+    public void sendEmail(String email, String subject, String content) {
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(email);
+        mail.setSubject(subject);
+        mail.setText(content);
+        emailSender.send(mail);
     }
     
     
