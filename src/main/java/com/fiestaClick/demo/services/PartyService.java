@@ -54,7 +54,7 @@ public class PartyService {
         partyEntity.setEventRoomEntity(eventRoomEntity);
         partyEntity.setExtraServiceEntity((List<ExtraServiceEntity>) extraServiceEntity);
         partyEntity.setPartyDate(partyDate);
-        partyEntity.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService));
+        partyEntity.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService)); 
                
         return partyRepository.save(partyEntity);
     }
