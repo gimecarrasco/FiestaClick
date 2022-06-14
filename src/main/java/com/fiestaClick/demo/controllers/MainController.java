@@ -21,5 +21,17 @@ public class MainController {
         return "login.html";
     } 
     
+      @GetMapping("/catering")
+    public String catering() {
+        return "catering.html";
+    } 
+     @GetMapping("/eventRoom")
+    public String eventRoomController() {
+        return "eventRoom.html";
+    } 
+     @GetMapping("/extra")
+    public String extraController() {
+        return "extra.html";
+    } 
 
 }
