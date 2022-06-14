@@ -7,30 +7,18 @@
 
 #menu-bar {
     display: none;
-
 }
 
 header {
     width: 100%;
     height: 50px;
-    /* background: linear-gradient(to right, #272640, #3e1f47, #752875); */
-    /* naranja */
-    background: linear-gradient(to right,#0f8fde,#feca62,#d75b76); 
-    /* background: linear-gradient(to right, #559ff9, #6e3f8d, #af3d55); */
-    /* background: linear-gradient(to right,#4d194d,#3e1f47,#312244);  */
-    /* azul */
-    /* background: linear-gradient(to right, #1d3557, #457b9d); */
+    background: linear-gradient(to right, #0f8fde, #feca62, #d75b76);
     color: antiquewhite;
     font-family: serif;
-
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
-}
-header h1{
-    
-  
 }
 
 header label {
@@ -38,7 +26,6 @@ header label {
     font-size: 28px;
     margin: 6px 0;
     cursor: pointer;
-
 }
 
 header #carrito {
@@ -46,7 +33,6 @@ header #carrito {
     cursor: pointer;
     margin-top: 10px;
     transform: translateX(13px);
-
 }
 
 header input.form-control {
@@ -60,9 +46,7 @@ header #lupa {
     position: absolute;
     top: 0;
     right: 0;
-    /* background: linear-gradient(to left, #272640, #3e1f47, #c80fc8); */
     background: linear-gradient(to left, #559ff9, #6e3f8d, #af3d55);
-    /* background: linear-gradient(to left,#355070,#6d597a,#b94c64);  */
     width: 25px;
     height: 30px;
     color: antiquewhite;
@@ -72,11 +56,12 @@ header #lupa {
     border: none;
 }
 
+
 #carrito:hover input {
     width: 150px;
     transition: all 1.2s ease;
     background-color: #0b132b;
-   
+
 }
 
 #carrito input:focus {
@@ -90,9 +75,9 @@ header #lupa {
     left: 0;
     width: 100%;
     height: 100vh;
-    transition: all 0.7s;
     transform: translateX(100%);
     list-style: none;
+    transition: all 1.2s;
 }
 
 .menu a {
@@ -103,6 +88,7 @@ header #lupa {
     padding: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     font-size: 18px;
+
 }
 
 .menu li {
@@ -115,11 +101,9 @@ header #lupa {
     position: absolute;
     visibility: hidden;
     transition: opacity all 1.5s;
-    /* background: linear-gradient(to right, #381f48, #58295886); */
-    background:#f29524c2;
+    background: #f29524c2;
     list-style: none;
     width: 100%;
-
 }
 
 .submenu li {
@@ -128,20 +112,21 @@ header #lupa {
 }
 
 .submenu a {
-    display: inline-flex;
     font-size: 16px;
+    text-align: center;
+
 }
 
 
-.submenu a:hover{
+.submenu a:hover {
     color: #0b132b;
-    transition: 1.5s;
+    transition: all 1.2s;
 }
+
 .menu li:hover .submenu {
     visibility: visible;
     position: absolute;
     opacity: 1;
-    transition: 3.5s;
 }
 
 #menu-bar:checked~.menu {
@@ -153,43 +138,55 @@ header #lupa {
     header #carrito {
         display: flex;
     }
+
     #carrito:hover input {
         width: 110px;
         transition: all 1.2s ease;
         background-color: #0b132b;
     }
-    
+
     #carrito input:focus {
         width: 110px;
         transition: all 1.2s ease;
     }
 
+    header {
+        opacity: 0.95;
+    }
+
     .menu {
         display: inline-flex;
         float: right;
-        background: linear-gradient(to right,#0f8fde,#feca62,#d75b76); 
+        background: linear-gradient(to right, #0f8fde, #feca62, #d75b76);
+        opacity: 0.97;
     }
-   
+
 }
 
 @media(min-width:768px) {
     header #carrito {
         display: flex;
     }
+
     #carrito:hover input {
         width: 130px;
         transition: all 1.2s ease;
         background-color: #0b132b;
     }
-    
+
     #carrito input:focus {
         width: 130px;
         transition: all 1.2s ease;
     }
+
     .menu {
         display: inline-flex;
         float: right;
-        background: linear-gradient(to right,#0f8fde,#feca62,#d75b76); 
+        background: linear-gradient(to right, #0f8fde, #feca62, #d75b76);
+    }
+
+    header {
+        opacity: 0.97;
     }
 }
 
@@ -215,6 +212,7 @@ header #lupa {
     header #carrito {
         display: block;
     }
+
 }
 
 /* NavBar END*/
