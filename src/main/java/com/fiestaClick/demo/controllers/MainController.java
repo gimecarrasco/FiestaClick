@@ -40,9 +40,5 @@ public class MainController {
     }
 
     
-    
-     @GetMapping("/basket")
-    public String basketController() {
-        return "basket.html";
-    }
+     
 }

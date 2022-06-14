@@ -14,13 +14,12 @@ body {
     align-items: center;
     justify-content: center;
     background-image: url(/images/logggg.jpg);
-    /* background-image: url(/images/loguear1.jpg); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-/* Crear cuenta */
+/* Creat account */
 
 .container-form {
     width: 100%;
@@ -92,6 +91,10 @@ body {
     transition: all .3s ease-in;
 }
 
+.border-icon a{
+    color: white;
+    text-decoration: none;
+}
 
 .border-icon:hover {
     background-color: #4a4aee;
