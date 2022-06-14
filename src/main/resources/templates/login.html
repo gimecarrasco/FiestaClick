@@ -64,16 +64,16 @@
                         <div class="border-icon">
                             <span class="icon-twitter"></span>
                         </div>
-                    </div>
+                    </div>                   
                     <p class="cuenta-gratis">Crear una cuenta gratis</p>
-                    <input type="text" name="name" placeholder="Nombre" required autofocus>
-                    <input type="text" name="lastName" placeholder="Apellido" required autofocus>
-                    <input type="text" name="dateOfBirth" placeholder="aaaa/mm/dd" required autofocus>
-                    <input type="email" name="email" placeholder="Mail" required autofocus>
-                    <input type="password" placeholder="Contraseña" required autofocus>
+                    <input type="text" name="name" placeholder="Nombre" th:value="${name}" required autofocus>
+                    <input type="text" name="lastName" placeholder="Apellido" th:value="${lastName}" required autofocus>
+                    <input type="text" name="dateOfBirth" placeholder="aaaa/mm/dd" th:value="${dateOfBirth}" required autofocus>
+                    <input type="email" name="email" placeholder="Mail" th:value="${email}" required autofocus>
+                    <input type="password" placeholder="Contraseña" name="password" th:value="${password}" required autofocus>
                     <button type="submit">Registrarse</button>
                 </form>
-                <form  action="#" method="POST" class="formulario" id="inicio">
+                <form  action="/logincheck" method="POST" class="formulario" id="inicio">
                     <h2 class="create-account">Iniciar Sesión</h2>
                     <div class="iconosFormulario">
                         <div class="border-icon">
@@ -86,12 +86,14 @@
                             <span class="icon-twitter"> </span>
                         </div>
                     </div>
-                    <input type="email" placeholder="Mail" required autofocus>
-                    <input type="password" placeholder="Contraseña" required autofocus>
+                    <p th:if="${error!=null}" th:text="${error}" style="color: red"></p>
+                    <input type="email" name="username" placeholder="Mail" required autofocus>
+                    <input type="password" name="password" placeholder="Contraseña" required autofocus>
                     <button type="submit">Iniciar Sesion</button>
                 </form>
             </div>
         </section>
+
         
     <!-- Dinamics -->
 
@@ -110,6 +112,7 @@
             </div>
         </div>
     </section>
+
 
         <!-- Footer -->
         <footer>
