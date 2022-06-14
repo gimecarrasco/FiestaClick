@@ -11,11 +11,7 @@
 }
 
 body {
-    /* background-color: rgba(222, 241, 219, 0.878); */
-    /* background-color: #eaac8b; */
-    /* azul */
     background-color: #e2ebf2;
-
     margin: 0;
     min-height: 100vh;
 }
@@ -40,7 +36,6 @@ body {
 
 header .contenedor {
     display: table;
-    /* para limpiar los float */
 }
 
 section #banner {

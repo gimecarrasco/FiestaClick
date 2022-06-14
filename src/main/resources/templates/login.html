@@ -14,7 +14,7 @@
 
     <body>
         <!-- NavBar -->
-        <header>
+  <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -35,7 +35,11 @@
                             <li><a href="/extra">Diversion</a></li>
                         </ul>
                     </li>
-                    <a href=""><span class="icon-basket"></span> Carrito</a>
+                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                        <ul class="submenu">
+                            <li><a href="/basket">Ver Carrito</a></li>
+                        </ul>
+                    </li>
                     <form class="form-inline" id="carrito">
                         <input class="form-control" type="search" placeholder="Buscar">
                         <button class="submit" id="lupa">
@@ -89,6 +93,24 @@
                 </form>
             </div>
         </section>
+        
+    <!-- Dinamics -->
+
+    <section class="dinamics">
+        <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
+            <div class="card-body" >
+                <h5 class="card-title">Éxito</h5>
+                <p class="card-text" th:text="${exito}"> </p>
+            </div>
+        </div>
+
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body" id="error">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+    </section>
 
         <!-- Footer -->
         <footer>

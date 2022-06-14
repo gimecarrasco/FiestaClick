@@ -45,8 +45,7 @@ body {
     margin: 10px;
     padding: 20px;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.9);
-    /* background: linear-gradient(to bottom, #272640, #3e1f47, #621662d7);
-    */
+
     border-color: #222;
     border-radius: 15px;
     backdrop-filter: blur(5px);
@@ -97,7 +96,6 @@ body {
 .border-icon:hover {
     background-color: #4a4aee;
     background-color: #6d597a;
-
     cursor: pointer;
 }
 
@@ -132,12 +130,10 @@ body {
     font-size: .8rem;
     cursor: pointer;
     color: #222;
-    /* font-family: serif; */
-
 }
 
 form#inicio.formulario>button {
-   margin-top: 47.8%;
+    margin-top: 47.8%;
 }
 
 .formulario button:hover {
@@ -146,6 +142,22 @@ form#inicio.formulario>button {
     transition: all 1.1s;
     color: white;
 }
+
+.dinamics {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    border-color: #222;
+    z-index: 20px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 300ms;
+    font-family: serif;
+    text-align: center;
+    color: antiquewhite;
+}
+
  
 
 
