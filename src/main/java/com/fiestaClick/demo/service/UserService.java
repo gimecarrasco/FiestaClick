@@ -33,8 +33,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
     
+//    @Autowired
+//    private JavaMailSender emailSender;
+    
     @Autowired
-    private JavaMailSender emailSender;
+    private MailService mailService;
+    
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void save(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
@@ -56,6 +60,7 @@ public class UserService implements UserDetailsService {
         //String content = "Gracias por registrarse " + userEntity.getName() + "!";        
         //sendEmail(email, subject, content);
 
+        mailService.mailSender(email, "bienvenido/a"+" "+name, "Se ha registrado con exito a FiestaClick");
         
         userRepository.save(userEntity);
     }
@@ -98,13 +103,13 @@ public class UserService implements UserDetailsService {
 
     }
     
-    public void sendEmail(String email, String subject, String content) {
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setSubject(subject);
-        mail.setText(content);
-        emailSender.send(mail);
-    }
+//    public void sendEmail(String email, String subject, String content) {
+//        SimpleMailMessage mail = new SimpleMailMessage();
+//        mail.setTo(email);
+//        mail.setSubject(subject);
+//        mail.setText(content);
+//        emailSender.send(mail);
+//    }
     
     
 }
