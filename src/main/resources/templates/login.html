@@ -13,7 +13,7 @@
 
     <body>
         <!-- NavBar -->
-  <header>
+        <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -23,8 +23,8 @@
                 <nav class="menu">
                     <li><a href="#"><span class="icon-user"></span>Usuario</a>
                         <ul class="submenu">
-                            <li><a href="user/login">Ingresar</a></li>
-                            <li><a href="user/login">Registrarse</a></li>
+                            <li><a href="/login">Ingresar</a></li>
+                            <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
@@ -36,7 +36,7 @@
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
-                            <li><a href="/basket">Ver Carrito</a></li>
+                            <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
                     </li>
                     <form class="form-inline" id="carrito">
@@ -56,15 +56,16 @@
                     <h2 class="create-account">Crear una cuenta</h2>
                     <div class="iconosFormulario">
                         <div class="border-icon">
-                            <span class="icon-facebook-squared"></span>
+                            <a href="https://es-la.facebook.com/login.php" id="facebook"
+                               class="icon-facebook-squared"></a></span>
                         </div>
                         <div class="border-icon">
-                            <span class="icon-instagram"></span>
+                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
                         </div>
                         <div class="border-icon">
-                            <span class="icon-twitter"></span>
+                            <span><a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
                         </div>
-                    </div>                   
+                    </div>                
                     <p class="cuenta-gratis">Crear una cuenta gratis</p>
                     <input type="text" name="name" placeholder="Nombre" th:value="${name}" required autofocus>
                     <input type="text" name="lastName" placeholder="Apellido" th:value="${lastName}" required autofocus>
@@ -77,16 +78,16 @@
                     <h2 class="create-account">Iniciar Sesión</h2>
                     <div class="iconosFormulario">
                         <div class="border-icon">
-                            <span class="icon-facebook-squared"></span>
+                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
+                                      class="icon-facebook-squared"></a></span>
                         </div>
                         <div class="border-icon">
-                            <span class="icon-instagram"> </span>
+                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
                         </div>
                         <div class="border-icon">
-                            <span class="icon-twitter"> </span>
+                            <span><a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
                         </div>
-                    </div>
-                    <p th:if="${error!=null}" th:text="${error}" style="color: red"></p>
+                    </div>  
                     <input type="email" name="username" placeholder="Mail" required autofocus>
                     <input type="password" name="password" placeholder="Contraseña" required autofocus>
                     <button type="submit">Iniciar Sesion</button>
@@ -94,24 +95,22 @@
             </div>
         </section>
 
-        
-    <!-- Dinamics -->
-
-    <section class="dinamics">
-        <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
-            <div class="card-body" >
-                <h5 class="card-title">Éxito</h5>
-                <p class="card-text" th:text="${exito}"> </p>
+        <!-- Dinamics -->
+        <section class="dinamics">
+            <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
+                <div class="card-body" >
+                    <h5 class="card-title">Éxito</h5>
+                    <p class="card-text" th:text="${exito}"> </p>
+                </div>
             </div>
-        </div>
 
-        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-            <div class="card-body" id="error">
-                <h5 class="card-title">Error</h5>
-                <p class="card-text" th:text="${error}"></p>
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div class="card-body" id="error">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
         <!-- Footer -->

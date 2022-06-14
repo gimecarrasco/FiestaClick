@@ -37,7 +37,7 @@
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
-                            <li><a href="/basket">Ver Carrito</a></li>
+                            <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
                     </li>
                     <form class="form-inline" id="carrito">
@@ -59,19 +59,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="comic:${comics}" th:value="${comic.id}" th:if="${comic.alta}!=false">
-                    <td th:text="${comic.titulo}"></td>
+                <tr th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:if="${cateringEntity.register}!=false" >               
+                    <td th:text="${cateringEntity.name}"></td>
                     <td>
-                        <form th:action="@{/Comics/eliminar}" method="POST">
-                            <input type="hidden" class="form-control" name="id" th:value="${comic.id}">
+                        <form th:action="@{/basket/disable}" method="POST">
+                            <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
                             <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
                         </form>
-                    </td>
+                    </td>                
                 </tr>
             </tbody>
             <tfoot>
             <td>
-                <a href="/basket/buy"><button type="submit" class="btn btn-primary">Confirmar</button></a>
+                <form th:action="@{/#}" method="POST">
+<!--                    <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">-->
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </form>
             </td>
         </tfoot>
     </table>

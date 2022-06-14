@@ -1,7 +1,8 @@
 
 package com.fiestaClick.demo.controllers;
 
-import com.fiestaClick.demo.services.ExtraServiceService;
+
+import com.fiestaClick.demo.service.ExtraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ExtraController {
     
     @Autowired
-    private ExtraServiceService extraService;
+    private ExtraService extraService;
 
 }
