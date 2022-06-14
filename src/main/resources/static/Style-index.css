@@ -3,7 +3,6 @@
 @import url(Style-blog.css);
 @import url(Style-footer.css);
 
-
 * {
     margin: 0;
     padding: 0;
@@ -11,11 +10,7 @@
 }
 
 body {
-    /* background-color: rgba(222, 241, 219, 0.878); */
-    /* background-color: #eaac8b; */
-    /* azul */
-    background-color: #e2ebf2;
-
+    background-color: #badcf7
     margin: 0;
     min-height: 100vh;
 }
@@ -36,6 +31,11 @@ body {
     font-size: 30px;
     transform: translateY(12px);
     font-family: railey;
+}
+
+.contenedor h1:hover{
+    color: #402399;
+    transition: all 1.2s;
 }
 
 header .contenedor {

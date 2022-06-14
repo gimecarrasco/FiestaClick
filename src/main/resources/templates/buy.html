@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/../../Style-extra.css">
+    <link rel="stylesheet" href="/../../Style-buy.css">
     <link rel="stylesheet" type="text/css" href="/font/fontello.css">
-    <title>Catering</title>
+    <title>Buy</title>
 </head>
 
 <body>
-       <!-- NavBar -->
-  <header>
+<!-- NavBar -->
+   <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -50,63 +50,61 @@
             </div>
         </header>
 
-        <!-- Banner -->
-        <section id="banner">
-            <div class="contenedor">
-                <h2>Elegí tu Catering</h2>
-            </div>
-        </section>
 
-        <!-- Cards -->
-        <section id="cards">
-            <div class="container__cards">
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat1.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Mesas temáticas</h2>
-                    <p class="card-text">Elegi los personajes que quieras y nosotros te armamos la mejor mesa</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat2.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Zeta-Jones</h2>
-                    <p class="card-text">Sandwiches y bocaditos de 10 variedades con temática para niños.</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat3.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Burguer & Fun</h2>
-                    <p class="card-text">El menú más elegido por los más pequeños</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat4.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Dulces Fiestas</h2>
-                    <p class="card-text">La mejor calidad, presentación y variedad.</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    
+    <section id="message">
+        <div class="container__message">
+            <h1>Realizar Compra</h1>
+        </div>
+    </section>
+
+    <section id="table">
+        <table class="table container">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre:</th>
+                    <th scope="col"><input type="text" name="name" placeholder=" Ingrese su nombre" required autofocus>
+                    </th>
+                    <th scope="col">Apellido:</th>
+                    <th scope="col"><input type="text" name="lastName" placeholder=" Ingrese su apellido" required
+                            autofocus>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col">Correo:</th>
+                    <th scope="col"><input type="email" name="email" placeholder=" Ingrese su mail" required autofocus>
+                    </th>
+                    <th scope="col">Nro de tarjeta:</th>
+                    <th scope="col"><input type="number" name="card" placeholder=" 0000-0000-0000-0000" required
+                            autofocus></th>
+                </tr>
+
+                <tr>
+                    <th scope="col">Vencimiento:</th>
+                    <th scope="col"><input type="number" name="card" placeholder="00/00"></th>
+                    <th scope="col">Cod. Seg:</th>
+                    <th scope="col"><input type="number" name="card" placeholder="000"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="data">
+                    <td>Nombre</td>
+                    <td>Precio</td>
+                </tr>
+            </tbody>
+            <tfoot style="border: none;">
+                <tr>
+                    <td scope="row">Total:</td>
+                    <td>
+                        <form>
+                            <button class="btn btn-success" type="submit">
+                                <a href="">Finalizar compra </a>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
 
     <!-- Footer -->
     <footer>

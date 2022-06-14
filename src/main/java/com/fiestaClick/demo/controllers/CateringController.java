@@ -25,6 +25,7 @@ public class CateringController {
     public String form(ModelMap modelo)  {
         return "saveCateringAndExtra.html";
     }
+   
     
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo)  throws ErrorService{
