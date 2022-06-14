@@ -3,7 +3,7 @@ package com.fiestaClick.demo.controllers;
 
 import com.fiestaClick.demo.entities.PhotoEntity;
 import com.fiestaClick.demo.errors.ErrorService;
-import com.fiestaClick.demo.services.CateringService;
+import com.fiestaClick.demo.service.CateringService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,19 +28,19 @@ public class CateringController {
    
     
     @PostMapping("/register")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, @RequestParam MultipartFile photo)  throws ErrorService{
+    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo)  throws ErrorService{
         try {
             System.out.println("Nombre: " + name );
             System.out.println("Precio: " + price );
             System.out.println("Descripción: " + description );
             System.out.println("Foto: " + photo );
              cateringService.save(name, price, description, photo);
-            model.put("exito", "Ha sido cargado exitosamente.");
+            //model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();
             model.put("error", "Error al cargarse su servicio");
             return "saveCateringAndExtra.html";
         }
-        return "index.html";
+        return "saveCateringAndExtra.html";
     }
 }

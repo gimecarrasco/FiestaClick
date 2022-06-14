@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,8 +21,8 @@ public class CateringEntity {
     private String description;
     private Boolean register;
 
-    @OneToMany
-    private List<PhotoEntity> photoEntity;
+    @OneToOne
+    private PhotoEntity photoEntity;
 
     public CateringEntity() {
     }
@@ -32,7 +33,7 @@ public class CateringEntity {
         this.price = price;
         this.description = description;
         this.register = register;
-        this.photoEntity = (List<PhotoEntity>) photoEntity;
+        this.photoEntity = photoEntity;
     }
 
     public String getId() {
@@ -67,11 +68,11 @@ public class CateringEntity {
         this.description = description;
     }
 
-    public List<PhotoEntity> getPhotoEntity() {
+    public PhotoEntity getPhotoEntity() {
         return photoEntity;
     }
 
-    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
+    public void setPhotoEntity(PhotoEntity photoEntity) {
         this.photoEntity = photoEntity;
     }
 
