@@ -30,8 +30,8 @@ public class UserController {
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
         try {
-              userService.save(name,lastName, dateOfBirth, email, password);
-            model.put("exito", "Has sido registrado exitosamente.");
+            userService.save(name,lastName, dateOfBirth, email, password);
+            model.put("exito", "Felicitaciones!");            
         } catch (Exception e) {
             e.printStackTrace();
             model.put("error", e.getMessage());
