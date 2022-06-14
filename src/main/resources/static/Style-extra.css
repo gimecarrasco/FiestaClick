@@ -1,7 +1,7 @@
-@import url(/css/Style-menu.css);
-@import url(/css/Style-footer.css);
-@import url(/css/Style-index.css);
-@import url(/css/Style-blog.css);
+@import url(Style-menu.css);
+@import url(Style-footer.css);
+@import url(Style-index.css);
+@import url(Style-blog.css);
 
 body {
     min-height: 100vh;
