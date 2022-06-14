@@ -55,7 +55,22 @@
             <p class="card-text" th:text="${error}"></p>
         </div>
     </div>
-        
+        <section class="dinamics">
+        <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
+            <div class="card-body" >
+                <h5 class="card-title">Éxito</h5>
+                <p class="card-text" th:text="${exito}"> </p>
+            </div>
+        </div>
+
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body" id="error">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+    </section>
+
         <div class="container-form">
             <form  action="/catering/register" method="POST"  class="formulario" enctype="multipart/form-data" >
                 <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>

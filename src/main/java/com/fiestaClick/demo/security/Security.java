@@ -1,7 +1,7 @@
 
 package com.fiestaClick.demo.security;
 
-import com.fiestaClick.demo.services.UserService;
+import com.fiestaClick.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,7 +39,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/logincheck") //controlador que checkea user y password
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/") //controlador que deriva a la pagina exitosa
+                .defaultSuccessUrl("/indexUser") //controlador que deriva a la pagina luego de un logueo exitoso
                 .permitAll()
                 .and().logout()
                 .logoutUrl("/logout")

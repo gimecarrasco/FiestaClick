@@ -1,5 +1,5 @@
 
-package com.fiestaClick.demo.services;
+package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;

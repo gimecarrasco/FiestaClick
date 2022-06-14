@@ -1,4 +1,4 @@
-package com.fiestaClick.demo.services;
+package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.repository.PhotoRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class PhotoService {
                 photo.setName(archive.getName());
                 photo.setMime(archive.getContentType());
                 photo.setContent(archive.getBytes());
-                photoRepository.save(photo);
+                 return photoRepository.save(photo);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }

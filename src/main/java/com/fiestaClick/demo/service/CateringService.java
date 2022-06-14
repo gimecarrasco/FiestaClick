@@ -1,4 +1,4 @@
-package com.fiestaClick.demo.services;
+package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;
@@ -32,7 +32,7 @@ public class CateringService {
         catering.setDescription(description);
         
         PhotoEntity photo= photoService.save((MultipartFile) photoEntity);
-        catering.setPhotoEntity((List<PhotoEntity>) photo);
+        catering.setPhotoEntity(photo);
         catering.setRegister(Boolean.TRUE);
 
         return cateringRepository.save(catering);
@@ -88,7 +88,7 @@ public class CateringService {
            catering.setName(name);
            catering.setDescription(description);
            catering.setPrice(price);
-           catering.setPhotoEntity((List<PhotoEntity>) photoEntity);
+           catering.setPhotoEntity( photoEntity);
             
             return cateringRepository.save(catering);
 

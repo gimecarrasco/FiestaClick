@@ -1,4 +1,4 @@
-package com.fiestaClick.demo.services;
+package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.EventRoomEntity;

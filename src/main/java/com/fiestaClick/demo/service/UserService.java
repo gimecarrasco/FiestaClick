@@ -1,7 +1,8 @@
-package com.fiestaClick.demo.services;
+package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.enumerations.Role;
+import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,8 +37,9 @@ public class UserService implements UserDetailsService {
     private JavaMailSender emailSender;
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String lastName, Date dateOfBirth, String email, String password){
+    public void save(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
         
+        validate(name, lastName, dateOfBirth, email, password);
         UserEntity userEntity = new UserEntity();
         
         userEntity.setName(name);
@@ -49,13 +51,28 @@ public class UserService implements UserDetailsService {
         userEntity.setRegister(Boolean.TRUE);
         userEntity.setRole(Role.USER);
          
-        String subject = "Inscripcion a FiestaClick";
+       // String subject = "Inscripcion a FiestaClick";
 
-        String content = "Gracias por registrarse " + userEntity.getName() + "!";        
-        sendEmail(email, subject, content);
+        //String content = "Gracias por registrarse " + userEntity.getName() + "!";        
+        //sendEmail(email, subject, content);
 
         
         userRepository.save(userEntity);
+    }
+    
+    public void validate(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception {
+        if (name == null || name.trim().isEmpty()) {
+            throw new ErrorService("El nombre no puede ser nulo el nombre ");
+        }
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new ErrorService("El apellido no puede ser nulo.");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new ErrorService("No puede ser nula la descripción");
+        }
+        if (password==null || password.trim().isEmpty()) {
+            throw new ErrorService("La contraseña no puede ser nula.");
+        }
     }
 
     @Override
