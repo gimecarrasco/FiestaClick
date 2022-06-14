@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ExtraServiceService {
+public class ExtraService {
     
     @Autowired
     private ExtraServiceRepository extraServiceRepository;
