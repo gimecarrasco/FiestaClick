@@ -22,10 +22,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-    @GetMapping("/login")
-    public String form(ModelMap modelo)  {
-        return "login.html";
-    }
+ 
     
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
