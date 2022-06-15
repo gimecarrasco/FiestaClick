@@ -1,8 +1,6 @@
 package com.fiestaClick.demo.controllers;
 
-import com.fiestaClick.demo.entities.CateringEntity;
-import com.fiestaClick.demo.entities.EventRoomEntity;
-import com.fiestaClick.demo.entities.ExtraServiceEntity;
+import com.fiestaClick.demo.entities.PartyEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
@@ -32,17 +30,14 @@ public class BasketController {
 
     @GetMapping("/basket")
     public String basket(ModelMap modelo) {
-        List<CateringEntity> caterings = cateringService.listCatering();
-        List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
-        List<ExtraServiceEntity> extras = extraService.listCatering();
-        modelo.put("caterings", caterings);
-        modelo.put("eventRooms", eventRooms);
-        modelo.put("extras", extras);
+
+        List<PartyEntity> partys = partyService.listParty();
+        modelo.put("partys", partys);
         return "basket.html";
     }
 
     @GetMapping("/buy")
-    public String buyController() {
+    public String buy() {
         return "buy.html";
     }
 
@@ -73,7 +68,7 @@ public class BasketController {
     @PostMapping("/disableExtra")
     public String disableExtra(ModelMap modelo, @RequestParam String id) {
         try {
-           extraService.disable(id);
+            extraService.disable(id);
             modelo.put("exito", "Se eliminó del carrito");
         } catch (ErrorService e) {
             e.printStackTrace();

@@ -13,7 +13,7 @@
 
     <body>
         <!-- NavBar -->
-          <header>
+        <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -21,17 +21,23 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-th-list" for="menu-bar"></label>
                 <nav class="menu">
-                    <li><a href="#"><span class="icon-user"></span>Usuario</a>
+
+                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
                         <ul class="submenu">
                             <li><a href="/login">Ingresar</a></li>
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                        <ul class="submenu">
+                            <li><a href="/logout">Cerrar Sesión</a></li> 
+                        </ul>
+                    </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/eventRoom">Salones</a></li>
-                            <li><a href="/catering">Caterings</a></li>
-                            <li><a href="/extra">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a></li>
+                            <li><a href="/servicios/catering">Caterings</a></li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
@@ -45,10 +51,10 @@
                             <span class="icon-search"></span>
                         </button>
                     </form>
-                </nav>
+                </nav>          
             </div>
         </header>
-
+        
         <main>
             <!-- Banner -->
             <section id="banner">
@@ -66,7 +72,7 @@
                         <div class="cover__card">
                             <img src="/images/salon.jpg" alt="salon">
                         </div>
-                        <h2 class="card-title">Salón la Carlota</h2>
+                        <h2 class="card-title">Salones</h2>
                         <p class="card-text">Atendido por sus propios Dueños</p>
                         <hr>
                         <div class="footer__card">
@@ -77,7 +83,7 @@
                         <div class="cover__card">
                             <img src="/images/catering2.jpg" alt="catering">
                         </div>
-                        <h2 class="card-title">Catering Zeta-Jones</h2>
+                        <h2 class="card-title">Caterings</h2>
                         <p class="card-text">No creemos en la vergüenza</p>
                         <hr>
                         <div class="footer__card">
@@ -88,7 +94,7 @@
                         <div class="cover__card">
                             <img src="/images/extra2.jpg" alt="extra">
                         </div>
-                        <h2 class="card-title">Payasos</h2>
+                        <h2 class="card-title">Entretenimiento</h2>
                         <p class="card-text">Para niños y grandes</p>
                         <hr>
                         <div class="footer__card">
