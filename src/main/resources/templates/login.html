@@ -93,7 +93,7 @@
                 </form>
                
                 
-                <form  th:action="@{/logincheck}" method="POST" class="formulario" id="inicio">
+                <form  action="/logincheck" method="POST" class="formulario" id="inicio">
                     <h2 class="create-account">Iniciar Sesión</h2>
                     <div class="iconosFormulario">
                         <div class="border-icon">
@@ -110,8 +110,8 @@
                     <p th:if="${error != null}" th:text="${error}"  style="color: red"></p>
                     <p th:if="${logout != null}" th:text="${logout}"  style="color: green"></p>
                     
-                    <input type="email" name="username" th:value="${email}" value="email" placeholder="Mail" required autofocus>
-                    <input type="password" name="password" th:value="${password}" value="password" placeholder="Contraseña" required autofocus>
+                    <input type="email" name="username" placeholder="Mail" required autofocus>
+                    <input type="password" name="password" placeholder="Contraseña" required autofocus>
                     <button type="submit">Iniciar Sesion</button>
                 </form>
             </div>
