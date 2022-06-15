@@ -23,17 +23,23 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-th-list" for="menu-bar"></label>
                 <nav class="menu">
-                    <li><a href="#"><span class="icon-user"></span>Usuario</a>
+
+                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
                         <ul class="submenu">
-                            <li><a href="user/login">Ingresar</a></li>
-                            <li><a href="user/login">Registrarse</a></li>
+                            <li><a href="/login">Ingresar</a></li>
+                            <li><a href="/login">Registrarse</a></li>
+                        </ul>
+                    </li>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                        <ul class="submenu">
+                            <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/eventRoom">Salones</a></li>
-                            <li><a href="/catering">Caterings</a></li>
-                            <li><a href="/extra">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a></li>
+                            <li><a href="/servicios/catering">Caterings</a></li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
@@ -47,68 +53,26 @@
                             <span class="icon-search"></span>
                         </button>
                     </form>
-                </nav>
+                </nav>          
             </div>
         </header>
         <br>
         <br>
         <br>
         <br>
-        
-     
-        
-                <section class="formulary">
+
+        <section class="formulary">
             <div class="container-form">
-                <form action="/user/register" method="POST" class="formulario">
-                    <h2 class="create-account">Crear una cuenta</h2>
-                    <div class="iconosFormulario">
-                        <div class="border-icon">
-                            <a href="https://es-la.facebook.com/login.php" id="facebook"
-                               class="icon-facebook-squared"></a></span>
-                        </div>
-                        <div class="border-icon">
-                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
-                        </div>
-                        <div class="border-icon">
-                            <span><a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
-                        </div>
-                    </div>                       
-                    <p class="cuenta-gratis">Crear una cuenta gratis</p>
-                    <input type="text" name="name" placeholder="Nombre" th:value="${name}" required autofocus>
-                    <input type="text" name="lastName" placeholder="Apellido" th:value="${lastName}" required autofocus>
-                    <input type="text" name="dateOfBirth" placeholder="aaaa/mm/dd" th:value="${dateOfBirth}" required autofocus>
-                    <input type="email" name="email" placeholder="Mail" th:value="${email}" required autofocus>
-                    <input type="password" placeholder="Contraseña" name="password" th:value="${password}" required autofocus>
-                    <button type="submit">Registrarse</button>
-                </form>
-               
-                
-                <form  action="/logincheck" method="POST" class="formulario" id="inicio">
-                    <h2 class="create-account">Iniciar Sesión</h2>
-                    <div class="iconosFormulario">
-                        <div class="border-icon">
-                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
-                                      class="icon-facebook-squared"></a></span>
-                        </div>
-                        <div class="border-icon">
-                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
-                        </div>
-                        <div class="border-icon">
-                            <span><a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
-                        </div>
-                    </div>  
-                    <p th:if="${error != null}" th:text="${error}"  style="color: red"></p>
-                    <p th:if="${logout != null}" th:text="${logout}"  style="color: green"></p>
-                    
-                    <input type="email" name="username" placeholder="Mail" required autofocus>
-                    <input type="password" name="password" placeholder="Contraseña" required autofocus>
-                    <button type="submit">Iniciar Sesion</button>
+                <form action="/services/modify" method="POST" class="formulario">
+                    <h2 class="create-account">Modificar</h2>
+                    <input type="hidden" name="id" th:value="${id}">
+                    <input type="text" class="form-control" name="name" th:value="${name}"  placeholder="Nombre" required autofocus>                  
+                    <input type="number" class="form-control" name="price" th:value="${price}" placeholder="Precio"  required autofocus>
+                    <input type="text" class="form-control" name="description" th:value="${description}" placeholder="Descripción" required autofocus>
+                    <input type="file" class="form-control" name="photoEntity" th:value="${photoEntity}" placeholder="Foto" required autofocus>   
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="reset" class="btn btn-danger">Volver</button>
                 </form>
             </div>
         </section>
-        
-        
-        
-        
-        
     </body>

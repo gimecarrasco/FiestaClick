@@ -21,43 +21,35 @@ public class MainController {
     public String index(ModelMap modelo) {
         modelo.put("exito", "Has sido registrado exitosamente.");
         return "index.html";
-    } 
+    }
 
-     @GetMapping("/login")
+    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, ModelMap model) {
-         if (error != null) {
-             model.put("error", "El nombre de usuario o contraseña son incorrectos.");
-             return "login.html";
-         }
-         if (logout != null) {
-             model.put("logout", "Ha salido correctamente de la plataforma.");
-             return "login.html";
-         }
+        if (error != null) {
+            model.put("error", "El nombre de usuario o contraseña son incorrectos.");
+
+        }
+        if (logout != null) {
+            model.put("logout", "Ha salido correctamente de la plataforma.");
+
+        }
         return "login.html";
     }
-     @PreAuthorize("hasAnyRole('ROLE_USER')") 
-        @GetMapping("/indexUser")
-  public String indexUser(HttpSession session, ModelMap model) {
+
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/indexUser")
+    public String indexUser(HttpSession session, ModelMap model) {
         return "indexUser.html";
     }
-  
-    @GetMapping("/catering")
-    public String catering() {
-        return "catering.html";
-    }
 
-    @GetMapping("/eventRoom")
-    public String eventRoom() {
-        return "eventRoom.html";
+    @GetMapping("/prueba")
+    public String prueba() {
+        return "prueba.html";
     }
 
     @GetMapping("/extra")
     public String extra() {
         return "extra.html";
     }
-    
-    
 
-    
-     
 }

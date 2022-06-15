@@ -22,17 +22,23 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-th-list" for="menu-bar"></label>
                 <nav class="menu">
-                    <li><a href="#"><span class="icon-user"></span>Usuario</a>
+
+                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
                         <ul class="submenu">
-                            <li><a href="user/login">Ingresar</a></li>
-                            <li><a href="user/login">Registrarse</a></li>
+                            <li><a href="/login">Ingresar</a></li>
+                            <li><a href="/login">Registrarse</a></li>
+                        </ul>
+                    </li>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                        <ul class="submenu">
+                            <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/eventRoom">Salones</a></li>
-                            <li><a href="/catering">Caterings</a></li>
-                            <li><a href="/extra">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a></li>
+                            <li><a href="/servicios/catering">Caterings</a></li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
@@ -46,7 +52,7 @@
                             <span class="icon-search"></span>
                         </button>
                     </form>
-                </nav>
+                </nav>          
             </div>
         </header>
 
@@ -60,56 +66,27 @@
         <!-- Cards -->
         <section id="cards">
             <div class="container__cards">
-                <div class="card">
+                <div class="card" th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" >
                     <div class="cover__card">
                         <img src="/images/cat1.jpg" alt="salon">
                     </div>
-                    <h2 class="card-title">Mesas temáticas</h2>
-                    <p class="card-text">Elegi los personajes que quieras y nosotros te armamos la mejor mesa</p>
+                    <h2 class="card-title" th:text="${cateringEntity.name}"></h2>
+                    <p class="card-text" th:text="${cateringEntity.description}"></p>
+                      <p class="card-text" th:if="${session.usersession!=null}"  th:text="${cateringEntity.price}"></p>
                     <hr>                  
-                    <div class="footer__card" th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}">                 
-                        <form th:action="@{/catering/enable}" method="POST">
+                    <div class="footer__card">                 
+                        <form th:action="@{/servicios/enable}" method="POST">
                             <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
                             <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>
                         </form>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat2.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Zeta-Jones</h2>
-                    <p class="card-text">Sandwiches y bocaditos de 10 variedades con temática para niños.</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat3.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Burguer & Fun</h2>
-                    <p class="card-text">El menú más elegido por los más pequeños</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/cat4.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Dulces Fiestas</h2>
-                    <p class="card-text">La mejor calidad, presentación y variedad.</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/catering"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
+                        <form th:action="@{/servicios/edit}" method "POST">
+                              <input type="hidden" name="id" th:value="${cateringEntity.id}">
+                            <button  type="submit" class="btn btn-primary">Editar</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-
 
         <!-- Footer -->
         <footer>
