@@ -7,6 +7,7 @@ import com.fiestaClick.demo.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -102,8 +103,65 @@ public class UserService implements UserDetailsService {
         } else {
             return null;
         }
-
     }
+
+        @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public void update(String id, String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
+        validate(name, lastName, dateOfBirth, email, password);
+
+        Optional<UserEntity> answer = userRepository.findById(id);
+        if (answer.isPresent()) {
+            UserEntity user = answer.get();
+            user.setName(name);
+            user.setLastName(lastName);
+            user.setDateOfBirth(dateOfBirth);
+            user.setName(email);
+            
+            String encripted = new BCryptPasswordEncoder().encode(password);
+            user.setPassword(encripted); 
+            
+            userRepository.save(user);
+        } else {
+            throw new ErrorService("No se encontró un autor con el identificador solicitado.");
+        }
+    }
+    
+    @Transactional(propagation = Propagation.NESTED)
+    public void desable(String id) throws ErrorService{
+        Optional<UserEntity> answer =  userRepository.findById(id);
+        if (answer.isPresent()) {
+            UserEntity user = answer.get();
+            user.setRegister(Boolean.FALSE);
+        } else {
+            throw new ErrorService("No se encontró un autor con el identificador solicitado.");
+        }
+    }
+    
+    @Transactional(propagation = Propagation.NESTED)
+    public void enable(String id) throws ErrorService{
+         Optional<UserEntity> answer =  userRepository.findById(id);
+        if (answer.isPresent()) {
+            UserEntity autor = answer.get();
+            autor.setRegister(Boolean.TRUE);
+        } else {
+            throw new ErrorService("No se encontró un autor con el identificador solicitado.");
+        } 
+    }
+    @Transactional(propagation = Propagation.NESTED)
+    public void borrarPorId(String id) throws ErrorService{
+        Optional <UserEntity> answer = userRepository.findById(id);
+        if (answer.isPresent()) {
+           userRepository.delete(answer.get());
+        } else {
+             throw new ErrorService("No se encontró un autor con el identificador solicitado.");
+        }
+    }
+    
+      @Transactional(propagation = Propagation.NESTED)
+    public UserEntity findById(String id) {
+        return userRepository.findById(id).get();
+    }
+   
     
 //    public void sendEmail(String email, String subject, String content) {
 //        SimpleMailMessage mail = new SimpleMailMessage();

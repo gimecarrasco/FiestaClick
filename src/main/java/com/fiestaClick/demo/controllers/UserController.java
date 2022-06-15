@@ -1,5 +1,6 @@
 package com.fiestaClick.demo.controllers;
 
+import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.UserRepository;
 import com.fiestaClick.demo.service.UserService;
@@ -22,8 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
     
- 
-    
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
         try {
@@ -31,7 +30,7 @@ public class UserController {
             model.put("exito", "Felicitaciones!");            
         } catch (Exception e) {
             e.printStackTrace();
-            model.put("error", e.getMessage());
+            //model.put("error", e.getMessage());
             model.put("name", name);
             model.put("lastName", lastName);
             model.put("dateOfBirth", dateOfBirth);
@@ -41,6 +40,36 @@ public class UserController {
             return "login.html";
         }
         return "login.html";
+    }
+    
+    @GetMapping("/editProfile")
+    public String editProfile(@RequestParam String id, ModelMap model){
+        try {
+            UserEntity userEdit = userService.findById(id);
+            model.addAttribute("profile", userEdit);
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+    return "editProfile";
+}
+    
+    @PostMapping("/updateProfile")
+    public String updateProfile(ModelMap model, @RequestParam String id, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password){
+        UserEntity user = null;
+        
+        try {
+            user = userService.findById(id);
+            userService.update(id, name, lastName, dateOfBirth, email, password);
+            return "redirect:/index";
+        } catch (Exception e) {
+            model.put("name", name);
+            model.put("lastName", lastName);
+            model.put("dateOfBirth", dateOfBirth);
+            model.put("email", email);
+            model.put("password", password);
+            return "editProfil.html";
+        }
+        
     }
 
 }
