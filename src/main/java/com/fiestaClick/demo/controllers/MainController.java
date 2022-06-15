@@ -36,10 +36,10 @@ public class MainController {
      @PreAuthorize("hasAnyRole('ROLE_USER')") 
         @GetMapping("/indexUser")
   public String indexUser(HttpSession session, ModelMap model) {
-         UserEntity login = (UserEntity) session.getAttribute("usersession");//recupero usuario logueado
-        if(login == null){
-            return "redirect:/login";// si pasa tiempo y no hace nada para vuelva a inicio
-        }
+//         UserEntity login = (UserEntity) session.getAttribute("usersession");//recupero usuario logueado
+//        if(login == null){
+//            return "redirect:/login";// si pasa tiempo y no hace nada para vuelva a inicio
+//        }
 //        try {
 //            List<Mascota> listaMascotaPropia = mascotaServicio.buscarPorIdUsuario(login.getId());
 //            model.addAttribute("listaMascotasPropia",listaMascotaPropia);
