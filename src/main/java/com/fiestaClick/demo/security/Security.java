@@ -37,7 +37,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/logincheck") //controlador que checkea user y password
-                .usernameParameter("email")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/indexUser") //controlador que deriva a la pagina luego de un logueo exitoso
                 .permitAll()
