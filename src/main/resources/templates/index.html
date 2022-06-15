@@ -30,6 +30,7 @@
                     </li>
                     <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
                         <ul class="submenu">
+                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
@@ -65,6 +66,9 @@
                 </div>
             </section>
 
+            <!--Saludo una vez logueado, funciona!
+            <h2 th:if="${session.usersession != null}" th:text="${ 'HOLA' + session.usersession.name + ' ' + session.usersession.lastName }"></h2>-->
+            
             <!-- Cards -->
             <section id="cards">
                 <div class="container__cards">
