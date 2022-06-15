@@ -43,17 +43,19 @@ public class PartyService {
     
     
     @Transactional
-    public PartyEntity save(UserEntity userEntity, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception {
+    public PartyEntity save( String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception {
         
-        UserEntity otherUserEntity = userRepository.findById(idUser).get();
-                
-        validate(userEntity, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
+                 
+        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
+        
+        UserEntity userEntity = userRepository.findById(idUser).get();
          
         PartyEntity partyEntity = new PartyEntity();
         partyEntity.setCateringEntity(cateringEntity);
         partyEntity.setEventRoomEntity(eventRoomEntity);
         partyEntity.setExtraServiceEntity((List<ExtraServiceEntity>) extraServiceEntity);
         partyEntity.setPartyDate(partyDate);
+        partyEntity.setUserEntity(userEntity);
         partyEntity.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService)); 
                
         return partyRepository.save(partyEntity);
@@ -64,11 +66,11 @@ public class PartyService {
     }
     
     @Transactional
-    public PartyEntity modify(String id, UserEntity userEntity, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
+    public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
         
         Optional<PartyEntity> answer = partyRepository.findById(id);
         
-        validate(userEntity, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
+        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
         
         if (answer.isPresent()) {
             PartyEntity party = answer.get();
@@ -101,22 +103,12 @@ public class PartyService {
         partyRepository.deleteById(id);
     }
     
-    public void validate(UserEntity userEntity, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate) throws Exception {
-        if (userEntity == null) {
-            throw new ErrorService("No puede ser nulo este valor");
+    public void validate(String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate) throws Exception {
+        if (idUser == null) {
+            throw new ErrorService("No se encontró el usuario");
         }
-        if (cateringEntity == null) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (extraServiceEntity == null) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (eventRoomEntity == null) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }        
-        if (partyDate == null) {
-            throw new ErrorService("No puede ser nulo este valor");
+        if (cateringEntity == null || extraServiceEntity == null || eventRoomEntity == null || partyDate == null) {
+            throw new ErrorService("Debes elegir al menos un servicio.");
         }
     }
-    
 }

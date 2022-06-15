@@ -94,7 +94,7 @@ public class UserService implements UserDetailsService {
             //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usuariosession", u); //traerme el usuario
+            session.setAttribute("usersession", u); //traerme el usuario
 
             User user = new User(u.getEmail(), u.getPassword(), permisos);
             return user;
