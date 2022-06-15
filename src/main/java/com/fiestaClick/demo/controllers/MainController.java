@@ -27,9 +27,11 @@ public class MainController {
     public String login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, ModelMap model) {
          if (error != null) {
              model.put("error", "El nombre de usuario o contraseña son incorrectos.");
+             return "login.html";
          }
          if (logout != null) {
              model.put("logout", "Ha salido correctamente de la plataforma.");
+             return "login.html";
          }
         return "login.html";
     }
@@ -56,14 +58,16 @@ public class MainController {
     }
 
     @GetMapping("/eventRoom")
-    public String eventRoomController() {
+    public String eventRoom() {
         return "eventRoom.html";
     }
 
     @GetMapping("/extra")
-    public String extraController() {
+    public String extra() {
         return "extra.html";
     }
+    
+    
 
     
      

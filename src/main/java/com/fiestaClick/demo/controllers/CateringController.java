@@ -27,8 +27,8 @@ public class CateringController {
     @Autowired
     private CateringService cateringService;
     
-    @Autowired
-    private PartyEntity partyEntity;
+//    @Autowired
+//    private PartyEntity partyEntity;
     
     @GetMapping("/saveCateringAndExtra")
     public String form(ModelMap modelo)  {
@@ -59,18 +59,18 @@ public class CateringController {
 //        return "index";
 //    }
     
-    @PostMapping("/enable")
-    public String enable(ModelMap modelo, @RequestParam String id, CateringEntity cateringEntity) {
-        try {
-            cateringService.enable(id);
-            partyEntity.setCateringEntity(cateringEntity);  
-            modelo.put("exito", "Se agregó al carrito");
-        } catch (ErrorService e) {
-            e.printStackTrace();
-            modelo.put("error", "No se pudo agregar del carrito");
-        }
-        return "redirect:/shop/basket";
-    }
+//    @PostMapping("/enable")
+//    public String enable(ModelMap modelo, @RequestParam String id, CateringEntity cateringEntity) {
+//        try {
+//            cateringService.enable(id);
+//            partyEntity.setCateringEntity(cateringEntity);  
+//            modelo.put("exito", "Se agregó al carrito");
+//        } catch (ErrorService e) {
+//            e.printStackTrace();
+//            modelo.put("error", "No se pudo agregar del carrito");
+//        }
+//        return "redirect:/shop/basket";
+//    }
 
     
 }
