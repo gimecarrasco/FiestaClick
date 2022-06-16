@@ -37,8 +37,14 @@
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
                             <li><a href="/servicios/salones">Salones</a></li>
-                            <li><a href="/servicios/catering">Caterings</a></li>
-                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
+                            <li><a href="/servicios/catering">Caterings</a>
+                                <ul><a href= "/servicios/catering" >Ver caterings</a></ul>
+                                <ul><a href= "/servicios/persistCateringAndExtra" >Cargar caterings</a></ul>
+                            </li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a>
+                                <ul><a href= "" >Ver servicios</a></ul>
+                                <ul><a href= "" >Cargar servicio</a></ul>
+                            </li>
                         </ul>
                     </li>
                     <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
