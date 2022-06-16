@@ -21,50 +21,35 @@ public class MainController {
     public String index(ModelMap modelo) {
         modelo.put("exito", "Has sido registrado exitosamente.");
         return "index.html";
-    } 
+    }
 
-     @GetMapping("/login")
+    @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, @RequestParam(required = false) String logout, ModelMap model) {
-         if (error != null) {
-             model.put("error", "El nombre de usuario o contraseña son incorrectos.");
-         }
-         if (logout != null) {
-             model.put("logout", "Ha salido correctamente de la plataforma.");
-         }
+        if (error != null) {
+            model.put("error", "El nombre de usuario o contraseña son incorrectos.");
+
+        }
+        if (logout != null) {
+            model.put("logout", "Ha salido correctamente de la plataforma.");
+
+        }
         return "login.html";
     }
-     @PreAuthorize("hasAnyRole('ROLE_USER')") 
-        @GetMapping("/indexUser")
-  public String indexUser(HttpSession session, ModelMap model) {
-//         UserEntity login = (UserEntity) session.getAttribute("usersession");//recupero usuario logueado
-//        if(login == null){
-//            return "redirect:/login";// si pasa tiempo y no hace nada para vuelva a inicio
-//        }
-//        try {
-//            List<Mascota> listaMascotaPropia = mascotaServicio.buscarPorIdUsuario(login.getId());
-//            model.addAttribute("listaMascotasPropia",listaMascotaPropia);
-//        } catch (ErrorService e) {
-//            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
-//        }
-            
+
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/indexUser")
+    public String indexUser(HttpSession session, ModelMap model) {
         return "indexUser.html";
     }
-  
-    @GetMapping("/catering")
-    public String catering() {
-        return "catering.html";
-    }
 
-    @GetMapping("/eventRoom")
-    public String eventRoomController() {
-        return "eventRoom.html";
+    @GetMapping("/prueba")
+    public String prueba() {
+        return "prueba.html";
     }
 
     @GetMapping("/extra")
-    public String extraController() {
+    public String extra() {
         return "extra.html";
     }
 
-    
-     
 }

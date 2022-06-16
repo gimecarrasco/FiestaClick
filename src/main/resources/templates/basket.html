@@ -14,7 +14,7 @@
 
     <body>
         <!-- NavBar -->
-        <header>
+            <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -22,17 +22,23 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-th-list" for="menu-bar"></label>
                 <nav class="menu">
-                    <li><a href="#"><span class="icon-user"></span>Usuario</a>
+
+                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
                         <ul class="submenu">
-                            <li><a href="user/login">Ingresar</a></li>
-                            <li><a href="user/login">Registrarse</a></li>
+                            <li><a href="/login">Ingresar</a></li>
+                            <li><a href="/login">Registrarse</a></li>
+                        </ul>
+                    </li>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                        <ul class="submenu">
+                            <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/eventRoom">Salones</a></li>
-                            <li><a href="/catering">Caterings</a></li>
-                            <li><a href="/extra">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a></li>
+                            <li><a href="/servicios/catering">Caterings</a></li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
@@ -46,7 +52,7 @@
                             <span class="icon-search"></span>
                         </button>
                     </form>
-                </nav>
+                </nav>          
             </div>
         </header>
 
@@ -54,76 +60,78 @@
         <table class="table container">
             <thead>
                 <tr>
-                    <th scope="col">Tu fiesta</th>
-                    <th scope="col" id="delete">Eliminar</th>
+                    <th scope="col" id="name">Tu fiesta</th>
+                    <th scope="col" id="delete" >Eliminar</th>
+                    <!--                    <th scope="col"id="delete"  >Confirmar</th>-->
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:if="${cateringEntity.register}!=false" >               
-                    <td th:text="${cateringEntity.name}"></td>
+                <tr th:each="partyEntity : ${partys}">                    
+                    <td th:text="${partyEntity.eventRoomEntity.name}"></td>
+                    <td th:text="${partyEntity.cateringEntity.name}"></td>
+                    <td th:text="${partyEntity.extraServiceEntity.name}"></td>              
                     <td>
-                        <form th:action="@{/basket/disable}" method="POST">
-                            <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
-                            <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
-                        </form>
-                    </td>                
-                </tr>
+                        <a th:href="@{/libros/delete}+'?isbn='+${l.isbn}"><button class="btn btn-light">Eliminar</button></a>
+                        <a th:href="@{/libros/form}+'?isbn='+${l.isbn}+'&action=modificar'"><button class="btn btn-light">Editar</button></a>
+                    </td>
+                </tr>          
             </tbody>
             <tfoot>
-            <td>
-                <form th:action="@{/#}" method="POST">
-<!--                    <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">-->
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                </form>
-            </td>
-        </tfoot>
-    </table>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-dark">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Nuestros Servicios</h3>
-                        <ul>
-                            <li><a href="#">Salones</a></li>
-                            <li><a href="#">Caterings</a></li>
-                            <li><a href="#">Entretenimiento</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Sobre Nosotros</h3>
-                        <ul>
-                            <li><a href="#">¿Quiénes somos?</a></li>
-                            <li><a href="#">Contactános</a></li>
-                            <li><a href="#">¿Necesitas ayuda?</a></li>
-                            <li><a href="#">Política de Privacidad</a></li>
-                        </ul>
-                    </div>
-                    <div id="fiesta" class="col-md-6 item text">
-                        <h3>Fiesta Click</h3>
-                        <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
-                            la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
-                    </div>
-                    <div id="iconos" class="container text-center">
-                        <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
-                                  class="icon-facebook-squared"></a></span>
-                        <span> <a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
-                        <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
+                <tr>
+                    <td>
+                        <form th:action="@{#}" method="POST">
+                            <input type="hidden" class="form-control" name="id" >
+                            <button type="submit" class="btn btn-primary" id="buy">Confirmar</button>                     
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <!-- Footer -->
+        <footer>
+            <div class="footer-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Nuestros Servicios</h3>
+                            <ul>
+                                <li><a href="#">Salones</a></li>
+                                <li><a href="#">Caterings</a></li>
+                                <li><a href="#">Entretenimiento</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Sobre Nosotros</h3>
+                            <ul>
+                                <li><a href="#">¿Quiénes somos?</a></li>
+                                <li><a href="#">Contactános</a></li>
+                                <li><a href="#">¿Necesitas ayuda?</a></li>
+                                <li><a href="#">Política de Privacidad</a></li>
+                            </ul>
+                        </div>
+                        <div id="fiesta" class="col-md-6 item text">
+                            <h3>Fiesta Click</h3>
+                            <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
+                                la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
+                        </div>
+                        <div id="iconos" class="container text-center">
+                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
+                                      class="icon-facebook-squared"></a></span>
+                            <span> <a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
+                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Copyrights -->
-        <div class="bg-light py-4">
-            <div class="container text-center">
-                <img src="/images/logo.png" alt="logo">
-                <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
+            <!-- Copyrights -->
+            <div class="bg-light py-4">
+                <div class="container text-center">
+                    <img src="/images/logo.png" alt="logo">
+                    <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
+                </div>
             </div>
-        </div>
-    </footer>
-    <!-- End -->
-</body>
+        </footer>
+        <!-- End -->
+    </body>
 
 </html>

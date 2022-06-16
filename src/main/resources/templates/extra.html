@@ -14,7 +14,7 @@
 
     <body>
         <!-- NavBar -->
-      <header>
+       <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -22,17 +22,23 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-th-list" for="menu-bar"></label>
                 <nav class="menu">
-                    <li><a href="#"><span class="icon-user"></span>Usuario</a>
+
+                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
                         <ul class="submenu">
-                            <li><a href="user/login">Ingresar</a></li>
-                            <li><a href="user/login">Registrarse</a></li>
+                            <li><a href="/login">Ingresar</a></li>
+                            <li><a href="/login">Registrarse</a></li>
+                        </ul>
+                    </li>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                        <ul class="submenu">
+                            <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/eventRoom">Salones</a></li>
-                            <li><a href="/catering">Caterings</a></li>
-                            <li><a href="/extra">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a></li>
+                            <li><a href="/servicios/catering">Caterings</a></li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
@@ -46,7 +52,7 @@
                             <span class="icon-search"></span>
                         </button>
                     </form>
-                </nav>
+                </nav>          
             </div>
         </header>
 
@@ -60,49 +66,19 @@
         <!-- Cards -->
         <section id="cards">
             <div class="container__cards">
-                <div class="card">
+                <div class="card" th:each="extraServiceEntity:${extras}" th:value="${extraServiceEntity.id}">
                     <div class="cover__card">
                         <img src="/images/mago3.jpg" alt="salon">
                     </div>
-                    <h2 class="card-title">Mago Lalo</h2>
-                    <p class="card-text">La magia los atrapará!!</p>
+                    <h2 class="card-title" th:text="${extraServiceEntity.name}"></h2>
+                    <p class="card-text"th:text="${extraServiceEntity.description}"></p>
+                     <p class="card-text" th:if="${session.usersession!=null}" th:text="${extraServiceEntity.price}"></p>
                     <hr>
                     <div class="footer__card">
-                        <a href="/extra"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/pintar.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Píntame</h2>
-                    <p class="card-text">Pinturas hipoalergénicas y con colores electrizantes</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/extra"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/pelotero1.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Explota explota que expló</h2>
-                    <p class="card-text">Inflables de muchos tamaños y colores para que puedas divertirte con tus amigos.
-                    </p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/extra"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cover__card">
-                        <img src="/images/payasos2.jpg" alt="salon">
-                    </div>
-                    <h2 class="card-title">Payasin y Payason</h2>
-                    <p class="card-text">Haremos que tu fiesta sea la mas divertida e inolvidable.</p>
-                    <hr>
-                    <div class="footer__card">
-                        <a href="/extra"><button type="submit" class="btn btn-dark">Agregar al Carrito</button></a>
+                        <form th:action="@{/servicios/enable}" method="POST">
+                            <input type="hidden" class="form-control" name="id" th:value="${extraServiceEntity.id}">
+                            <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
 }
 
 body {
-    min-height: 100vh;
+    min-height: 80vh;
     align-items: center;
     justify-content: center;
     background-image: url(/images/globo3.jpg);
@@ -24,7 +24,7 @@ table.container {
     width: 60%;
     height: 500%;
     margin: auto;
-    margin-top: 20%;
+    margin-top: 10%;
     padding: 20px;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.6);
     border: none;
@@ -42,16 +42,25 @@ table.container {
 }
 
 
-tr,
-th,
-td {
+tr,th,td {
     border: none;
+    text-align: center;
 }
+
+td#name{
+    text-align: left;
+}
+
 th#delete{
-    float: right;
-    transform: translateX(-11%);
+    text-align: center;
 }
-button#delete{
-    float: right;
+th#name{
+    text-align: left;
 }
+
+
+button#buy{
+  margin-left: 50%;
+}
+
 
