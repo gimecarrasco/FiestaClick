@@ -26,17 +26,17 @@ public class PhotoEntity {
     @Basic(fetch = FetchType.LAZY)
     private byte[] content;
 
-    private boolean alta;
+
 
     public PhotoEntity() {
     }
 
-    public PhotoEntity(String id, String name, String mime, byte[] content, boolean alta) {
+    public PhotoEntity(String id, String name, String mime, byte[] content) {
         this.id = id;
         this.name = name;
         this.mime = mime;
         this.content = content;
-        this.alta = alta;
+      
     }
 
     public String getId() {
@@ -71,20 +71,11 @@ public class PhotoEntity {
         this.content = content;
     }
 
-    public boolean isAlta() {
-        return alta;
-    }
-
-    public void setAlta(boolean alta) {
-        this.alta = alta;
-    }
-
+   
     @Override
     public String toString() {
-        return "PhotoEntity{" + "id=" + id + ", name=" + name + ", mime=" + mime + ", content=" + content + ", alta=" + alta + '}';
+        return "PhotoEntity{" + "id=" + id + ", name=" + name + ", mime=" + mime + ", content=" + content + '}';
     }
-
-    
-    
+          
     
 }

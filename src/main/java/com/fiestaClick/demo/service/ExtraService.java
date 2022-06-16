@@ -1,4 +1,3 @@
-
 package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
@@ -10,47 +9,46 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ExtraService {
-    
+
     @Autowired
     private ExtraServiceRepository extraServiceRepository;
-    
-    
-    
-     public void validate(String name, Double price, String description) throws Exception{
+    @Autowired
+    private PhotoService photoService;
+
+    public void validate(String name, Double price, String description) throws Exception {
         if (name == null || name.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");  
+            throw new ErrorService("No puede ser nulo este valor");
         }
-         if (price == null || price == 0) {
-            throw new ErrorService("No puede ser nulo este valor");  
+        if (price == null || price == 0) {
+            throw new ErrorService("No puede ser nulo este valor");
         }
-       if (description == null || description.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");  
+        if (description == null || description.trim().isEmpty()) {
+            throw new ErrorService("No puede ser nulo este valor");
         }
-        
+
     }
-    
-     
-     @Transactional
-    public ExtraServiceEntity save(String name, Double price, String description,PhotoEntity photoEntity) throws Exception{
-        
-        validate(name,price,description);
-        
-        ExtraServiceEntity extraService= new ExtraServiceEntity();
-        
+
+    @Transactional
+    public ExtraServiceEntity save(String name, Double price, String description, MultipartFile photoEntity) throws Exception {
+
+        validate(name, price, description);
+
+        ExtraServiceEntity extraService = new ExtraServiceEntity();
+
         extraService.setName(name);
         extraService.setPrice(price);
         extraService.setDescription(description);
-        extraService.setPhotoEntity((List<PhotoEntity>) photoEntity);
-        
+        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+
         return extraServiceRepository.save(extraService);
-        
+
     }
-    
-     @Transactional
+
+    @Transactional
     public ExtraServiceEntity enable(String id) throws ErrorService { //enel ejemplo de perro este metodo devuelve un perro
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id); //valor que puede ser nulo
         if (answer.isPresent()) {
@@ -61,10 +59,9 @@ public class ExtraService {
             throw new ErrorService("No se encontro un servicio extra con este id");
         }
     }
-    
-    
+
     @Transactional
-    public ExtraServiceEntity disable(String id) throws ErrorService { 
+    public ExtraServiceEntity disable(String id) throws ErrorService {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
         if (answer.isPresent()) {
             ExtraServiceEntity extraService = answer.get();
@@ -74,41 +71,50 @@ public class ExtraService {
             throw new ErrorService("No se encontro un servicio extra con este id");
         }
     }
-    
-     @Transactional
-    public ExtraServiceEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
-         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
-         
-          validate(name, price, description);
-          
-          if (answer.isPresent()) {
+
+    @Transactional
+    public void delete(String id) throws ErrorService {
+        Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
+        if (answer.isPresent()) {
+            ExtraServiceEntity extra = answer.get();
+            extraServiceRepository.delete(extra);
+        } else {
+            throw new ErrorService("No existe un servicio con el id solicitado");
+        }
+    }
+
+    @Transactional
+    public ExtraServiceEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
+        Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
+
+        validate(name, price, description);
+
+        if (answer.isPresent()) {
             ExtraServiceEntity extraService = answer.get();
-            
-           extraService.setName(name);
-           extraService.setDescription(description);
-           extraService.setPrice(price);
-           extraService.setPhotoEntity((List<PhotoEntity>) photoEntity);
-            
+
+            extraService.setName(name);
+            extraService.setDescription(description);
+            extraService.setPrice(price);
+            extraService.setPhotoEntity((PhotoEntity) photoEntity);
+
             return extraServiceRepository.save(extraService);
 
         } else {
             throw new ErrorService("No se encontro el servicio extra que se desea modificar");
         }
-         
+
     }
-    
+
     @Transactional
     public List<ExtraServiceEntity> listCatering() {
         return extraServiceRepository.findAll();
     }
-    
-    
-   
+
     @Transactional
     public ExtraServiceEntity findExtraServiceByName(String extraService) {
         return extraServiceRepository.findExtraServiceByName(extraService);
     }
-    
+
     @Transactional
     public void deleteById(String id) {
         extraServiceRepository.deleteById(id);

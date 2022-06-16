@@ -9,38 +9,39 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class EventRoomEntity {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
     private Integer capacity;
     private String adress;
-    
+
     @Enumerated(EnumType.STRING)
     private City city;
     private String name;
     private Boolean register;
     private String description;
     private String decor;
-    
+    private Double price;
+
     @Temporal(TemporalType.DATE)
     private Date date;
-   @OneToMany  
-    private List <PhotoEntity> photoEntity;
-    private Double price;
-    
+
+    @OneToOne
+    private PhotoEntity photoEntity;
 
     public EventRoomEntity() {
     }
 
-    public EventRoomEntity(String Id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, List<PhotoEntity> photoEntity, Double price) {
+    public EventRoomEntity(String Id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, PhotoEntity photoEntity, Double price) {
         this.Id = Id;
         this.capacity = capacity;
         this.adress = adress;
@@ -53,8 +54,6 @@ public class EventRoomEntity {
         this.photoEntity = photoEntity;
         this.price = price;
     }
-
-
 
     public String getId() {
         return Id;
@@ -128,14 +127,13 @@ public class EventRoomEntity {
         this.date = date;
     }
 
-    public List<PhotoEntity> getPhotoEntity() {
+    public PhotoEntity getPhotoEntity() {
         return photoEntity;
     }
 
-    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
+    public void setPhotoEntity(PhotoEntity photoEntity) {
         this.photoEntity = photoEntity;
     }
-
 
     public Double getPrice() {
         return price;
@@ -149,6 +147,5 @@ public class EventRoomEntity {
     public String toString() {
         return "EventRoomEntity{" + "Id=" + Id + ", capacity=" + capacity + ", adress=" + adress + ", city=" + city + ", name=" + name + ", register=" + register + ", description=" + description + ", decor=" + decor + ", date=" + date + ", photoEntity=" + photoEntity + ", price=" + price + '}';
     }
-    
-    
+
 }

@@ -13,7 +13,7 @@
 
     <body>
         <!-- NavBar -->
-       <header>
+          <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -28,8 +28,9 @@
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
                         <ul class="submenu">
+                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
@@ -40,7 +41,7 @@
                             <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
@@ -72,7 +73,7 @@
             </div>
         </section>
         
-        <!-- Cards -->
+        <!-- Formulary -->
         <section class="formulary">
             <div class="container-form">
                 <form action="/user/register" method="POST" class="formulario">
@@ -112,10 +113,7 @@
                         <div class="border-icon">
                             <span><a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
                         </div>
-                    </div>  
-                    <p th:if="${error != null}" th:text="${error}"  style="color: red"></p>
-                    <p th:if="${logout != null}" th:text="${logout}"  style="color: green"></p>
-                    
+                    </div>                    
                     <input type="email" name="username" placeholder="Mail" required autofocus>
                     <input type="password" name="password" placeholder="Contraseña" required autofocus>
                     <button type="submit">Iniciar Sesion</button>

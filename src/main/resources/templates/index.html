@@ -28,7 +28,7 @@
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
                         <ul class="submenu">
                             <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
@@ -36,12 +36,24 @@
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/servicios/salones">Salones</a></li>
-                            <li><a href="/servicios/catering">Caterings</a></li>
-                            <li><a href="/servicios/entretenimiento">Diversion</a></li>
+                            <li><a href="/servicios/salones">Salones</a>
+                                   <ul>                         
+                                    <a href= "/servicios/persistCateringAndExtra">Cargar Salones</a>
+                                </ul>
+                            </li>
+                            <li><a href="/servicios/catering">Caterings</a>
+                                <ul>                         
+                                    <a href= "/servicios/persistCateringAndExtra">Cargar Caterings</a>
+                                </ul>
+                            </li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a>  
+                                <ul>                                                           
+                                    <a href= "/servicios/persistCateringAndExtra" >Cargar Servicio</a>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
@@ -55,7 +67,7 @@
                 </nav>          
             </div>
         </header>
-        
+
         <main>
             <!-- Banner -->
             <section id="banner">
@@ -68,7 +80,7 @@
 
             <!--Saludo una vez logueado, funciona!
             <h2 th:if="${session.usersession != null}" th:text="${ 'HOLA' + session.usersession.name + ' ' + session.usersession.lastName }"></h2>-->
-            
+
             <!-- Cards -->
             <section id="cards">
                 <div class="container__cards">
@@ -80,7 +92,7 @@
                         <p class="card-text">Atendido por sus propios Dueños</p>
                         <hr>
                         <div class="footer__card">
-                            <a href="/eventRoom"><button type="submit" class="btn btn-dark">Ver más</button></a>
+                            <a href="/servicios/salones"><button type="submit" class="btn btn-dark">Ver más</button></a>
                         </div>
                     </div>
                     <div class="card">
@@ -91,7 +103,7 @@
                         <p class="card-text">No creemos en la vergüenza</p>
                         <hr>
                         <div class="footer__card">
-                            <a href="/catering"><button type="submit" class="btn btn-dark">Ver más</button></a>
+                            <a href="/servicios/catering"><button type="submit" class="btn btn-dark">Ver más</button></a>
                         </div>
                     </div>
                     <div class="card">
@@ -102,7 +114,7 @@
                         <p class="card-text">Para niños y grandes</p>
                         <hr>
                         <div class="footer__card">
-                            <a href="/extra"><button type="submit" class="btn btn-dark">Ver más</button></a>
+                            <a href="/servicios/entretenimiento"><button type="submit" class="btn btn-dark">Ver más</button></a>
                         </div>
                     </div>
                 </div>
@@ -132,7 +144,7 @@
                             </ul>
                         </div>
                         <div id="fiesta" class="col-md-6 item text">
-                            <h3>Fiesta Click</h3>
+                            <h3 id="fiestaClick">Fiesta Click</h3>
                             <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
                                 la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
                         </div>

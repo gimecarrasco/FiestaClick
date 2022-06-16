@@ -14,7 +14,7 @@
 
     <body>
         <!-- NavBar -->
-            <header>
+        <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -29,8 +29,9 @@
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
                         <ul class="submenu">
+                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
@@ -41,7 +42,7 @@
                             <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
@@ -66,15 +67,42 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="partyEntity : ${partys}">                    
-                    <td th:text="${partyEntity.eventRoomEntity.name}"></td>
-                    <td th:text="${partyEntity.cateringEntity.name}"></td>
-                    <td th:text="${partyEntity.extraServiceEntity.name}"></td>              
+                <!--                <tr th:each="partyEntity : ${partys}">                    
+                                    <td th:text="${partyEntity.eventRoomEntity.name}"></td>
+                                    <td th:text="${partyEntity.cateringEntity.name}"></td>
+                                    <td th:text="${partyEntity.extraServiceEntity.name}"></td>              
+                                    <td>
+                                        <a th:href="@{/libros/delete}+'?isbn='+${l.isbn}"><button class="btn btn-light">Eliminar</button></a>
+                                        <a th:href="@{/libros/form}+'?isbn='+${l.isbn}+'&action=modificar'"><button class="btn btn-light">Editar</button></a>
+                                    </td>
+                                </tr>          -->
+                <tr th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:if="${cateringEntity.register}!=false" >               
+                    <td th:text="${cateringEntity.name}" id="name"></td>                  
                     <td>
-                        <a th:href="@{/libros/delete}+'?isbn='+${l.isbn}"><button class="btn btn-light">Eliminar</button></a>
-                        <a th:href="@{/libros/form}+'?isbn='+${l.isbn}+'&action=modificar'"><button class="btn btn-light">Editar</button></a>
+                        <form th:action="@{/shop/deleteCatering}" method="POST">
+                            <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
+                            <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
+                        </form>
+                    </td>                                 
+                </tr>
+                <tr  th:each="eventRoomEntity:${eventRooms}" th:value="${eventRoomEntity.id}" th:if="${eventRoomEntity.register}!=false">
+                    <td th:text="${eventRoomEntity.name}" id="name"></td>     
+                    <td>
+                        <form th:action="@{/shop/deleteEventRoom}" method="POST">
+                            <input type="hidden" class="form-control" name="id" th:value="${eventRoomEntity.id}">
+                            <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
+                        </form>
                     </td>
-                </tr>          
+                </tr>
+                <tr  th:each="extraServiceEntity:${extras}" th:value="${extraServiceEntity.id}" th:if="${extraServiceEntity.register}!=false">
+                    <td th:text="${extraServiceEntity.name}" id="name"></td>     
+                    <td>
+                        <form th:action="@{/shop/deleteExtra}" method="POST">
+                            <input type="hidden" class="form-control" name="id" th:value="${extraServiceEntity.id}">
+                            <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,13 +21,13 @@ public class ExtraServiceEntity {
     private String description;    
     private Boolean register;
     
-    @OneToMany  
-    private List <PhotoEntity> photoEntity;
+    @OneToOne
+    private PhotoEntity photoEntity;
 
     public ExtraServiceEntity() {
     }
 
-    public ExtraServiceEntity(String id, String name, Double price, String description, Boolean register, List<PhotoEntity> photoEntity) {
+    public ExtraServiceEntity(String id, String name, Double price, String description, Boolean register, PhotoEntity photoEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -69,11 +70,11 @@ public class ExtraServiceEntity {
         this.description = description;
     }
 
-    public List<PhotoEntity> getPhotoEntity() {
+    public PhotoEntity getPhotoEntity() {
         return photoEntity;
     }
 
-    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
+    public void setPhotoEntity(PhotoEntity photoEntity) {
         this.photoEntity = photoEntity;
     }
 

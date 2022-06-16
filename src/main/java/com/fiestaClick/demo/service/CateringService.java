@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class CateringService {
 
     @Autowired
     private CateringRepository cateringRepository;
-   @Autowired
-   private PhotoService photoService;
+    @Autowired
+    private PhotoService photoService;
 
     @Transactional
     public CateringEntity save(String name, Double price, String description, MultipartFile photoEntity) throws Exception {
@@ -30,8 +29,7 @@ public class CateringService {
         catering.setName(name);
         catering.setPrice(price);
         catering.setDescription(description);
-        
-        PhotoEntity photo= photoService.save((MultipartFile) photoEntity);
+        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         catering.setPhotoEntity(photo);
         catering.setRegister(Boolean.TRUE);
 
@@ -50,8 +48,8 @@ public class CateringService {
             throw new ErrorService("No puede ser nula la descripción");
         }
     }
-    
-     @Transactional
+
+    @Transactional
     public CateringEntity enable(String id) throws ErrorService { //enel ejemplo de perro este metodo devuelve un perro
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
@@ -62,10 +60,9 @@ public class CateringService {
             throw new ErrorService("No existe un catering con el id solicitado");
         }
     }
-    
-    
+
     @Transactional
-    public CateringEntity disable(String id) throws ErrorService { 
+    public CateringEntity disable(String id) throws ErrorService {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
             CateringEntity catering = answer.get();
@@ -75,41 +72,55 @@ public class CateringService {
             throw new ErrorService("No existe un catering con el id solicitado");
         }
     }
-    
-     @Transactional
-    public CateringEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception{
-         Optional<CateringEntity> answer = cateringRepository.findById(id);
-         
-          validate(name, price, description);
-          
-          if (answer.isPresent()) {
+
+    @Transactional
+    public CateringEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
+        Optional<CateringEntity> answer = cateringRepository.findById(id);
+
+        validate(name, price, description);
+
+        if (answer.isPresent()) {
             CateringEntity catering = answer.get();
-            
-           catering.setName(name);
-           catering.setDescription(description);
-           catering.setPrice(price);
-           catering.setPhotoEntity( photoEntity);
-            
+
+            catering.setName(name);
+            catering.setDescription(description);
+            catering.setPrice(price);
+            catering.setPhotoEntity(photoEntity);
+
             return cateringRepository.save(catering);
 
         } else {
             throw new ErrorService("No se encontro el catering que se desea modificar");
         }
-         
+
     }
-    
+
+    @Transactional
+    public void delete(String id) throws ErrorService {
+        Optional<CateringEntity> answer = cateringRepository.findById(id);
+        if (answer.isPresent()) {
+            CateringEntity catering = answer.get();
+            cateringRepository.delete(catering);
+        } else {
+            throw new ErrorService("No existe un catering con el id solicitado");
+        }
+    }
+
     @Transactional
     public List<CateringEntity> listCatering() {
         return cateringRepository.findAll();
     }
-    
-    
-   
+
     @Transactional
     public CateringEntity findCateringByName(String catering) {
         return cateringRepository.findCateringByName(catering);
     }
-    
+
+    @Transactional
+    public void findById(String id) {
+        cateringRepository.findById(id);
+    }
+
     @Transactional
     public void deleteById(String id) {
         cateringRepository.deleteById(id);

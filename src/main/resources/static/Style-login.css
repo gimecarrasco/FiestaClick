@@ -2,7 +2,6 @@
 @import url(Style-menu.css);
 @import url(Style-footer.css);
 
-
 * {
     margin: 0;
     padding: 0;
@@ -125,6 +124,8 @@ body {
 .formulario button {
     width: 60%;
     margin: auto;
+    display:inline;
+    text-align: center;
     border: solid thin white;
     padding: .7rem;
     border-radius: 2rem;
@@ -133,6 +134,7 @@ body {
     font-size: .8rem;
     cursor: pointer;
     color: #222;
+  
 }
 
 form#inicio.formulario>button {

@@ -1,6 +1,8 @@
 package com.fiestaClick.demo.controllers;
 
-import com.fiestaClick.demo.entities.PartyEntity;
+import com.fiestaClick.demo.entities.CateringEntity;
+import com.fiestaClick.demo.entities.EventRoomEntity;
+import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
@@ -31,8 +33,15 @@ public class BasketController {
     @GetMapping("/basket")
     public String basket(ModelMap modelo) {
 
-        List<PartyEntity> partys = partyService.listParty();
-        modelo.put("partys", partys);
+//        List<PartyEntity> partys = partyService.listParty();
+        List<CateringEntity> caterings = cateringService.listCatering();
+        List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
+        List<ExtraServiceEntity> extras = extraService.listCatering();
+        modelo.put("caterings", caterings);
+        modelo.put("eventRooms", eventRooms);
+        modelo.put("extras", extras);
+
+//        modelo.put("partys", partys);
         return "basket.html";
     }
 
@@ -73,6 +82,45 @@ public class BasketController {
         } catch (ErrorService e) {
             e.printStackTrace();
             modelo.put("error", "No se pudo eliminar del carrito");
+        }
+        return "redirect:/shop/basket";
+    }
+
+    @PostMapping("/deleteCatering")
+    public String deleteCatering(ModelMap modelo, @RequestParam String id) {
+        try {
+            cateringService.delete(id);
+            modelo.put("exito", "Se eliminó correctamente.");
+
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo eliminar ");
+        }
+        return "redirect:/shop/basket";
+    }
+
+    @PostMapping("/deleteEventRoom")
+    public String deleteEventRoom(ModelMap modelo, @RequestParam String id) {
+        try {
+            eventRoomService.delete(id);
+            modelo.put("exito", "Se eliminó correctamente.");
+
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo eliminar ");
+        }
+        return "redirect:/shop/basket";
+    }
+
+    @PostMapping("/deleteExtra")
+    public String deleteExtra(ModelMap modelo, @RequestParam String id) {
+        try {
+            extraService.delete(id);
+            modelo.put("exito", "Se eliminó correctamente.");
+
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo eliminar ");
         }
         return "redirect:/shop/basket";
     }

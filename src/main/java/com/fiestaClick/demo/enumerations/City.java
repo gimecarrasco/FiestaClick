@@ -20,13 +20,13 @@ public enum City {
     GRAL_ALVEAR ("General Alvear"),
     MENDOZA ("Mendoza");
     
-    private final String value;
+    private final String name;
 
-    private City(String value) {
-        this.value = value;
+    private City(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return this.value;
+    public String getName() {
+        return this.name;
     }
 }
