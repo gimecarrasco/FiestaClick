@@ -36,14 +36,20 @@
                     </li>
                     <li><a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/servicios/salones">Salones</a></li>
-                            <li><a href="/servicios/catering">Caterings</a>
-                                <ul><a href= "/servicios/catering" >Ver caterings</a></ul>
-                                <ul><a href= "/servicios/persistCateringAndExtra" >Cargar caterings</a></ul>
+                            <li><a href="/servicios/salones">Salones</a>
+                                   <ul>                         
+                                    <a href= "/servicios/persistCateringAndExtra">Cargar Salones</a>
+                                </ul>
                             </li>
-                            <li><a href="/servicios/entretenimiento">Diversion</a>
-                                <ul><a href= "" >Ver servicios</a></ul>
-                                <ul><a href= "" >Cargar servicio</a></ul>
+                            <li><a href="/servicios/catering">Caterings</a>
+                                <ul>                         
+                                    <a href= "/servicios/persistCateringAndExtra">Cargar Caterings</a>
+                                </ul>
+                            </li>
+                            <li><a href="/servicios/entretenimiento">Diversion</a>  
+                                <ul>                                                           
+                                    <a href= "/servicios/persistCateringAndExtra" >Cargar Servicio</a>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -61,7 +67,7 @@
                 </nav>          
             </div>
         </header>
-        
+
         <main>
             <!-- Banner -->
             <section id="banner">
@@ -74,7 +80,7 @@
 
             <!--Saludo una vez logueado, funciona!
             <h2 th:if="${session.usersession != null}" th:text="${ 'HOLA' + session.usersession.name + ' ' + session.usersession.lastName }"></h2>-->
-            
+
             <!-- Cards -->
             <section id="cards">
                 <div class="container__cards">

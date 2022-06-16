@@ -30,7 +30,7 @@ public class PhotoController {
         try {
             CateringEntity cateringEntity = cateringService.enable(id);           
             if (cateringEntity.getPhotoEntity() == null) {
-                throw new ErrorService("El Comic no tiene una foto");
+                throw new ErrorService("El Catering no tiene una foto");
             }
             byte[] photo = cateringEntity.getPhotoEntity().getContent();
 

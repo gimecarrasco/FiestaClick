@@ -96,6 +96,17 @@ public class CateringService {
     }
 
     @Transactional
+    public void delete(String id) throws ErrorService {
+        Optional<CateringEntity> answer = cateringRepository.findById(id);
+        if (answer.isPresent()) {
+            CateringEntity catering = answer.get();
+            cateringRepository.delete(catering);
+        } else {
+            throw new ErrorService("No existe un catering con el id solicitado");
+        }
+    }
+
+    @Transactional
     public List<CateringEntity> listCatering() {
         return cateringRepository.findAll();
     }

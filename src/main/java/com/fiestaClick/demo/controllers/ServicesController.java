@@ -3,7 +3,7 @@ package com.fiestaClick.demo.controllers;
 import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
-import com.fiestaClick.demo.entities.PhotoEntity;
+import com.fiestaClick.demo.enumerations.City;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
@@ -26,6 +26,7 @@ public class ServicesController {
     private CateringService cateringService;
     @Autowired
     private EventRoomService eventRoomService;
+
     @Autowired
     private ExtraService extraService;
 
@@ -35,21 +36,22 @@ public class ServicesController {
         modelo.put("caterings", caterings);
         return "catering.html";
     }
-    
+
     @GetMapping("/persistCateringAndExtra")
-    public String form(ModelMap modelo)  {
+    public String form(ModelMap modelo) {
         return "persistCateringAndExtra.html";
-    }    
-    
-    @PostMapping("/register")  
-    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo)  throws ErrorService{
+    }
+
+    @PostMapping("/register")
+    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo) throws ErrorService {
         try {
-            System.out.println("Nombre: " + name );
-            System.out.println("Precio: " + price );
-            System.out.println("Descripción: " + description );
-            System.out.println("Foto: " + photo );
-             cateringService.save(name, price, description, photo);    
-            //model.put("exito", "Ha sido cargado exitosamente.");
+            System.out.println("Nombre: " + name);
+            System.out.println("Precio: " + price);
+            System.out.println("Descripción: " + description);
+            System.out.println("Foto: " + photo);
+//            cateringService.save(name, price, description, photo);
+            extraService.save(name, price, description, photo);
+            model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();
             model.put("error", "Error al cargarse su servicio");
@@ -57,9 +59,43 @@ public class ServicesController {
             model.put("price", price);
             model.put("description", description);
             model.put("photo", photo);
-            return "/servicios/persistCateringAndExtra.html";
+            return "redirect:/servicios/persistCateringAndExtra";
         }
-        return "/index.html";
+        return "redirect:/servicios/persistCateringAndExtra";
+    }
+
+    @GetMapping("/registerEvent")
+    public String formulary(ModelMap vista) {
+        vista.addAttribute("citys", City.values());
+        return "/servicios/persistCateringAndExtra";
+    }
+
+    @PostMapping("/registerEvent")
+    public String saveEvent(ModelMap model, @RequestParam Integer capacity, @RequestParam String adress, @RequestParam City city, @RequestParam String name, @RequestParam String description, @RequestParam String decor, MultipartFile photo, @RequestParam Double price) throws ErrorService {
+        try {
+            System.out.println("Capacidad: " + capacity);
+            System.out.println("Dirección: " + adress);
+            System.out.println("Localidad: " + city);
+//            List<City> citys = eventRoomService.
+            System.out.println("Nombre: " + name);
+            System.out.println("Descripción: " + description);
+            System.out.println("Decoración: " + decor);
+            System.out.println("Foto: " + photo);
+            System.out.println("Precio: " + price);
+
+            eventRoomService.save(capacity, adress, city, name, description, decor, photo, price);
+
+            model.put("exito", "Ha sido cargado exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.put("error", "Error al cargarse su servicio");
+            model.put("name", name);
+            model.put("price", price);
+            model.put("description", description);
+            model.put("photo", photo);
+            return "redirect:/servicios/persistCateringAndExtra";
+        }
+        return "redirect:/servicios/persistCateringAndExtra";
     }
 
     @GetMapping("/salones")
@@ -76,12 +112,6 @@ public class ServicesController {
         return "extra.html";
     }
 
-    @GetMapping("/prueba")
-    public String prueba() {
-        return "prueba.html";
-    }
-
-
     @PostMapping("/enable")
     public String enable(ModelMap modelo, @RequestParam String id) {
         try {
@@ -93,53 +123,35 @@ public class ServicesController {
         }
         return "redirect:/servicios/catering";
     }
-    
-    
+
     @PostMapping("/enableEventRoom")
     public String enableEventRoom(ModelMap modelo, @RequestParam String id) {
         try {
             eventRoomService.enable(id);
             modelo.put("exito", "Se agregó al carrito");
-            return"redirect:/servicios/salones";
+            return "redirect:/servicios/salones";
         } catch (ErrorService e) {
             e.printStackTrace();
             modelo.put("error", "No se pudo agregar del carrito");
-              return"redirect:/servicios/salones";
+            return "redirect:/servicios/salones";
         }
-   
+
     }
-    
+
     @PostMapping("/enableExtra")
     public String enableExtra(ModelMap modelo, @RequestParam String id) {
         try {
             extraService.enable(id);
             modelo.put("exito", "Se agregó al carrito");
-            return"redirect:/servicios/entretenimiento";
+            return "redirect:/servicios/entretenimiento";
         } catch (ErrorService e) {
             e.printStackTrace();
             modelo.put("error", "No se pudo agregar del carrito");
-              return"redirect:/servicios/entretenimiento";
+            return "redirect:/servicios/entretenimiento";
         }
-   
-    }
-    
-    
-    
 
-//    @PostMapping("/modify")
-//    public String modify(ModelMap modelo, @RequestParam String id, String name, Double price, String description, PhotoEntity photoEntity) {
-//        try {
-//            cateringService.findById(id);
-//            cateringService.modify(id, name, price, description, photoEntity);
-//            modelo.put("exito", "Modificó el catering");
-//            return "redirect:/index";
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            modelo.put("error", "No se pudo modificar el catering");
-//            return "prueba.html";
-//        }
-//    }
+    }
+
 //    @PostMapping("/addCatering")   //user/addCatering ---> debería ir en userController
 //    public String addService(ModelMap model, @RequestParam CateringEntity cateringEntity) {
 //        partyEntity.setCateringEntity(cateringEntity); 

@@ -24,12 +24,12 @@ public class PhotoService {
         if (archive != null && !archive.isEmpty()) {
             try {
                 PhotoEntity photo = new PhotoEntity();
-                photo.setName(archive.getName());
                 photo.setMime(archive.getContentType());
+                photo.setName(archive.getName());
                 photo.setContent(archive.getBytes());
-                 return photoRepository.save(photo);
+                return photoRepository.save(photo);
             } catch (Exception e) {
-                System.err.println(e.getMessage());               
+                System.err.println(e.getMessage());
             }
         }
         return null;
