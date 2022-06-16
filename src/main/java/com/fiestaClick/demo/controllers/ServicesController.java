@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/servicios")
@@ -54,11 +55,28 @@ public class ServicesController {
         return "extra.html";
     }
 
-    @GetMapping("/edit")
-    public String edit(ModelMap modelo, @RequestParam String id) {
-        modelo.put("id", id);
+    @GetMapping("/prueba")
+    public String prueba() {
         return "prueba.html";
     }
+
+    @PostMapping("/crear")
+    public String crear(ModelMap modelo, String name, Double price, String description, MultipartFile photoEntity) {
+        try {
+            cateringService.save(name, price, description, photoEntity);
+            modelo.put("exito", "Catering creado con éxito.");
+            return " redirect:/index.html";
+        } catch (Exception e) {
+            e.printStackTrace();
+            modelo.put("name", name);
+            modelo.put("price", price);
+            modelo.put("description", description);
+            modelo.put("photoEntity", photoEntity);
+
+            return "prueba.html";
+        }
+    }
+
 
     @PostMapping("/enable")
     public String enable(ModelMap modelo, @RequestParam String id) {
@@ -71,18 +89,53 @@ public class ServicesController {
         }
         return "redirect:/servicios/catering";
     }
-
-    @PostMapping("/modify")
-    public String modify(ModelMap modelo, @RequestParam String id, String name, Double price, String description, PhotoEntity photoEntity) {
+    
+    
+    @PostMapping("/enableEventRoom")
+    public String enableEventRoom(ModelMap modelo, @RequestParam String id) {
         try {
-            cateringService.modify(id, name, price, description, photoEntity);
-            modelo.put("exito", "Modificó el catering");
-        } catch (Exception e) {
+            eventRoomService.enable(id);
+            modelo.put("exito", "Se agregó al carrito");
+            return"redirect:/servicios/salones";
+        } catch (ErrorService e) {
             e.printStackTrace();
-            modelo.put("error", "No se pudo modificar el catering");
+            modelo.put("error", "No se pudo agregar del carrito");
+              return"redirect:/servicios/salones";
         }
-        return "redirect:/servicios/catering";
+   
     }
+    
+    @PostMapping("/enableExtra")
+    public String enableExtra(ModelMap modelo, @RequestParam String id) {
+        try {
+            extraService.enable(id);
+            modelo.put("exito", "Se agregó al carrito");
+            return"redirect:/servicios/entretenimiento";
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo agregar del carrito");
+              return"redirect:/servicios/entretenimiento";
+        }
+   
+    }
+    
+    
+    
+
+//    @PostMapping("/modify")
+//    public String modify(ModelMap modelo, @RequestParam String id, String name, Double price, String description, PhotoEntity photoEntity) {
+//        try {
+//            cateringService.findById(id);
+//            cateringService.modify(id, name, price, description, photoEntity);
+//            modelo.put("exito", "Modificó el catering");
+//            return "redirect:/index";
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            modelo.put("error", "No se pudo modificar el catering");
+//            return "prueba.html";
+//        }
+//    }
 
 //    @PostMapping("/register")
 //    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo) throws ErrorService {

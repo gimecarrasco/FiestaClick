@@ -29,7 +29,7 @@ public class PhotoService {
                 photo.setContent(archive.getBytes());
                  return photoRepository.save(photo);
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                System.err.println(e.getMessage());               
             }
         }
         return null;
