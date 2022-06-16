@@ -6,8 +6,7 @@
 
 .footer-dark {
     padding: 50px 0;
-    color: #f0f9ff;
-    /* background-color: #282d32; */
+    color: #f0f9ff;   
     background-color: #0e1a3c;
     margin: auto;
     display: flex;
@@ -59,6 +58,12 @@
 .container.text-center img{
     width: 150px;
     height: 150px;
+}
+
+h3#fiestaClick{
+    font-family: railey;
+    font-size: 27px; 
+    color: #c1a25b;
 }
 
 #iconos {
