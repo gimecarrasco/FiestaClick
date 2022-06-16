@@ -121,6 +121,8 @@ public class EventRoomService {
         return eventRoomRepository.findAll();
     }
     
+    
+    
     @Transactional
     public EventRoomEntity findEventRoomByName(String eventRoomName){
         return eventRoomRepository.findByName(eventRoomName);

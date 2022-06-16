@@ -7,11 +7,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/../../Style-extra.css">
+        <link rel="stylesheet" href="/../../Style-login.css">
         <link rel="stylesheet" type="text/css" href="/font/fontello.css">
-        <title>Catering</title>
+        <title>Prueba</title>
     </head>
-
 
     <body>
         <!-- NavBar -->
@@ -30,8 +29,9 @@
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
                         <ul class="submenu">
+                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
@@ -42,7 +42,7 @@
                             <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
@@ -63,16 +63,37 @@
 
         <section class="formulary">
             <div class="container-form">
-                <form action="/services/modify" method="POST" class="formulario">
-                    <h2 class="create-account">Modificar</h2>
-                    <input type="hidden" name="id" th:value="${id}">
-                    <input type="text" class="form-control" name="name" th:value="${name}"  placeholder="Nombre" required autofocus>                  
-                    <input type="number" class="form-control" name="price" th:value="${price}" placeholder="Precio"  required autofocus>
-                    <input type="text" class="form-control" name="description" th:value="${description}" placeholder="Descripción" required autofocus>
-                    <input type="file" class="form-control" name="photoEntity" th:value="${photoEntity}" placeholder="Foto" required autofocus>   
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                <form action="@{/servicios/crear}" method="POST"  enctype="multipart/form-data" class="formulario">                                   
+                    <label><strong>Nombre:</strong></label>
+                    <input type="text" class="form-control" name="name" th:value="${name}" required autofocus>                  
+                    <label><strong>Precio:</strong></label>
+                    <input type="number" class="form-control" name="price" th:value="${price}" required autofocus>
+                    <label><strong>Descripción:</strong></label>
+                    <input type="text"  class="form-control" name="description" th:value="${description}" required autofocus>
+                    <label><strong>Foto:</strong></label>
+                    <input type="file" class="form-control"  name="photoEntity" th:value="${photoEntity}"  required autofocus>                  
+                    <button type="submit" class="btn btn-primary">Crear</button>
                     <button type="reset" class="btn btn-danger">Volver</button>
                 </form>
             </div>
         </section>
+
+        <!-- Dinamics -->
+        <section class="dinamics">
+            <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
+                <div class="card-body" >
+                    <h5 class="card-title">Se creó con exito!!</h5>
+                    <p class="card-text" th:text="${exito}"> </p>
+                </div>
+            </div>
+
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div class="card-body" id="error">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+        </section>
     </body>
+
+</html>

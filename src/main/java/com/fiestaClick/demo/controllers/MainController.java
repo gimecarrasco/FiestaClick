@@ -42,10 +42,7 @@ public class MainController {
         return "indexUser.html";
     }
 
-    @GetMapping("/prueba")
-    public String prueba() {
-        return "prueba.html";
-    }
+ 
 
     @GetMapping("/extra")
     public String extra() {

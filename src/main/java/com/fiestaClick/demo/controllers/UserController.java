@@ -15,19 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
-    
+
     @PostMapping("/register")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth,@RequestParam String email, @RequestParam String password)  throws ErrorService{
+    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password) throws ErrorService {
         try {
-            userService.save(name,lastName, dateOfBirth, email, password);
-            model.put("exito", "Felicitaciones!");            
+            userService.save(name, lastName, dateOfBirth, email, password);
+            model.put("exito", "Felicitaciones!");
         } catch (Exception e) {
             e.printStackTrace();
             //model.put("error", e.getMessage());
@@ -41,22 +40,22 @@ public class UserController {
         }
         return "login.html";
     }
-    
+
     @GetMapping("/editProfile")
-    public String editProfile(@RequestParam String id, ModelMap model){
+    public String editProfile(@RequestParam String id, ModelMap model) {
         try {
             UserEntity userEdit = userService.findById(id);
             model.addAttribute("profile", userEdit);
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-    return "editProfile";
-}
-    
+        return "editProfile";
+    }
+
     @PostMapping("/updateProfile")
-    public String updateProfile(ModelMap model, @RequestParam String id, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password){
+    public String updateProfile(ModelMap model, @RequestParam String id, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password) {
         UserEntity user = null;
-        
+
         try {
             user = userService.findById(id);
             userService.update(id, name, lastName, dateOfBirth, email, password);
@@ -69,7 +68,7 @@ public class UserController {
             model.put("password", password);
             return "editProfil.html";
         }
-        
+
     }
 
 }

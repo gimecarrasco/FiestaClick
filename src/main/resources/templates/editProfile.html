@@ -7,15 +7,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/../../Style-extra.css">
+        <link rel="stylesheet" href="/../../Style-login.css">
         <link rel="stylesheet" type="text/css" href="/font/fontello.css">
         <title>Catering</title>
     </head>
 
-
     <body>
         <!-- NavBar -->
-        <header>
+            <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -30,8 +29,9 @@
                             <li><a href="/login">Registrarse</a></li>
                         </ul>
                     </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user" th:text="${session.usersession.name}"></span></a>
+                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
                         <ul class="submenu">
+                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
                             <li><a href="/logout">Cerrar Sesión</a></li> 
                         </ul>
                     </li>
@@ -42,38 +42,104 @@
                             <li><a href="/servicios/entretenimiento">Diversion</a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>
-                    </li>               
+                    </li>
+                    <form class="form-inline" id="carrito">
+                        <input class="form-control" type="search" placeholder="Buscar">
+                        <button class="submit" id="lupa">
+                            <span class="icon-search"></span>
+                        </button>
+                    </form>
                 </nav>          
             </div>
         </header>
-        <br>
-        <br>
-        <br>
-        <br>
 
+        <!-- Dinamics -->
+        <section class="dinamics">
+            <div th:if="${exito}!=null" class="card text-white bg-succes mb-3" id="success">
+                <div class="card-body" >
+                    <h5 class="card-title">Has sido registrado exitosamente!!</h5>
+                    <p class="card-text" th:text="${exito}"> </p>
+                </div>
+            </div>
+
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div class="card-body" id="error">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulary -->
         <section class="formulary">
             <div class="container-form">
                 <form action="/user/updateProfile" method="POST" class="formulario" enctype="form-data">
-                     <h2 class="create-account">Datos personales</h2>
-                     
-                 <input type="hidden" name="id" th:value="${profile.id}">
-                 <label>Nombre</label> <br>
-                 <input type="text" name="name" placeholder="Nombre" th:value="${profile.name}" required autofocus> <br>
-                 <label>Apellido</label> <br>
-                    <input type="text" name="lastName" placeholder="Apellido" th:value="${profile.lastName}" required autofocus> <br>
-                    <label>Fecha de nacimiento (aaaa/mm/dd)</label> <br>
-                    <input type="text" name="dateOfBirth" placeholder="aaaa/mm/dd" th:value="${profile.dateOfBirth}" required autofocus> <br>
-                    <label>Correo electrónico</label> <br>
-                    <input type="email" name="email" placeholder="Mail" th:value="${profile.email}" required autofocus> <br>
-                    <label>Contraseña</label> <br>
-                    <input type="password" placeholder="Contraseña" name="password" th:value="${profile.password}" required autofocus> <br>
-                    <button type="submit" class="btn btn-primary">Actualizar perfil</button>
-                    <button type="reset" class="btn btn-danger">Volver</button>
+                    <h2 class="create-account">Editar Usuario</h2>
+                    <input type="hidden" name="id" th:value="${profile.id}">
+                    <label>Nombre</label> 
+                    <input type="text" name="name" placeholder="Nombre" th:value="${profile.name}" required autofocus>
+                    <label>Apellido</label> 
+                    <input type="text" name="lastName" placeholder="Apellido" th:value="${profile.lastName}" required autofocus> 
+                    <label>Fecha de nacimiento (aaaa/mm/dd)</label> 
+                    <input type="text" name="dateOfBirth" placeholder="aaaa/mm/dd" th:value="${profile.dateOfBirth}" required autofocus> 
+                    <label>Correo electrónico</label>
+                    <input type="email" name="email" placeholder="Mail" th:value="${profile.email}" required autofocus> 
+                    <label>Contraseña</label> 
+                    <input type="password" placeholder="Contraseña" name="password"  required autofocus> 
+                    <button type="submit" >Actualizar perfil</button>                                
                 </form>
             </div>
         </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Nuestros Servicios</h3>
+                            <ul>
+                                <li><a href="#">Salones</a></li>
+                                <li><a href="#">Caterings</a></li>
+                                <li><a href="#">Entretenimiento</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Sobre Nosotros</h3>
+                            <ul>
+                                <li><a href="#">¿Quiénes somos?</a></li>
+                                <li><a href="#">Contactános</a></li>
+                                <li><a href="#">¿Necesitas ayuda?</a></li>
+                                <li><a href="#">Política de Privacidad</a></li>
+                            </ul>
+                        </div>
+                        <div id="fiesta" class="col-md-6 item text">
+                            <h3>Fiesta Click</h3>
+                            <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
+                                la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
+                        </div>
+                        <div id="iconos" class="container text-center">
+                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
+                                      class="icon-facebook-squared"></a></span>
+                            <span> <a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
+                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Copyrights -->
+            <div class="bg-light py-4">
+                <div class="container text-center">
+                    <img src="/images/logo.png" alt="logo"> 
+                    <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
+                </div>
+            </div>
+        </footer>
+        <!-- End -->
+
     </body>
+</html>
