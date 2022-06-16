@@ -29,16 +29,37 @@ public class ServicesController {
     @Autowired
     private ExtraService extraService;
 
-    @GetMapping("/saveCateringAndExtra")
-    public String form(ModelMap modelo) {
-        return "saveCateringAndExtra.html";
-    }
-
     @GetMapping("/catering")
     public String catering(ModelMap modelo) {
         List<CateringEntity> caterings = cateringService.listCatering();
         modelo.put("caterings", caterings);
         return "catering.html";
+    }
+    
+    @GetMapping("/persistCateringAndExtra")
+    public String form(ModelMap modelo)  {
+        return "persistCateringAndExtra.html";
+    }    
+    
+    @PostMapping("/register")  
+    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo)  throws ErrorService{
+        try {
+            System.out.println("Nombre: " + name );
+            System.out.println("Precio: " + price );
+            System.out.println("Descripción: " + description );
+            System.out.println("Foto: " + photo );
+             cateringService.save(name, price, description, photo);    
+            //model.put("exito", "Ha sido cargado exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.put("error", "Error al cargarse su servicio");
+            model.put("name", name);
+            model.put("price", price);
+            model.put("description", description);
+            model.put("photo", photo);
+            return "/servicios/persistCateringAndExtra.html";
+        }
+        return "/index.html";
     }
 
     @GetMapping("/salones")
@@ -58,23 +79,6 @@ public class ServicesController {
     @GetMapping("/prueba")
     public String prueba() {
         return "prueba.html";
-    }
-
-    @PostMapping("/crear")
-    public String crear(ModelMap modelo, String name, Double price, String description, MultipartFile photoEntity) {
-        try {
-            cateringService.save(name, price, description, photoEntity);
-            modelo.put("exito", "Catering creado con éxito.");
-            return " redirect:/index.html";
-        } catch (Exception e) {
-            e.printStackTrace();
-            modelo.put("name", name);
-            modelo.put("price", price);
-            modelo.put("description", description);
-            modelo.put("photoEntity", photoEntity);
-
-            return "prueba.html";
-        }
     }
 
 
@@ -135,23 +139,6 @@ public class ServicesController {
 //            modelo.put("error", "No se pudo modificar el catering");
 //            return "prueba.html";
 //        }
-//    }
-
-//    @PostMapping("/register")
-//    public String save(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo) throws ErrorService {
-//        try {
-////            System.out.println("Nombre: " + name );
-////            System.out.println("Precio: " + price );
-////            System.out.println("Descripción: " + description );
-////            System.out.println("Foto: " + photo );
-//            cateringService.save(name, price, description, photo);
-//            //model.put("exito", "Ha sido cargado exitosamente.");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.put("error", "Error al cargarse su servicio");
-//            return "saveCateringAndExtra.html";
-//        }
-//        return "saveCateringAndExtra.html";
 //    }
 //    @PostMapping("/addCatering")   //user/addCatering ---> debería ir en userController
 //    public String addService(ModelMap model, @RequestParam CateringEntity cateringEntity) {
