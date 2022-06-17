@@ -1,5 +1,6 @@
 package com.fiestaClick.demo.service;
 
+import com.fiestaClick.demo.entities.PartyEntity;
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.enumerations.Role;
 import com.fiestaClick.demo.errors.ErrorService;
@@ -62,7 +63,10 @@ public class UserService implements UserDetailsService {
 
         //String content = "Gracias por registrarse " + userEntity.getName() + "!";        
         //sendEmail(email, subject, content);
-
+        
+        PartyEntity pE = null;
+        userEntity.setPartyEntity(pE);
+        
         mailService.mailSender(email, "bienvenido/a"+" "+name, "Se ha registrado con exito a FiestaClick");
         
         userRepository.save(userEntity);
@@ -159,6 +163,7 @@ public class UserService implements UserDetailsService {
     
       @Transactional(propagation = Propagation.NESTED)
     public UserEntity findById(String id) {
+    	  //hacerlo con optinal y si no se encuentra el usuario lanzar un errorService
         return userRepository.findById(id).get();
     }
    

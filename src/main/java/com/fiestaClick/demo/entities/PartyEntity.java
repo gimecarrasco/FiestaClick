@@ -35,9 +35,6 @@ public class PartyEntity {
     @OneToMany
     private List<ExtraServiceEntity> extraServiceEntity;
 
-    @ManyToOne
-    private UserEntity userEntity;
-    
     @Temporal(TemporalType.DATE)
     private Date partyDate;
 
@@ -46,16 +43,15 @@ public class PartyEntity {
     public PartyEntity() {
     }
 
-    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, UserEntity userEntity, Date partyDate, Double total) {
+    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, Date partyDate, Double total) {
         this.id = id;
         this.eventRoomEntity = eventRoomEntity;
         this.cateringEntity = cateringEntity;
         this.extraServiceEntity = extraServiceEntity;
-        this.userEntity = userEntity;
         this.partyDate = partyDate;
         this.total = total;
     }
-   
+        
     public String getId() {
         return id;
     }
@@ -88,14 +84,6 @@ public class PartyEntity {
         this.extraServiceEntity = extraServiceEntity;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
     public Date getPartyDate() {
         return partyDate;
     }
@@ -111,11 +99,7 @@ public class PartyEntity {
     public void setTotal(Double total) {
         this.total = total;
     }    
-    
-    @Override
-    public String toString() {
-        return "PartyEntity{" + "id=" + id + ", eventRoomEntity=" + eventRoomEntity + ", cateringEntity=" + cateringEntity + ", extraServiceEntity=" + extraServiceEntity + ", userEntity=" + userEntity + ", partyDate=" + partyDate + ", total=" + total + '}';
-    }
+  
 
 }
 

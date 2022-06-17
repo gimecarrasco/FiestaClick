@@ -55,15 +55,34 @@ public class PartyService {
         partyEntity.setEventRoomEntity(eventRoomEntity);
         partyEntity.setExtraServiceEntity((List<ExtraServiceEntity>) extraServiceEntity);
         partyEntity.setPartyDate(partyDate);
-        partyEntity.setUserEntity(userEntity);
         partyEntity.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService)); 
                
         return partyRepository.save(partyEntity);
     }
-    
+    //usar con if
     public double totalPartyPrice(String idEventRoom, String idCatering, String idExtraService) {
         return (eventRoomRepository.findById(idEventRoom).get().getPrice() + cateringRepository.findById(idCatering).get().getPrice() + extraServiceRepository.findById(idExtraService).get().getPrice());
     }
+    
+    //Lleno con los caterings
+    public String updateCatering(String idParty,String idCatering) throws ErrorService {
+    	Optional<PartyEntity> response = partyRepository.findById(idParty);
+
+    	if(response.isPresent()) {
+    		PartyEntity entity = response.get();
+    		Optional<CateringEntity> catResponse = cateringRepository.findById(idCatering);
+    		if(catResponse.isPresent()) {
+    			CateringEntity catEntity = catResponse.get();
+    			entity.setCateringEntity(catEntity);
+    			partyRepository.save(entity);
+    			throw new ErrorService("Carrito Actualizado con Catering");
+    		}
+    		throw new ErrorService( "Error al encontrar el catering");
+    	}
+    	throw new ErrorService("Error al encontrar al fiesta");
+    }
+    //hacer lo mismo con entretenimiento
+    //hacer lo mismo con salon
     
     @Transactional
     public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
@@ -93,10 +112,25 @@ public class PartyService {
         return partyRepository.findAll();
     }
        
+    public PartyEntity findPartyByIdUser(String idUser) throws Exception{
+    	Optional<PartyEntity> response = partyRepository.findPartyByUserId(idUser);
+    	if(response.isPresent()) {
+    		return response.get();
+    	}else {
+    		throw new Exception("Error al obtener lista de usuarios");
+    	}
+    }    
+    
     @Transactional
     public Optional<PartyEntity> findPartyById(String id) {
         return partyRepository.findById(id);
     }
+    
+    
+//    @Transactional
+//    public Optional<PartyEntity> findPartyById(String id) {
+//        return partyRepository.findById(id);
+//    }
     
     @Transactional
     public void deleteById(String id) {
