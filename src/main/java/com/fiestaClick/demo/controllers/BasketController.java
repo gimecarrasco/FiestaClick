@@ -50,8 +50,8 @@ public class BasketController {
         return "buy.html";
     }
 
-    @PostMapping("/disable")
-    public String disable(ModelMap modelo, @RequestParam String id) {
+    @PostMapping("/disableCatering")
+    public String disableCatering(ModelMap modelo, @RequestParam String id) {
         try {
             cateringService.disable(id);
             modelo.put("exito", "Se eliminó del carrito");
