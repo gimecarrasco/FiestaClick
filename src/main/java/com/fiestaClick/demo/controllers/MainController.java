@@ -36,7 +36,7 @@ public class MainController {
         return "login.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    
     @GetMapping("/indexUser")
     public String indexUser(HttpSession session, ModelMap model) {
         return "indexUser.html";

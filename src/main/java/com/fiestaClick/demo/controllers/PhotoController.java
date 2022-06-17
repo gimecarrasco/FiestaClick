@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/Photo")
+@RequestMapping("/photo")
 public class PhotoController {
 
     @Autowired

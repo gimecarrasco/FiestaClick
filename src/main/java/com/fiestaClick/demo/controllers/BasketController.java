@@ -86,43 +86,45 @@ public class BasketController {
         return "redirect:/shop/basket";
     }
 
-    @PostMapping("/deleteCatering")
-    public String deleteCatering(ModelMap modelo, @RequestParam String id) {
-        try {
-            cateringService.delete(id);
-            modelo.put("exito", "Se eliminó correctamente.");
-
-        } catch (ErrorService e) {
-            e.printStackTrace();
-            modelo.put("error", "No se pudo eliminar ");
-        }
-        return "redirect:/shop/basket";
-    }
-
-    @PostMapping("/deleteEventRoom")
-    public String deleteEventRoom(ModelMap modelo, @RequestParam String id) {
-        try {
-            eventRoomService.delete(id);
-            modelo.put("exito", "Se eliminó correctamente.");
-
-        } catch (ErrorService e) {
-            e.printStackTrace();
-            modelo.put("error", "No se pudo eliminar ");
-        }
-        return "redirect:/shop/basket";
-    }
-
-    @PostMapping("/deleteExtra")
-    public String deleteExtra(ModelMap modelo, @RequestParam String id) {
-        try {
-            extraService.delete(id);
-            modelo.put("exito", "Se eliminó correctamente.");
-
-        } catch (ErrorService e) {
-            e.printStackTrace();
-            modelo.put("error", "No se pudo eliminar ");
-        }
-        return "redirect:/shop/basket";
-    }
+    
+    // ESTAS ACCIONES LAS PUEDE HACER UNICAMENTE UN ADMINISTRADOR
+//    @PostMapping("/deleteCatering")
+//    public String deleteCatering(ModelMap modelo, @RequestParam String id) {
+//        try {
+//            cateringService.delete(id);
+//            modelo.put("exito", "Se eliminó correctamente.");
+//
+//        } catch (ErrorService e) {
+//            e.printStackTrace();
+//            modelo.put("error", "No se pudo eliminar ");
+//        }
+//        return "redirect:/shop/basket";
+//    }
+//
+//    @PostMapping("/deleteEventRoom")
+//    public String deleteEventRoom(ModelMap modelo, @RequestParam String id) {
+//        try {
+//            eventRoomService.delete(id);
+//            modelo.put("exito", "Se eliminó correctamente.");
+//
+//        } catch (ErrorService e) {
+//            e.printStackTrace();
+//            modelo.put("error", "No se pudo eliminar ");
+//        }
+//        return "redirect:/shop/basket";
+//    }
+//
+//    @PostMapping("/deleteExtra")
+//    public String deleteExtra(ModelMap modelo, @RequestParam String id) {
+//        try {
+//            extraService.delete(id);
+//            modelo.put("exito", "Se eliminó correctamente.");
+//
+//        } catch (ErrorService e) {
+//            e.printStackTrace();
+//            modelo.put("error", "No se pudo eliminar ");
+//        }
+//        return "redirect:/shop/basket";
+//    }
 
 }

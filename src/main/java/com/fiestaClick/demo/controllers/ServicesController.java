@@ -33,6 +33,9 @@ public class ServicesController {
     @GetMapping("/catering")
     public String catering(ModelMap modelo) {
         List<CateringEntity> caterings = cateringService.listCatering();
+        for (CateringEntity catering : caterings) {
+            System.out.println(catering); //probando que funcione la línea 35
+        }
         modelo.put("caterings", caterings);
         return "catering.html";
     }
