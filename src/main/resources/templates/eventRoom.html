@@ -14,7 +14,7 @@
 
     <body>
         <!-- NavBar -->
-         <header>
+        <header>
             <div class="contenedor">
                 <a href="/index">
                     <h1>Fiesta Click</h1>
@@ -73,12 +73,13 @@
                     </div>
                     <h2 class="card-title" th:text="${eventRoomEntity.name}"></h2>
                     <p class="card-text" th:text="${eventRoomEntity.description}"></p>
-                     <p class="card-text" th:if="${session.usersession!=null}" th:text="${eventRoomEntity.price}"></p>
+                    <p class="card-text" th:if="${session.usersession!=null}" th:text="${eventRoomEntity.price}"></p>
                     <hr>
                     <div class="footer__card">
-                        <form th:action="@{/servicios/enableEventRoom}" method="POST">
+                        <form>
                             <input type="hidden" class="form-control" name="id" th:value="${eventRoomEntity.id}">
-                            <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>
+                            <!--                            <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>-->
+                            <a th:href="@{'/servicios/ticket/eventRoom' +  ${eventRoomEntity.id}}" class=" btn btn-dark">Agregar Carrito </a>
                         </form>
                     </div>
                 </div>           
@@ -87,7 +88,7 @@
 
 
         <!-- Footer -->
-             <footer>
+        <footer>
             <div class="footer-dark">
                 <div class="container">
                     <div class="row">

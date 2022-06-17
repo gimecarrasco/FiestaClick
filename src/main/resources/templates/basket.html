@@ -76,7 +76,8 @@
                                         <a th:href="@{/libros/form}+'?isbn='+${l.isbn}+'&action=modificar'"><button class="btn btn-light">Editar</button></a>
                                     </td>
                                 </tr>          -->
-                <tr th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:if="${cateringEntity.register}!=false">               
+                
+<!--                <tr th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:if="${cateringEntity.register}!=false">               
                     <td th:text="${cateringEntity.name}" id="name"></td>                  
                     <td>
                         <form th:action="@{/shop/disableCatering}" method="POST">
@@ -102,7 +103,7 @@
                             <button type="submit" class="btn btn-danger" id="delete">Eliminar</button>
                         </form>
                     </td>
-                </tr>
+                </tr>-->
             </tbody>
             <tfoot>
                 <tr>

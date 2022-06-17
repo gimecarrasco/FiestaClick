@@ -19,18 +19,7 @@ public class ExtraService {
     @Autowired
     private PhotoService photoService;
 
-    public void validate(String name, Double price, String description) throws Exception {
-        if (name == null || name.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (price == null || price == 0) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (description == null || description.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
 
-    }
 
     @Transactional
     public ExtraServiceEntity save(String name, Double price, String description, MultipartFile photoEntity) throws Exception {
@@ -43,6 +32,7 @@ public class ExtraService {
         extraService.setPrice(price);
         extraService.setDescription(description);
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+        extraService.setPhotoEntity(photo);
 
         return extraServiceRepository.save(extraService);
 
@@ -101,6 +91,18 @@ public class ExtraService {
 
         } else {
             throw new ErrorService("No se encontro el servicio extra que se desea modificar");
+        }
+
+    }
+        public void validate(String name, Double price, String description) throws Exception {
+        if (name == null || name.trim().isEmpty()) {
+            throw new ErrorService("No puede ser nulo este valor");
+        }
+        if (price == null || price == 0) {
+            throw new ErrorService("No puede ser nulo este valor");
+        }
+        if (description == null || description.trim().isEmpty()) {
+            throw new ErrorService("No puede ser nulo este valor");
         }
 
     }

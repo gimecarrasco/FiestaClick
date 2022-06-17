@@ -21,16 +21,11 @@ public class EventRoomEntity {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
-    private Integer capacity;
-    private String adress;
 
-    @Enumerated(EnumType.STRING)
-    private City city;
     private String name;
-    private Boolean register;
-    private String description;
-    private String decor;
     private Double price;
+    private String description;
+    private Boolean register;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -41,18 +36,14 @@ public class EventRoomEntity {
     public EventRoomEntity() {
     }
 
-    public EventRoomEntity(String Id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, Date date, PhotoEntity photoEntity, Double price) {
+    public EventRoomEntity(String Id, String name, Double price, String description, Boolean register, Date date, PhotoEntity photoEntity) {
         this.Id = Id;
-        this.capacity = capacity;
-        this.adress = adress;
-        this.city = city;
         this.name = name;
-        this.register = register;
+        this.price = price;
         this.description = description;
-        this.decor = decor;
+        this.register = register;
         this.date = date;
         this.photoEntity = photoEntity;
-        this.price = price;
     }
 
     public String getId() {
@@ -63,30 +54,6 @@ public class EventRoomEntity {
         this.Id = Id;
     }
 
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
     public String getName() {
         return name;
     }
@@ -95,12 +62,12 @@ public class EventRoomEntity {
         this.name = name;
     }
 
-    public Boolean getRegister() {
-        return register;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setRegister(Boolean register) {
-        this.register = register;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -111,12 +78,12 @@ public class EventRoomEntity {
         this.description = description;
     }
 
-    public String getDecor() {
-        return decor;
+    public Boolean getRegister() {
+        return register;
     }
 
-    public void setDecor(String decor) {
-        this.decor = decor;
+    public void setRegister(Boolean register) {
+        this.register = register;
     }
 
     public Date getDate() {
@@ -135,17 +102,11 @@ public class EventRoomEntity {
         this.photoEntity = photoEntity;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     @Override
     public String toString() {
-        return "EventRoomEntity{" + "Id=" + Id + ", capacity=" + capacity + ", adress=" + adress + ", city=" + city + ", name=" + name + ", register=" + register + ", description=" + description + ", decor=" + decor + ", date=" + date + ", photoEntity=" + photoEntity + ", price=" + price + '}';
+        return "EventRoomEntity{" + "Id=" + Id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", date=" + date + ", photoEntity=" + photoEntity + '}';
     }
+
+
 
 }

@@ -3,16 +3,18 @@ package com.fiestaClick.demo.controllers;
 import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
-import com.fiestaClick.demo.enumerations.City;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
 import com.fiestaClick.demo.service.ExtraService;
+import com.fiestaClick.demo.service.PartyService;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,20 +26,40 @@ public class ServicesController {
 
     @Autowired
     private CateringService cateringService;
+
     @Autowired
     private EventRoomService eventRoomService;
 
     @Autowired
     private ExtraService extraService;
 
+    @Autowired
+    private PartyService partyService;
+
     @GetMapping("/catering")
     public String catering(ModelMap modelo) {
         List<CateringEntity> caterings = cateringService.listCatering();
-        for (CateringEntity catering : caterings) {
-            System.out.println(catering); //probando que funcione la línea 35
-        }
         modelo.put("caterings", caterings);
         return "catering.html";
+    }
+
+    @GetMapping("/ticket/catering/{id}")
+    public String ticket(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
+        System.out.println("cualquier cosa");
+        CateringEntity cateringEntity = cateringService.findById(id);
+        partyService.save(session.getId(), cateringEntity, null, null);
+
+        return "redirect:/servicios/entretenimiento";
+    }
+
+    @GetMapping("/ticket/eventRoom/{id}")
+    public String ticketEventRoom(ModelMap modelo, @PathVariable String id, HttpSession session, @RequestParam String partyEntityId) throws Exception {
+        System.out.println("cualquier cosa");
+
+        EventRoomEntity eventRoom = eventRoomService.findById(id);
+        partyService.modify(id, id, cateringEntity, extraServiceEntity, eventRoom);
+
+        return "redirect:/servicios/entretenimiento";
     }
 
     @GetMapping("/persistCateringAndExtra")
@@ -52,7 +74,6 @@ public class ServicesController {
             System.out.println("Precio: " + price);
             System.out.println("Descripción: " + description);
             System.out.println("Foto: " + photo);
-//            cateringService.save(name, price, description, photo);
             extraService.save(name, price, description, photo);
             model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
@@ -72,36 +93,34 @@ public class ServicesController {
 //        vista.addAttribute("citys", City.values());
 //        return "/servicios/persistCateringAndExtra";
 //    }
-
-    @PostMapping("/registerEvent")
-    public String saveEvent(ModelMap model, @RequestParam Integer capacity, @RequestParam String adress, @RequestParam String name, @RequestParam String description, @RequestParam String decor, MultipartFile photo, @RequestParam Double price) throws ErrorService {
-        try {
-            System.out.println("Capacidad: " + capacity);
-            System.out.println("Dirección: " + adress);
-//            System.out.println("Localidad: " + city);
-
-
-            System.out.println("Nombre: " + name);
-            System.out.println("Descripción: " + description);
-            System.out.println("Decoración: " + decor);
-            System.out.println("Foto: " + photo);
-            System.out.println("Precio: " + price);
-
-            eventRoomService.save(capacity, adress, name, description, decor, photo, price);
-
-            model.put("exito", "Ha sido cargado exitosamente.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.put("error", "Error al cargarse su servicio");
-            model.put("name", name);
-            model.put("price", price);
-            model.put("description", description);
-            model.put("photo", photo);
-            return "redirect:/servicios/persistCateringAndExtra";
-        }
-        return "redirect:/servicios/persistCateringAndExtra";
-    }
-
+//    @PostMapping("/registerEvent")
+//    public String saveEvent(ModelMap model, @RequestParam Integer capacity, @RequestParam String adress, @RequestParam String name, @RequestParam String description, @RequestParam String decor, MultipartFile photo, @RequestParam Double price) throws ErrorService {
+//        try {
+//            System.out.println("Capacidad: " + capacity);
+//            System.out.println("Dirección: " + adress);
+////            System.out.println("Localidad: " + city);
+//
+//
+//            System.out.println("Nombre: " + name);
+//            System.out.println("Descripción: " + description);
+//            System.out.println("Decoración: " + decor);
+//            System.out.println("Foto: " + photo);
+//            System.out.println("Precio: " + price);
+//
+//            eventRoomService.save(capacity, adress, name, description, decor, photo, price);
+//
+//            model.put("exito", "Ha sido cargado exitosamente.");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            model.put("error", "Error al cargarse su servicio");
+//            model.put("name", name);
+//            model.put("price", price);
+//            model.put("description", description);
+//            model.put("photo", photo);
+//            return "redirect:/servicios/persistCateringAndExtra";
+//        }
+//        return "redirect:/servicios/persistCateringAndExtra";
+//    }
     @GetMapping("/salones")
     public String salones(ModelMap modelo) {
         List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
