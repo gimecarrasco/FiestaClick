@@ -78,7 +78,7 @@
                     <div class="footer__card">
                         <form th:action="@{/servicios/enableExtra}" method="POST">
                             <input type="hidden" class="form-control" name="id" th:value="${extraServiceEntity.id}">
-                            <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>
+                            <button th:if="${session.usersession!=null}" type="submit" class=" btn btn-dark">Agregar al Carrito</button>
                         </form>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                             </ul>
                         </div>
                         <div id="fiesta" class="col-md-6 item text">
-                            <h3>Fiesta Click</h3>
+                            <h3 id="fiestaClick">Fiesta Click</h3>
                             <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
                                 la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
                         </div>

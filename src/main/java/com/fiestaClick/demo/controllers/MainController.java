@@ -42,11 +42,4 @@ public class MainController {
         return "indexUser.html";
     }
 
- 
-
-    @GetMapping("/extra")
-    public String extra() {
-        return "extra.html";
-    }
-
 }

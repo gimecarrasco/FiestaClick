@@ -78,7 +78,7 @@
                     <div class="footer__card">                 
                         <form th:action="@{/servicios/enable}" method="POST">
                             <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
-                            <button type="submit" class=" btn btn-dark">Agregar al Carrito</button>
+                            <button type="submit" class=" btn btn-dark" th:if="${session.usersession!=null}" >Agregar al Carrito</button>
                         </form>            
                     </div>
                 </div>
