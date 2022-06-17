@@ -22,19 +22,20 @@ public class EventRoomService {
     private PhotoService photoService;
 
     @Transactional
-    public EventRoomEntity save(Integer capacity, String adress, City city, String name, String description, String decor, MultipartFile photoEntity, Double price) throws ErrorService {
+    public EventRoomEntity save(Integer capacity, String adress, String name, String description, String decor, MultipartFile photoEntity, Double price) throws ErrorService {
         EventRoomEntity eventRoom = new EventRoomEntity();
 
-        validate(capacity, adress, city, name, description, decor, price);
+        validate(capacity, adress, name, description, decor, price);
 
         eventRoom.setCapacity(capacity);
         eventRoom.setAdress(adress);
-        eventRoom.setCity(city);
+//        City city
+//        eventRoom.setCity(city);
         eventRoom.setName(name);
         eventRoom.setRegister(Boolean.TRUE);
         eventRoom.setDescription(description);
         eventRoom.setDecor(decor);
-        eventRoom.setDate(new Date());
+//        eventRoom.setDate(new Date());
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         eventRoom.setPrice(price);
 
@@ -43,7 +44,7 @@ public class EventRoomService {
 
     @Transactional
     public EventRoomEntity modify(String id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, PhotoEntity photoEntity, Double price) throws ErrorService {
-        validate(capacity, adress, city, name, description, decor, price);
+        validate(capacity, adress, name, description, decor, price);
 
         Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
         if (answer.isPresent()) {
@@ -59,7 +60,6 @@ public class EventRoomService {
             eventRoom.setPrice(price);
 
             return eventRoomRepository.save(eventRoom);
-
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
@@ -102,16 +102,17 @@ public class EventRoomService {
     }
 
     @Transactional
-    private void validate(Integer capacity, String adress, City city, String name, String description, String decor, Double price) throws ErrorService {
+    private void validate(Integer capacity, String adress, String name, String description, String decor, Double price) throws ErrorService {
         if (capacity == null || capacity == 0) {
             throw new ErrorService("La capacidad no puede ser nula");
         }
         if (adress == null || adress.isEmpty()) {
             throw new ErrorService("La dirección no puede ser nula");
         }
-        if (city == null) {
-            throw new ErrorService("El departamento no puede ser nulo");
-        }
+//        if (city == null) {
+//            throw new ErrorService("El departamento no puede ser nulo");
+//        }
+//City city
         if (name == null || name.isEmpty()) {
             throw new ErrorService("El nombre no puede ser nulo");
         }

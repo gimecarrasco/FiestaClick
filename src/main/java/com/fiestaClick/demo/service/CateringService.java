@@ -117,8 +117,10 @@ public class CateringService {
     }
 
     @Transactional
-    public void findById(String id) {
-        cateringRepository.findById(id);
+    public CateringEntity findById(String id) {
+
+        return cateringRepository.findById(id).get();
+
     }
 
     @Transactional

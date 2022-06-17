@@ -58,7 +58,7 @@
         </header>
 
         <!-- Banner -->
-        <section id="banner">
+        <section id="bannerExtra">
             <div class="contenedor">
                 <h2>Divertite como más te guste</h2>
             </div>
@@ -73,7 +73,7 @@
                     </div>
                     <h2 class="card-title" th:text="${extraServiceEntity.name}"></h2>
                     <p class="card-text"th:text="${extraServiceEntity.description}"></p>
-                     <p class="card-text" th:if="${session.usersession!=null}" th:text="${extraServiceEntity.price}"></p>
+                    <p class="card-text" th:if="${session.usersession!=null}" th:text="${extraServiceEntity.price}"></p>
                     <hr>
                     <div class="footer__card">
                         <form th:action="@{/servicios/enableExtra}" method="POST">
@@ -87,16 +87,16 @@
 
 
         <!-- Footer -->
-        <footer>
+         <footer>
             <div class="footer-dark">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-3 item">
                             <h3>Nuestros Servicios</h3>
                             <ul>
-                                <li><a href="#">Salones</a></li>
-                                <li><a href="#">Caterings</a></li>
-                                <li><a href="#">Entretenimiento</a></li>
+                                <li><a href="/servicios/salones">Salones</a></li>
+                                <li><a href="/servicios/catering">Caterings</a></li>                        
+                                <li><a href="servicios/entretenimiento">Entretenimiento</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-6 col-md-3 item">
