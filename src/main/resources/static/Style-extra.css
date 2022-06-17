@@ -14,7 +14,7 @@ body {
 }
 
 #bannerExtra {
-    margin-top: 50px;
+    margin-top: 30px;
     position: relative;
     margin-bottom: 1cm;
 }
@@ -28,7 +28,7 @@ body {
 }
 
 section#bannerExtra h2 {
-    font-size: 3cm;
+    font-size: 2.4cm;
     color: #0e1a3c;
     -webkit-text-stroke: 2px #111011d7;
     font-family: chasing;
@@ -37,7 +37,7 @@ section#bannerExtra h2 {
 
 #bannerExtra h2:hover{
     color: white;
-    -webkit-text-stroke: 0.5px #d75b76;
+    -webkit-text-stroke: 0.8px #d75b76;
     transition: all 1.3s;
 }
 

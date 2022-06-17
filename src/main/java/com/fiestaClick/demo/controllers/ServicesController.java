@@ -64,26 +64,27 @@ public class ServicesController {
         return "redirect:/servicios/persistCateringAndExtra";
     }
 
-    @GetMapping("/registerEvent")
-    public String formulary(ModelMap vista) {
-        vista.addAttribute("citys", City.values());
-        return "/servicios/persistCateringAndExtra";
-    }
+//    @GetMapping("/registerEvent")
+//    public String formulary(ModelMap vista) {
+//        vista.addAttribute("citys", City.values());
+//        return "/servicios/persistCateringAndExtra";
+//    }
 
     @PostMapping("/registerEvent")
-    public String saveEvent(ModelMap model, @RequestParam Integer capacity, @RequestParam String adress, @RequestParam City city, @RequestParam String name, @RequestParam String description, @RequestParam String decor, MultipartFile photo, @RequestParam Double price) throws ErrorService {
+    public String saveEvent(ModelMap model, @RequestParam Integer capacity, @RequestParam String adress, @RequestParam String name, @RequestParam String description, @RequestParam String decor, MultipartFile photo, @RequestParam Double price) throws ErrorService {
         try {
             System.out.println("Capacidad: " + capacity);
             System.out.println("Dirección: " + adress);
-            System.out.println("Localidad: " + city);
-//            List<City> citys = eventRoomService.
+//            System.out.println("Localidad: " + city);
+
+
             System.out.println("Nombre: " + name);
             System.out.println("Descripción: " + description);
             System.out.println("Decoración: " + decor);
             System.out.println("Foto: " + photo);
             System.out.println("Precio: " + price);
 
-            eventRoomService.save(capacity, adress, city, name, description, decor, photo, price);
+            eventRoomService.save(capacity, adress, name, description, decor, photo, price);
 
             model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {

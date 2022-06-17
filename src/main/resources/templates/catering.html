@@ -58,7 +58,7 @@
         </header>
 
         <!-- Banner -->
-        <section id="banner">
+        <section id="bannerExtra">
             <div class="contenedor">
                 <h2>Elegí tu Catering</h2>
             </div>
@@ -69,11 +69,11 @@
             <div class="container__cards">
                 <div class="card" th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" >
                     <div class="cover__card">
-                        <img th:if="${cateringEntity.photoEntity != null}" th:src="${'/photoEntity/cateringEntity?id= '}" alt="catering">
+                        <img th:if="${cateringEntity.photoEntity != null}"  th:href="@${'/Photo/cateringEntity/'+ ${cateringEntity.id}"  alt="catering">
                     </div>
                     <h2 class="card-title" th:text="${cateringEntity.name}"></h2>
                     <p class="card-text" th:text="${cateringEntity.description}"></p>
-                      <p class="card-text" th:if="${session.usersession!=null}"  th:text="${cateringEntity.price}"></p>
+                    <p class="card-text" th:if="${session.usersession!=null}"  th:text="${cateringEntity.price}"></p>
                     <hr>                  
                     <div class="footer__card">                 
                         <form th:action="@{/servicios/enable}" method="POST">
@@ -86,16 +86,16 @@
         </section>
 
         <!-- Footer -->
-        <footer>
+         <footer>
             <div class="footer-dark">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-3 item">
                             <h3>Nuestros Servicios</h3>
                             <ul>
-                                <li><a href="#">Salones</a></li>
-                                <li><a href="#">Caterings</a></li>
-                                <li><a href="#">Entretenimiento</a></li>
+                                <li><a href="/servicios/salones">Salones</a></li>
+                                <li><a href="/servicios/catering">Caterings</a></li>                        
+                                <li><a href="servicios/entretenimiento">Entretenimiento</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-6 col-md-3 item">
@@ -108,7 +108,7 @@
                             </ul>
                         </div>
                         <div id="fiesta" class="col-md-6 item text">
-                            <h3>Fiesta Click</h3>
+                            <h3 id="fiestaClick">Fiesta Click</h3>
                             <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
                                 la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
                         </div>
