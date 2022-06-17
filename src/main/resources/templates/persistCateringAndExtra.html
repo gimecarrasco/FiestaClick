@@ -39,30 +39,28 @@
         <!-- Cards -->
         <section class="formulary">
             <br>
-              <br>
-                <br>
-                  <br>
+            <br>
+            <br>
+            <br>
             <div class="container-form">
-                <form  action="@{/servicios/registerEvent}" method="POST"  class="formulario" enctype="multipart/form-data" >
-                    <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>
-                    <label>Capacidad</label>
-                    <input class="form-control"  type="number" name="capacity"  th:value="${capacity}" required>
-                    <label>Dirección</label>
-                    <input class="form-control" type="text" name="adress" th:value="${adress}" required>
-                    <br>
-                    <br>  
+                <form  action="/servicios/register" method="POST"  class="formulario" enctype="multipart/form-data" >
+                    <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>    
+
                     <label>Nombre del Salón</label>              
                     <input class="form-control" type="text" name="name" th:value="${name}" required>
+                    <br>
+                    <br>
+                    <label>Precio</label>
+                    <input class="form-control" type="number" name="price" th:value="${price}" required>
+                    <br>
+                    <br>
                     <label>Descripción</label>
                     <input class="form-control" type="text" name="description" th:value="${description}" required>
-                    <label>Decoración</label>
-                    <input class="form-control" type="text" name="decor" th:value="${decor}" required>
                     <br>
                     <br>
                     <label>Foto</label>
                     <input class="form-control"  type="file" name="photo" required><br>
-                    <label>Precio</label>
-                    <input class="form-control" type="number" name="price" th:value="${price}" required>
+
                     <br>
                     <br>
                     <button type="submit">Cargar</button>

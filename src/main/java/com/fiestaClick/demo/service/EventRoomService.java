@@ -2,12 +2,11 @@ package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;
-import com.fiestaClick.demo.enumerations.City;
 import com.fiestaClick.demo.repository.EventRoomRepository;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fiestaClick.demo.errors.ErrorService;
+import static java.lang.Boolean.TRUE;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,42 +21,35 @@ public class EventRoomService {
     private PhotoService photoService;
 
     @Transactional
-    public EventRoomEntity save(Integer capacity, String adress, String name, String description, String decor, MultipartFile photoEntity, Double price) throws ErrorService {
+    public EventRoomEntity save(String name, Double price, String description, MultipartFile photoEntity) throws ErrorService {
         EventRoomEntity eventRoom = new EventRoomEntity();
 
-        validate(capacity, adress, name, description, decor, price);
+        validate(name, price, description);
 
-        eventRoom.setCapacity(capacity);
-        eventRoom.setAdress(adress);
-//        City city
-//        eventRoom.setCity(city);
         eventRoom.setName(name);
-        eventRoom.setRegister(Boolean.TRUE);
-        eventRoom.setDescription(description);
-        eventRoom.setDecor(decor);
-//        eventRoom.setDate(new Date());
-        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         eventRoom.setPrice(price);
+        eventRoom.setDescription(description);
+        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+        eventRoom.setPhotoEntity(photo);
+        eventRoom.setRegister(Boolean.TRUE);
 
         return eventRoomRepository.save(eventRoom);
     }
 
     @Transactional
-    public EventRoomEntity modify(String id, Integer capacity, String adress, City city, String name, Boolean register, String description, String decor, PhotoEntity photoEntity, Double price) throws ErrorService {
-        validate(capacity, adress, name, description, decor, price);
+    public EventRoomEntity modify(String id, String name, Double price, String description, Boolean register, PhotoEntity photoEntity) throws ErrorService {
+        validate(name, price, description);
 
         Optional<EventRoomEntity> answer = eventRoomRepository.findById(id);
         if (answer.isPresent()) {
             EventRoomEntity eventRoom = answer.get();
-            eventRoom.setCapacity(capacity);
-            eventRoom.setAdress(adress);
-            eventRoom.setCity(city);
+
             eventRoom.setName(name);
-            eventRoom.setRegister(register);
-            eventRoom.setDescription(description);
-            eventRoom.setDecor(decor);
-            eventRoom.setPhotoEntity(photoEntity);
             eventRoom.setPrice(price);
+            eventRoom.setDescription(description);
+            eventRoom.setRegister(register);
+
+            eventRoom.setPhotoEntity(photoEntity);
 
             return eventRoomRepository.save(eventRoom);
         } else {
@@ -102,13 +94,13 @@ public class EventRoomService {
     }
 
     @Transactional
-    private void validate(Integer capacity, String adress, String name, String description, String decor, Double price) throws ErrorService {
-        if (capacity == null || capacity == 0) {
-            throw new ErrorService("La capacidad no puede ser nula");
-        }
-        if (adress == null || adress.isEmpty()) {
-            throw new ErrorService("La dirección no puede ser nula");
-        }
+    private void validate(String name, Double price, String description) throws ErrorService {
+//        if (capacity == null || capacity == 0) {
+//            throw new ErrorService("La capacidad no puede ser nula");
+//        }
+//        if (adress == null || adress.isEmpty()) {
+//            throw new ErrorService("La dirección no puede ser nula");
+//        }
 //        if (city == null) {
 //            throw new ErrorService("El departamento no puede ser nulo");
 //        }
@@ -119,9 +111,9 @@ public class EventRoomService {
         if (description == null || description.isEmpty()) {
             throw new ErrorService("La descripción no puede ser nula");
         }
-        if (decor == null || decor.isEmpty()) {
-            throw new ErrorService("La decoración no puede ser nula");
-        }
+//        if (decor == null || decor.isEmpty()) {
+//            throw new ErrorService("La decoración no puede ser nula");
+//        }
         if (price == null || price == 0) {
             throw new ErrorService("El precio no puede ser nulo");
         }
@@ -130,6 +122,11 @@ public class EventRoomService {
     @Transactional
     public List<EventRoomEntity> listEventRoom() {
         return eventRoomRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public EventRoomEntity findById(String id) {
+        return eventRoomRepository.findById(id).get();
     }
 
     @Transactional
