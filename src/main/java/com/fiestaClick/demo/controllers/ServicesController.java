@@ -100,7 +100,7 @@ public class ServicesController {
             model.put("photo", photo);
             return "redirect:/servicios/persistCateringAndExtra";
         }
-        return "redirect:/servicios/persistCateringAndExtra";
+        return "redirect:/servicios/catering";
     }
     
     @PostMapping("/registerExtra")
@@ -124,12 +124,6 @@ public class ServicesController {
         }
         return "redirect:/servicios/extra";
     }
-
-//    @GetMapping("/registerEvent")
-//    public String formulary(ModelMap vista) {
-//        vista.addAttribute("citys", City.values());
-//        return "/servicios/persistCateringAndExtra";
-//    }
 
     @PostMapping("/registerEventRoom")
     public String saveEventRoom(ModelMap model, @RequestParam String name,  @RequestParam String description, MultipartFile photo, @RequestParam Double price) throws ErrorService {

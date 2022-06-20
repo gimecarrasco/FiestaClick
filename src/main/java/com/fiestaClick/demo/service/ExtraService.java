@@ -46,6 +46,7 @@ public class ExtraService {
         extraService.setRegister(Boolean.TRUE);
         extraService.setBought(Boolean.FALSE);
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+        extraService.setPhotoEntity(photo);
 
         return extraServiceRepository.save(extraService);
 

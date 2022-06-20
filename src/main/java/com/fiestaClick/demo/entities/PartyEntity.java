@@ -32,7 +32,7 @@ public class PartyEntity {
     @OneToOne
     private CateringEntity cateringEntity;
 
-    @OneToMany
+    @OneToOne
     private ExtraServiceEntity extraServiceEntity;
     
     @Temporal(TemporalType.DATE)
