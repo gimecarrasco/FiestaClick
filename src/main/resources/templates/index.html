@@ -37,13 +37,13 @@
                     <li th:if="${session.usersession!=null}" ><a  href="#"><span class="icon-home"></span> Gestión</a>
                         <ul class="submenu">
                             <li>                         
-                                <a  href= "/servicios/persistCateringAndExtra">Cargar Salones</a>
+                                <a  href= "/servicios/persistEventRoom">Cargar Salones</a>
                             </li>
                             <li>                         
                                 <a  href= "/servicios/persistCateringAndExtra">Cargar Caterings</a>
                             </li>
                             <li>                                                           
-                                <a   href= "/servicios/persistCateringAndExtra" >Cargar Servicio</a>
+                                <a   href= "/servicios/persistExtra" >Cargar Servicio</a>
                             </li>
                         </ul>
                     </li>   
@@ -51,11 +51,11 @@
                     <li>
                         <a href="#"><span class="icon-home"></span> Servicios</a>
                         <ul class="submenu">
-                            <li><a href="/servicios/salones">Salones</a>
+                            <li><a href="/servicios/eventRoom">Salones</a>
                             </li>
                             <li><a href="/servicios/catering">Caterings</a>
                             </li>
-                            <li><a href="/servicios/entretenimiento">Diversion</a>  
+                            <li><a href="/servicios/extra">Diversion</a>  
                             </li>
                         </ul>
                     </li>
@@ -64,7 +64,7 @@
 
                         </ul>
                     </li>
-                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
+                    <li th:if="${session.usersession!=null}"><a href="/shop/basket"><span class="icon-basket" id="basket">Carrito</span></a>
                         <ul class="submenu">
                             <li><a href="/shop/basket">Ver Carrito</a></li>
                         </ul>

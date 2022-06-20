@@ -20,6 +20,7 @@ public class CateringEntity {
     private Double price;
     private String description;
     private Boolean register;
+    
     private Boolean bought;
 
     @OneToOne

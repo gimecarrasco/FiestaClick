@@ -9,7 +9,11 @@ import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
 import com.fiestaClick.demo.service.ExtraService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +67,18 @@ public class ServicesController {
     
 
     @GetMapping("/persistCateringAndExtra")
-    public String form(ModelMap modelo) {
+    public String persistCateringAndExtra(ModelMap modelo) {
         return "persistCateringAndExtra.html";
+    }
+    
+    @GetMapping("/persistEventRoom")
+    public String persistEventRoom(ModelMap modelo) {
+        return "persistEventRoom.html";
+    }
+    
+     @GetMapping("/persistExtra")
+    public String persistExtra(ModelMap modelo) {
+        return "persistExtra.html";
     }
 
     @PostMapping("/registerCatering")
@@ -108,7 +122,7 @@ public class ServicesController {
             model.put("photo", photo);
             return "redirect:/servicios/persistCateringAndExtra";
         }
-        return "redirect:/servicios/persistCateringAndExtra";
+        return "redirect:/servicios/extra";
     }
 
 //    @GetMapping("/registerEvent")
@@ -136,52 +150,77 @@ public class ServicesController {
             model.put("photo", photo);
             return "redirect:/servicios/persistCateringAndExtra";
         }
-        return "eventRoom.html";
+        return "redirect:/servicios/eventRoom";
     }
 
-//    @PostMapping("/enable")
-//    public String enable(ModelMap modelo, @RequestParam String id) {
-//        try {
-//            cateringService.enable(id);
-//            modelo.put("exito", "Se agregó al carrito");
-//        } catch (ErrorService e) {
-//            e.printStackTrace();
-//            modelo.put("error", "No se pudo agregar del carrito");
-//        }
-//        return "redirect:/servicios/catering";
-//    }
-//
-//    @PostMapping("/enableEventRoom")
-//    public String enableEventRoom(ModelMap modelo, @RequestParam String id) {
-//        try {
-//            eventRoomService.enable(id);
-//            modelo.put("exito", "Se agregó al carrito");
-//            return "redirect:/servicios/salones";
-//        } catch (ErrorService e) {
-//            e.printStackTrace();
-//            modelo.put("error", "No se pudo agregar del carrito");
-//            return "redirect:/servicios/salones";
-//        }
-//
-//    }
-
-//    @PostMapping("/enableExtra")
-//    public String enableExtra(ModelMap modelo, @RequestParam String id) {
-//        try {
-//            extraService.enable(id);
-//            modelo.put("exito", "Se agregó al carrito");
-//            return "redirect:/servicios/entretenimiento";
-//        } catch (ErrorService e) {
-//            e.printStackTrace();
-//            modelo.put("error", "No se pudo agregar del carrito");
-//            return "redirect:/servicios/entretenimiento";
-//        }
-//
-//    }
-
-//    @PostMapping("/addCatering")   //user/addCatering ---> debería ir en userController
-//    public String addService(ModelMap model, @RequestParam CateringEntity cateringEntity) {
-//        partyEntity.setCateringEntity(cateringEntity); 
-//        return "index";
-//    }
+    @GetMapping("/boughtCatering")
+    public String boughtCatering(ModelMap modelo, @RequestParam String id) {
+        try {
+            cateringService.bought(id);
+            modelo.put("exito", "Se agregó al carrito");
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo agregar del carrito");
+        }
+        return "redirect:/servicios/catering";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/notBoughtCatering")
+    public String notBoughtCatering(ModelMap model, String id) {
+        try {
+            cateringService.notBought(id);
+        } catch (ErrorService ex) {
+            Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return "redirect:/shop/basket";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/boughtEventRoom")
+    public String boughtEventRoom(ModelMap modelo, @RequestParam String id) {
+        try {
+            eventRoomService.bought(id);
+            modelo.put("exito", "Se agregó al carrito");
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo agregar del carrito");
+        }
+        return "redirect:/servicios/eventRoom";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/notBoughtEventRoom")
+    public String notBoughtEventRoom(ModelMap model, String id) {
+        try {
+            eventRoomService.notBought(id);
+        } catch (ErrorService ex) {
+            Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return "redirect:/shop/basket";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/boughtExtra")
+    public String boughtExtra(ModelMap modelo, @RequestParam String id) {
+        try {
+            extraService.bought(id);
+            modelo.put("exito", "Se agregó al carrito");
+        } catch (ErrorService e) {
+            e.printStackTrace();
+            modelo.put("error", "No se pudo agregar del carrito");
+        }
+        return "redirect:/servicios/extra";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/notBoughtExtra")
+    public String notBoughtExtra(ModelMap model, String id) {
+        try {
+            extraService.notBought(id);
+        } catch (ErrorService ex) {
+            Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "redirect:/shop/basket";
+    }
 }

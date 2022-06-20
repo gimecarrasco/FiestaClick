@@ -43,7 +43,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/") // controlador que redirecciona al html cuando se desloguea de manera exitosa
+                .logoutSuccessUrl("/index") // controlador que redirecciona al html cuando se desloguea de manera exitosa
                 .permitAll().
                 and().csrf().disable();
     }

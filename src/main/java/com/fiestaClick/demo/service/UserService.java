@@ -1,5 +1,6 @@
 package com.fiestaClick.demo.service;
 
+import com.fiestaClick.demo.entities.PartyEntity;
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.enumerations.Role;
 import com.fiestaClick.demo.errors.ErrorService;
