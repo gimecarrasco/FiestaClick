@@ -43,7 +43,7 @@ public class PartyService {
     
     
     @Transactional
-    public PartyEntity save(CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
+    public PartyEntity save(CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
         
                  
         validate(cateringEntity, extraServiceEntity, eventRoomEntity);
@@ -53,7 +53,7 @@ public class PartyService {
         partyEntity.setEventRoomEntity(eventRoomEntity);
         partyEntity.setExtraServiceEntity(extraServiceEntity);
 //        partyEntity.setPartyDate(partyDate);
-        partyEntity.setTotalPrice(totalPartyPrice(eventRoomEntity.getId(), cateringEntity.getId(), extraServiceEntity.get(0).getId())); 
+        partyEntity.setTotalPrice(totalPartyPrice(eventRoomEntity.getId(), cateringEntity.getId(), extraServiceEntity.getId())); 
                
         return partyRepository.save(partyEntity);
     }
@@ -78,7 +78,7 @@ public class PartyService {
     }
     
     @Transactional
-    public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
+    public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
         
         Optional<PartyEntity> answer = partyRepository.findById(id);
         
@@ -115,7 +115,7 @@ public class PartyService {
         partyRepository.deleteById(id);
     }
     
-    public void validate(CateringEntity cateringEntity, List <ExtraServiceEntity> extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
+    public void validate(CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
         if (cateringEntity == null || extraServiceEntity == null || eventRoomEntity == null) {
             throw new ErrorService("Debes elegir al menos un servicio.");
         }

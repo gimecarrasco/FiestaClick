@@ -4,7 +4,6 @@ import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PartyEntity;
-import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.CateringRepository;
 import com.fiestaClick.demo.repository.EventRoomRepository;
 import com.fiestaClick.demo.repository.ExtraServiceRepository;
@@ -12,11 +11,8 @@ import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
 import com.fiestaClick.demo.service.ExtraService;
 import com.fiestaClick.demo.service.PartyService;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -70,8 +66,7 @@ public class BasketController {
     public String registerParty(ModelMap model, String idCatering, String idEventRoom, String idExtra) {
         try {
             CateringEntity catering = cateringService.findById(idCatering);
-            List <ExtraServiceEntity> extra = new ArrayList();
-                    extra.add(extraService.findById(idExtra));
+            ExtraServiceEntity extra = extraService.findById(idExtra);
             EventRoomEntity eventRoom = eventRoomService.findById(idEventRoom);
 
             PartyEntity party = partyService.save(catering, extra, eventRoom);

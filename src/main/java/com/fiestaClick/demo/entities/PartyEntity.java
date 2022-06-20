@@ -33,7 +33,7 @@ public class PartyEntity {
     private CateringEntity cateringEntity;
 
     @OneToMany
-    private List<ExtraServiceEntity> extraServiceEntity;
+    private ExtraServiceEntity extraServiceEntity;
     
     @Temporal(TemporalType.DATE)
     private Date partyDate;
@@ -43,7 +43,7 @@ public class PartyEntity {
     public PartyEntity() {
     }
 
-    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, Date partyDate, Double totalPrice) {
+    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, Date partyDate, Double totalPrice) {
         this.id = id;
         this.eventRoomEntity = eventRoomEntity;
         this.cateringEntity = cateringEntity;
@@ -78,11 +78,11 @@ public class PartyEntity {
         this.cateringEntity = cateringEntity;
     }
 
-    public List<ExtraServiceEntity> getExtraServiceEntity() {
+    public ExtraServiceEntity getExtraServiceEntity() {
         return extraServiceEntity;
     }
 
-    public void setExtraServiceEntity(List<ExtraServiceEntity> extraServiceEntity) {
+    public void setExtraServiceEntity(ExtraServiceEntity extraServiceEntity) {
         this.extraServiceEntity = extraServiceEntity;
     }
 
