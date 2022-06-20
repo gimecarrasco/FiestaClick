@@ -75,7 +75,7 @@ public class BasketController {
             EventRoomEntity eventRoom = eventRoomService.findById(idEventRoom);
 
             PartyEntity party = partyService.save(catering, extra, eventRoom);
-            
+            System.out.println("El precio de la fiesta es: " + party.getTotalPrice());
             model.addAttribute("priceParty", party.getTotalPrice().toString());
             
             
