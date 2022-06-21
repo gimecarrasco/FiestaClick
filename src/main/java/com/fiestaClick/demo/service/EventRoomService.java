@@ -35,6 +35,7 @@ public class EventRoomService {
         eventRoom.setDescription(description);
 //        eventRoom.setDate(new Date());
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+        eventRoom.setPhotoEntity(photo);
         eventRoom.setPrice(price);
 
         return eventRoomRepository.save(eventRoom);
