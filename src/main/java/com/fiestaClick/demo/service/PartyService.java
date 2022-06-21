@@ -44,9 +44,8 @@ public class PartyService {
     
     @Transactional
     public PartyEntity save( String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception {
-        
-                 
-        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
+                         
+//        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity, partyDate);
         
         UserEntity userEntity = userRepository.findById(idUser).get();
          
@@ -55,6 +54,7 @@ public class PartyService {
         partyEntity.setEventRoomEntity(eventRoomEntity);
         partyEntity.setExtraServiceEntity((List<ExtraServiceEntity>) extraServiceEntity);
         partyEntity.setPartyDate(partyDate);
+        partyEntity.setId(userEntity.getId());
         partyEntity.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService)); 
                
         return partyRepository.save(partyEntity);
@@ -67,15 +67,23 @@ public class PartyService {
     //Lleno con los caterings
     public String updateCatering(String idParty,String idCatering) throws ErrorService {
     	Optional<PartyEntity> response = partyRepository.findById(idParty);
-
+        
     	if(response.isPresent()) {
     		PartyEntity entity = response.get();
+                
     		Optional<CateringEntity> catResponse = cateringRepository.findById(idCatering);
     		if(catResponse.isPresent()) {
     			CateringEntity catEntity = catResponse.get();
     			entity.setCateringEntity(catEntity);
     			partyRepository.save(entity);
     			throw new ErrorService("Carrito Actualizado con Catering");
+
+//                CateringEntity cE = new CateringEntity();
+//                entity.setCateringEntity(cE);
+//                partyRepository.save(entity);
+                
+////                throw new ErrorService("Carrito Actualizado con Catering");
+
     		}
     		throw new ErrorService( "Error al encontrar el catering");
     	}
@@ -125,12 +133,6 @@ public class PartyService {
     public Optional<PartyEntity> findPartyById(String id) {
         return partyRepository.findById(id);
     }
-    
-    
-//    @Transactional
-//    public Optional<PartyEntity> findPartyById(String id) {
-//        return partyRepository.findById(id);
-//    }
     
     @Transactional
     public void deleteById(String id) {

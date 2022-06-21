@@ -6,6 +6,7 @@ import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PartyEntity;
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.errors.ErrorService;
+import com.fiestaClick.demo.repository.CateringRepository;
 import com.fiestaClick.demo.service.CateringService;
 import com.fiestaClick.demo.service.EventRoomService;
 import com.fiestaClick.demo.service.ExtraService;
@@ -35,11 +36,15 @@ public class BasketController {
     private PartyService partyService;
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private CateringRepository cR;
 
     @GetMapping("/basket/{idUser}")
-    public String basket(ModelMap model, @RequestParam(value = "idUser") String idUser) {
+    public String basket(ModelMap model, @RequestParam(value = "idUser") String idUser, @RequestParam(value = "idCatering") String idCatering) {
     	try {
     	PartyEntity party = partyService.findPartyByIdUser(idUser);
+        partyService.updateCatering(party.getId(),idCatering);
 //        List<CateringEntity> caterings = cateringService.listCatering();
 //        List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
 //        List<ExtraServiceEntity> extras = extraService.listCatering();
@@ -55,9 +60,9 @@ public class BasketController {
     	}
     }
     
-    @PutMapping("/basket/{idUser}/{idCatering}")
+    @PostMapping("/basket/{idUser}/{idCatering}")
     public String updateCatering(ModelMap model, @RequestParam(value = "idUser")String idUser, @RequestParam(value = "idCatering")String idCatering ) {
-    	  
+    	   System.out.println("entró al método");
         try {
     		UserEntity user = userService.findById(idUser);
     		//Pasar por el servicio de usuario.
@@ -67,7 +72,7 @@ public class BasketController {
     	}catch(Exception e) {
     		//Model put Error
     		model.put("Error", e.getMessage());                
-    		return "redirect:/servicios/cateringt";
+    		return "redirect:/servicios/catering";
     	}
     }
     

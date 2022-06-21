@@ -4,6 +4,7 @@ import com.fiestaClick.demo.entities.PartyEntity;
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.enumerations.Role;
 import com.fiestaClick.demo.errors.ErrorService;
+import com.fiestaClick.demo.repository.PartyRepository;
 import com.fiestaClick.demo.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,12 +36,15 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private PartyRepository partyRepository;
+    
 //    @Autowired
 //    private JavaMailSender emailSender;
     
     @Autowired
     private MailService mailService;
-    
+          
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void save(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
@@ -64,14 +68,17 @@ public class UserService implements UserDetailsService {
         //String content = "Gracias por registrarse " + userEntity.getName() + "!";        
         //sendEmail(email, subject, content);
         
-        PartyEntity pE = null;
-        userEntity.setPartyEntity(pE);
-        
         mailService.mailSender(email, "bienvenido/a"+" "+name, "Se ha registrado con exito a FiestaClick");
         
         userRepository.save(userEntity);
+        
+        PartyEntity pE = new PartyEntity();                
+        partyRepository.save(pE);
+        
+        userEntity.setPartyEntity(pE);        
+        userRepository.save(userEntity);
     }
-    
+          
     public void validate(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception {
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("El nombre no puede ser nulo el nombre ");

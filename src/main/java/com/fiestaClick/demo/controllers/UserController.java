@@ -3,6 +3,7 @@ package com.fiestaClick.demo.controllers;
 import com.fiestaClick.demo.entities.UserEntity;
 import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.UserRepository;
+import com.fiestaClick.demo.service.PartyService;
 import com.fiestaClick.demo.service.UserService;
 import com.sun.istack.logging.Logger;
 import java.util.Date;
@@ -23,20 +24,21 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+//    @Autowired
+//    private PartyService partyService;
+//    
+//    @Autowired
+//    private UserEntity uE;
 
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password) throws ErrorService {
         try {
-            userService.save(name, lastName, dateOfBirth, email, password);
+            userService.save(name, lastName, dateOfBirth, email, password);//            
             model.put("exito", "Felicitaciones!");
         } catch (Exception e) {
             e.printStackTrace();
             //model.put("error", e.getMessage());
-            model.put("name", name);
-            model.put("lastName", lastName);
-            model.put("dateOfBirth", dateOfBirth);
-            model.put("email", email);
-            model.put("password", password);
             //Logger.getLogger(MainController.class.getName().log(Level.SEVERE, null, e));
             return "login.html";
         }

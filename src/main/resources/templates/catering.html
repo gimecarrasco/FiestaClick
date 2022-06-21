@@ -77,7 +77,7 @@
                     <p class="card-text" th:if="${session.usersession!=null}"  th:text=" '$ ' + ${cateringEntity.price}"></p>
                     <hr>                  
                     <div class="footer__card">                 
-                        <form th:action="@{/basket/${session.usersession.id}/${cateringEntity.id}}" method="PUT">
+                        <form th:action="@{/basket/${session.usersession.id}/${cateringEntity.id}}" method="POST">
                             <input type="hidden" class="form-control" name="id" th:value="${cateringEntity.id}">
                             <button type="submit" class=" btn btn-dark" th:if="${session.usersession!=null}">Agregar al Carrito</button>
                             
