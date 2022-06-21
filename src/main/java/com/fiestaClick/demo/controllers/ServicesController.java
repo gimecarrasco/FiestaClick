@@ -65,27 +65,6 @@ public class ServicesController {
         modelo.put("eventRooms", eventRooms);
         return "eventRoom.html";
     }
-    
-    
-
-    @GetMapping("/ticket/catering/{id}")
-    public String ticket(ModelMap modelo, @PathVariable String id, HttpSession session) throws Exception {
-        System.out.println("cualquier cosa");
-        CateringEntity cateringEntity = cateringService.findById(id);
-        partyService.save(session.getId(), cateringEntity, null, null);
-
-        return "redirect:/servicios/entretenimiento";
-    }
-
-    @GetMapping("/ticket/eventRoom/{id}")
-    public String ticketEventRoom(ModelMap modelo, @PathVariable String id, HttpSession session, @RequestParam String partyEntityId) throws Exception {
-        System.out.println("cualquier cosa");
-
-        EventRoomEntity eventRoom = eventRoomService.findById(id);
-        partyService.modify(id, id, cateringEntity, extraServiceEntity, eventRoom);
-
-        return "redirect:/servicios/entretenimiento";
-    }
 
     @GetMapping("/persistCateringAndExtra")
     public String persistCateringAndExtra(ModelMap modelo) {

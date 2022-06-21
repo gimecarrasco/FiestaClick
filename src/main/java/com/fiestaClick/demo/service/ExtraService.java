@@ -30,7 +30,7 @@ public class ExtraService {
         if (description == null || description.trim().isEmpty()) {
             throw new ErrorService("La descripción no puede ser nula.");
         }
-
+    }
 
     @Transactional
     public ExtraServiceEntity save(String name, Double price, String description, MultipartFile photoEntity) throws Exception {
@@ -93,18 +93,6 @@ public class ExtraService {
 
         } else {
             throw new ErrorService("No se encontro el servicio extra que se desea modificar");
-        }
-
-    }
-        public void validate(String name, Double price, String description) throws Exception {
-        if (name == null || name.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (price == null || price == 0) {
-            throw new ErrorService("No puede ser nulo este valor");
-        }
-        if (description == null || description.trim().isEmpty()) {
-            throw new ErrorService("No puede ser nulo este valor");
         }
 
     }

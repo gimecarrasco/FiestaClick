@@ -90,7 +90,7 @@ public class PartyService {
             party.getCateringEntity();
             party.getEventRoomEntity();
             party.getExtraServiceEntity();
-            party.setPartyDate(partyDate);
+           // party.setPartyDate(partyDate);
 //            party.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService));
             
             return partyRepository.save(party);
