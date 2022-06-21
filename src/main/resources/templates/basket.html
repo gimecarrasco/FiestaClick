@@ -13,53 +13,12 @@
     </head>
 
     <body>
-        <!-- NavBar -->
-        <header>
-            <div class="contenedor">
-                <a href="/index">
-                    <h1>Fiesta Click</h1>
-                </a>
-                <input type="checkbox" id="menu-bar">
-                <label class="icon-th-list" for="menu-bar"></label>
-                <nav class="menu">
+        <!--       Head and NavBar-->            
+        <header th:replace="/fragments/header :: header"></header>
 
-                    <li th:if="${session.usersession==null}" ><a href="#"><span class="icon-user">Usuario</span></a>
-                        <ul class="submenu">
-                            <li><a href="/login">Ingresar</a></li>
-                            <li><a href="/login">Registrarse</a></li>
-                        </ul>
-                    </li>
-                    <li  th:if="${session.usersession!=null}"><a href="#"><span class="icon-user">Mi Cuenta</span></a>
-                        <ul class="submenu">
-                            <li><a th:href="@{/user/editProfile(id=__${session.usersession.id}__)}">Configurar mi perfil</a></li> 
-                            <li><a href="/logout">Cerrar Sesión</a></li> 
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="icon-home"></span> Servicios</a>
-                        <ul class="submenu">
-                            <li><a href="/servicios/eventRoom">Salones</a></li>
-                            <li><a href="/servicios/catering">Caterings</a></li>
-                            <li><a href="/servicios/extra">Diversion</a></li>
-                        </ul>
-                    </li>
-                    <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
-                        <ul class="submenu">
-                            <li><a href="/shop/basket">Ver Carrito</a></li>
-                        </ul>
-                    </li>
-                    <form class="form-inline" id="carrito">
-                        <input class="form-control" type="search" placeholder="Buscar">
-                        <button class="submit" id="lupa">
-                            <span class="icon-search"></span>
-                        </button>
-                    </form>
-                </nav>          
-            </div>
-        </header>
 
-          
         <table  class="table container">
-           
+
             <thead>
                 <tr >
                     <th th:if="${message != null}" th:text="${message}" ></th>
@@ -80,94 +39,52 @@
                                         <a th:href="@{/libros/form}+'?isbn='+${l.isbn}+'&action=modificar'"><button class="btn btn-light">Editar</button></a>
                                     </td>
                                 </tr>          -->
-               
+
             <form th:if ="${message == null}" th:action="@{/shop/registerParty}" method="POST">
-               
+
                 <tr>               
                     <td th:if="${catering != null}" th:text="${catering.name}" id="name"></td>
                     <td th:if="${catering != null}" th:text="${catering.price}" id="price"></td>
-                 <input type="hidden" class="form-control" name="idCatering" th:if="${catering != null}" th:value="${catering.id}">
-                     <td>
-                        <a th:if="${catering != null}" th:href="@{/servicios/notBoughtCatering(id=${catering.id})}">   
+                <input type="hidden" class="form-control" name="idCatering" th:if="${catering != null}" th:value="${catering.id}">
+                <td>
+                    <a th:if="${catering != null}" th:href="@{/servicios/notBoughtCatering(id=${catering.id})}">   
                         <button type="button" class="btn btn-danger" id="delete">Eliminar</button>
-                        </a> 
-                    </td>
+                    </a> 
+                </td>
                 </tr>
                 <tr>
                     <td th:if="${eventRoom != null}" th:text="${eventRoom.name}" id="name"></td>     
                     <td th:if="${eventRoom != null}" th:text="${eventRoom.price}" id="price"></td>
-                      <input th:if="${eventRoom != null}" type="hidden" class="form-control" name="idEventRoom" th:value="${eventRoom.id}">
-                   <td>
-                       <a th:if="${eventRoom != null}" th:href="@{/servicios/notBoughtEventRoom(id=${eventRoom.id})}">   
+                <input th:if="${eventRoom != null}" type="hidden" class="form-control" name="idEventRoom" th:value="${eventRoom.id}">
+                <td>
+                    <a th:if="${eventRoom != null}" th:href="@{/servicios/notBoughtEventRoom(id=${eventRoom.id})}">   
                         <button type="button" class="btn btn-danger" id="delete">Eliminar</button>
-                        </a> 
-                    </td>
+                    </a> 
+                </td>
                 </tr>
                 <tr>
                     <td th:if="${extra != null}" th:text="${extra.name}" id="name"></td>  
                     <td th:if="${extra != null}" th:text="${extra.price}" id="price"></td>
-                      <input th:if="${extra != null}" type="hidden" class="form-control" name="idExtra" th:value="${extra.id}">
-                    <td>
-                        <a th:if="${extra != null}"  th:href="@{/servicios/notBoughtExtra(id=${extra.id})}">   
+                <input th:if="${extra != null}" type="hidden" class="form-control" name="idExtra" th:value="${extra.id}">
+                <td>
+                    <a th:if="${extra != null}"  th:href="@{/servicios/notBoughtExtra(id=${extra.id})}">   
                         <button type="button" class="btn btn-danger" id="delete">Eliminar</button>
-                        </a> 
-                    </td>
+                    </a> 
+                </td>
                 </tr>
-              
+
                 <tr>
                     <td>
-                            <button type="submit" class="btn btn-primary" id="buy">Confirmar compra</button>                     
+                        <button type="submit" class="btn btn-primary" id="buy">Confirmar compra</button>                     
                     </td>
                 </tr>
-                </form>
-            </tbody>
-    
-        </table>
-        <!-- Footer -->
-       <footer>
-            <div class="footer-dark">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-3 item">
-                            <h3>Nuestros Servicios</h3>
-                            <ul>
-                                <li><a href="/servicios/salones">Salones</a></li>
-                                <li><a href="/servicios/catering">Caterings</a></li>                        
-                                <li><a href="servicios/entretenimiento">Entretenimiento</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3 item">
-                            <h3>Sobre Nosotros</h3>
-                            <ul>
-                                <li><a href="#">¿Quiénes somos?</a></li>
-                                <li><a href="#">Contactános</a></li>
-                                <li><a href="#">¿Necesitas ayuda?</a></li>
-                                <li><a href="#">Política de Privacidad</a></li>
-                            </ul>
-                        </div>
-                        <div id="fiesta" class="col-md-6 item text">
-                            <h3 id="fiestaClick">Fiesta Click</h3>
-                            <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
-                                la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
-                        </div>
-                        <div id="iconos" class="container text-center">
-                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
-                                      class="icon-facebook-squared"></a></span>
-                            <span> <a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
-                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Copyrights -->
-            <div class="bg-light py-4">
-                <div class="container text-center">
-                    <img src="/images/logo.png" alt="logo">
-                    <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
-                </div>
-            </div>
-        </footer>
-        <!-- End -->
-    </body>
+            </form>
+        </tbody>
+
+    </table>
+
+    <!-- Footer -->
+    <footer th:replace="/fragments/footer :: footer"></footer> 
+</body>
 
 </html>
