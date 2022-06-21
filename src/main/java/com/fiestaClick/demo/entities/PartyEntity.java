@@ -32,29 +32,27 @@ public class PartyEntity {
     @OneToOne
     private CateringEntity cateringEntity;
 
-    @OneToMany
-    private List<ExtraServiceEntity> extraServiceEntity;
-
-    @ManyToOne
-    private UserEntity userEntity;
+    @OneToOne
+    private ExtraServiceEntity extraServiceEntity;
     
     @Temporal(TemporalType.DATE)
     private Date partyDate;
 
-    private Double total;
+    private Double totalPrice;
 
     public PartyEntity() {
     }
 
-    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, List<ExtraServiceEntity> extraServiceEntity, UserEntity userEntity, Date partyDate, Double total) {
+    public PartyEntity(String id, EventRoomEntity eventRoomEntity, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, Date partyDate, Double totalPrice) {
         this.id = id;
         this.eventRoomEntity = eventRoomEntity;
         this.cateringEntity = cateringEntity;
         this.extraServiceEntity = extraServiceEntity;
-        this.userEntity = userEntity;
         this.partyDate = partyDate;
-        this.total = total;
+        this.totalPrice = totalPrice;
     }
+
+   
    
     public String getId() {
         return id;
@@ -80,21 +78,23 @@ public class PartyEntity {
         this.cateringEntity = cateringEntity;
     }
 
-    public List<ExtraServiceEntity> getExtraServiceEntity() {
+    public ExtraServiceEntity getExtraServiceEntity() {
         return extraServiceEntity;
     }
 
-    public void setExtraServiceEntity(List<ExtraServiceEntity> extraServiceEntity) {
+    public void setExtraServiceEntity(ExtraServiceEntity extraServiceEntity) {
         this.extraServiceEntity = extraServiceEntity;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
+
+   
 
     public Date getPartyDate() {
         return partyDate;
@@ -104,17 +104,9 @@ public class PartyEntity {
         this.partyDate = partyDate;
     }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }    
-    
     @Override
     public String toString() {
-        return "PartyEntity{" + "id=" + id + ", eventRoomEntity=" + eventRoomEntity + ", cateringEntity=" + cateringEntity + ", extraServiceEntity=" + extraServiceEntity + ", userEntity=" + userEntity + ", partyDate=" + partyDate + ", total=" + total + '}';
+        return "PartyEntity{" + "id=" + id + ", eventRoomEntity=" + eventRoomEntity + ", cateringEntity=" + cateringEntity + ", extraServiceEntity=" + extraServiceEntity + ", partyDate=" + partyDate + ", totalPrice=" + totalPrice + '}';
     }
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,11 +33,15 @@ public class UserEntity {
     
     @Enumerated(EnumType.STRING)
     private Role role;
+    
+    @OneToOne
+    private PartyEntity partyEntity;
 
     public UserEntity() {
     }
 
-    public UserEntity(String name, String lastName, Date dateOfBirth, String email, String password, Boolean register, Role role) {
+    public UserEntity(String id, String name, String lastName, Date dateOfBirth, String email, String password, Boolean register, Role role, PartyEntity partyEntity) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -44,8 +49,16 @@ public class UserEntity {
         this.password = password;
         this.register = register;
         this.role = role;
+        this.partyEntity = partyEntity;
     }
 
+    public PartyEntity getPartyEntity() {
+        return partyEntity;
+    }
+
+    public void setPartyEntity(PartyEntity partyEntity) {
+        this.partyEntity = partyEntity;
+    }
     
     public UserEntity(String email, String password, List<GrantedAuthority> permisos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -115,9 +128,9 @@ public class UserEntity {
         this.register = register;
     }
 
-     @Override
+    @Override
     public String toString() {
-        return "UserEntity{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + ", role=" + role + '}';
+        return "UserEntity{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", password=" + password + ", register=" + register + ", role=" + role + ", partyEntity=" + partyEntity + '}';
     }
     
 }

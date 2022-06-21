@@ -32,6 +32,7 @@ public class CateringService {
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         catering.setPhotoEntity(photo);
         catering.setRegister(Boolean.TRUE);
+        catering.setBought(Boolean.FALSE);
 
         return cateringRepository.save(catering);
 
@@ -49,32 +50,32 @@ public class CateringService {
         }
     }
 
-    @Transactional
-    public CateringEntity enable(String id) throws ErrorService { //enel ejemplo de perro este metodo devuelve un perro
+     @Transactional
+    public CateringEntity bought(String id) throws ErrorService {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
-            CateringEntity catering = answer.get();
-            catering.setRegister(Boolean.TRUE);
-            return cateringRepository.save(catering);
+            CateringEntity eventRoom = answer.get();
+            eventRoom.setBought(Boolean.TRUE);
+            return cateringRepository.save(eventRoom);
         } else {
-            throw new ErrorService("No existe un catering con el id solicitado");
+            throw new ErrorService("No existe el salón solicitado");
         }
     }
 
     @Transactional
-    public CateringEntity disable(String id) throws ErrorService {
+    public CateringEntity notBought(String id) throws ErrorService {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
-            CateringEntity catering = answer.get();
-            catering.setRegister(Boolean.FALSE);
-            return cateringRepository.save(catering);
+            CateringEntity eventRoom = answer.get();
+            eventRoom.setBought(Boolean.FALSE);
+            return cateringRepository.save(eventRoom);
         } else {
-            throw new ErrorService("No existe un catering con el id solicitado");
+            throw new ErrorService("No existe el salón solicitado");
         }
     }
 
     @Transactional
-    public CateringEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
+    public CateringEntity update(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
 
         validate(name, price, description);

@@ -20,6 +20,9 @@ public interface ExtraServiceRepository extends JpaRepository<ExtraServiceEntity
     @Query("SELECT e FROM ExtraServiceEntity e WHERE e.name = :name")
     public ExtraServiceEntity findExtraServiceByName(@Param("name") String name);
     
+@Query("SELECT e FROM ExtraServiceEntity e WHERE e.bought = true")
+    public ExtraServiceEntity extraServiceBought();
+    
 //    
 //    @Query("SELECT e FROM ExtraServiceEntity e WHERE e.price = :price")
 //    public ExtraServiceEntity findExtraServicebyprice(@Param("price") Integer price);

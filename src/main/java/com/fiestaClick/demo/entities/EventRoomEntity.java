@@ -21,8 +21,10 @@ public class EventRoomEntity {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
-
     private String name;
+    private Boolean register;
+    private Boolean bought;
+    private String description;
     private Double price;
     private String description;
     private Boolean register;
@@ -36,12 +38,13 @@ public class EventRoomEntity {
     public EventRoomEntity() {
     }
 
-    public EventRoomEntity(String Id, String name, Double price, String description, Boolean register, Date date, PhotoEntity photoEntity) {
+    public EventRoomEntity(String Id, String name, Boolean register, Boolean bought, String description, Double price, Date date, PhotoEntity photoEntity) {
         this.Id = Id;
         this.name = name;
-        this.price = price;
-        this.description = description;
         this.register = register;
+        this.bought = bought;
+        this.description = description;
+        this.price = price;
         this.date = date;
         this.photoEntity = photoEntity;
     }
@@ -70,20 +73,20 @@ public class EventRoomEntity {
         this.price = price;
     }
 
+    public Boolean getBought() {
+        return bought;
+    }
+
+    public void setBought(Boolean bought) {
+        this.bought = bought;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Boolean getRegister() {
-        return register;
-    }
-
-    public void setRegister(Boolean register) {
-        this.register = register;
     }
 
     public Date getDate() {
@@ -104,7 +107,7 @@ public class EventRoomEntity {
 
     @Override
     public String toString() {
-        return "EventRoomEntity{" + "Id=" + Id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", date=" + date + ", photoEntity=" + photoEntity + '}';
+        return "EventRoomEntity{" + "Id=" + Id + ", name=" + name + ", register=" + register + ", bought=" + bought + ", description=" + description + ", price=" + price + ", date=" + date + ", photoEntity=" + photoEntity + '}';
     }
 
 

@@ -43,26 +43,38 @@ public class PartyService {
     
     
     @Transactional
-    public PartyEntity save( String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
+    public PartyEntity save(CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
         
                  
-//        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity);
-        
-        UserEntity userEntity = userRepository.findByUserID(idUser);
+        validate(cateringEntity, extraServiceEntity, eventRoomEntity);
          
         PartyEntity partyEntity = new PartyEntity();
         partyEntity.setCateringEntity(cateringEntity);
         partyEntity.setEventRoomEntity(eventRoomEntity);
-        partyEntity.setExtraServiceEntity((List<ExtraServiceEntity>) extraServiceEntity);
-        partyEntity.setPartyDate(new Date());
-        partyEntity.setUserEntity(userEntity);
-        partyEntity.setTotal(0.0); 
+        partyEntity.setExtraServiceEntity(extraServiceEntity);
+//        partyEntity.setPartyDate(partyDate);
+        partyEntity.setTotalPrice(totalPartyPrice(eventRoomEntity.getId(), cateringEntity.getId(), extraServiceEntity.getId())); 
                
         return partyRepository.save(partyEntity);
     }
     
-    public double totalPartyPrice(String idEventRoom, String idCatering, String idExtraService) {
-        return (eventRoomRepository.findById(idEventRoom).get().getPrice() + cateringRepository.findById(idCatering).get().getPrice() + extraServiceRepository.findById(idExtraService).get().getPrice());
+    public Double totalPartyPrice(String idEventRoom, String idCatering, String idExtraService) {
+        Double priceEventRoom = 0.0;
+        Double priceCatering = 0.0;
+        Double priceExtraService = 0.0;
+        
+        if (eventRoomRepository.findById(idEventRoom).get().getPrice() != null) {
+            priceEventRoom = eventRoomRepository.findById(idEventRoom).get().getPrice();
+        }
+        
+         if (cateringRepository.findById(idCatering).get().getPrice() != null) {
+            priceCatering = cateringRepository.findById(idCatering).get().getPrice();
+        }
+         
+          if (extraServiceRepository.findById(idExtraService).get().getPrice() != null) {
+            priceExtraService = extraServiceRepository.findById(idExtraService).get().getPrice();
+        }
+        return (priceEventRoom + priceCatering + priceExtraService);
     }
     
     @Transactional
@@ -70,7 +82,7 @@ public class PartyService {
         
         Optional<PartyEntity> answer = partyRepository.findById(id);
         
-        validate(idUser, cateringEntity, extraServiceEntity, eventRoomEntity);
+        validate(cateringEntity, extraServiceEntity, eventRoomEntity);
         
         if (answer.isPresent()) {
             PartyEntity party = answer.get();
@@ -78,7 +90,8 @@ public class PartyService {
             party.getCateringEntity();
             party.getEventRoomEntity();
             party.getExtraServiceEntity();
-            party.setTotal(0.0);
+            party.setPartyDate(partyDate);
+//            party.setTotal(totalPartyPrice(idEventRoom, idCatering, idExtraService));
             
             return partyRepository.save(party);
 
@@ -102,10 +115,7 @@ public class PartyService {
         partyRepository.deleteById(id);
     }
     
-    public void validate(String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
-        if (idUser == null) {
-            throw new ErrorService("No se encontró el usuario");
-        }
+    public void validate(CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception {
         if (cateringEntity == null || extraServiceEntity == null || eventRoomEntity == null) {
             throw new ErrorService("Debes elegir al menos un servicio.");
         }

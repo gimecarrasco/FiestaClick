@@ -1,5 +1,6 @@
 package com.fiestaClick.demo.service;
 
+import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;
 import com.fiestaClick.demo.errors.ErrorService;
@@ -19,6 +20,16 @@ public class ExtraService {
     @Autowired
     private PhotoService photoService;
 
+    public void validate(String name, Double price, String description) throws Exception {
+        if (name == null || name.trim().isEmpty()) {
+            throw new ErrorService("El nombre no puede ser nulo.");
+        }
+        if (price == null || price == 0) {
+            throw new ErrorService("El precio no puede ser nulo.");
+        }
+        if (description == null || description.trim().isEmpty()) {
+            throw new ErrorService("La descripción no puede ser nula.");
+        }
 
 
     @Transactional
@@ -31,6 +42,8 @@ public class ExtraService {
         extraService.setName(name);
         extraService.setPrice(price);
         extraService.setDescription(description);
+        extraService.setRegister(Boolean.TRUE);
+        extraService.setBought(Boolean.FALSE);
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         extraService.setPhotoEntity(photo);
 
@@ -38,43 +51,32 @@ public class ExtraService {
 
     }
 
-    @Transactional
-    public ExtraServiceEntity enable(String id) throws ErrorService { //enel ejemplo de perro este metodo devuelve un perro
-        Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id); //valor que puede ser nulo
-        if (answer.isPresent()) {
-            ExtraServiceEntity extraService = answer.get();
-            extraService.setRegister(Boolean.TRUE);
-            return extraServiceRepository.save(extraService);
-        } else {
-            throw new ErrorService("No se encontro un servicio extra con este id");
-        }
-    }
-
-    @Transactional
-    public ExtraServiceEntity disable(String id) throws ErrorService {
+     @Transactional
+    public ExtraServiceEntity bought(String id) throws ErrorService {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
         if (answer.isPresent()) {
-            ExtraServiceEntity extraService = answer.get();
-            extraService.setRegister(Boolean.FALSE);
-            return extraServiceRepository.save(extraService);
+            ExtraServiceEntity eventRoom = answer.get();
+            eventRoom.setBought(Boolean.TRUE);
+            return extraServiceRepository.save(eventRoom);
         } else {
-            throw new ErrorService("No se encontro un servicio extra con este id");
+            throw new ErrorService("No existe el salón solicitado");
         }
     }
 
     @Transactional
-    public void delete(String id) throws ErrorService {
+    public ExtraServiceEntity notBought(String id) throws ErrorService {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
         if (answer.isPresent()) {
-            ExtraServiceEntity extra = answer.get();
-            extraServiceRepository.delete(extra);
+            ExtraServiceEntity eventRoom = answer.get();
+            eventRoom.setBought(Boolean.FALSE);
+            return extraServiceRepository.save(eventRoom);
         } else {
-            throw new ErrorService("No existe un servicio con el id solicitado");
+            throw new ErrorService("No existe el salón solicitado");
         }
     }
 
     @Transactional
-    public ExtraServiceEntity modify(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
+    public ExtraServiceEntity update(String id, String name, Double price, String description, PhotoEntity photoEntity) throws ErrorService, Exception {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
 
         validate(name, price, description);
@@ -108,7 +110,7 @@ public class ExtraService {
     }
 
     @Transactional
-    public List<ExtraServiceEntity> listCatering() {
+    public List<ExtraServiceEntity> listExtraService() {
         return extraServiceRepository.findAll();
     }
 
@@ -116,7 +118,12 @@ public class ExtraService {
     public ExtraServiceEntity findExtraServiceByName(String extraService) {
         return extraServiceRepository.findExtraServiceByName(extraService);
     }
-
+    
+    @org.springframework.transaction.annotation.Transactional
+   public ExtraServiceEntity findById(String id) {
+        return extraServiceRepository.findById(id).get();
+    }
+   
     @Transactional
     public void deleteById(String id) {
         extraServiceRepository.deleteById(id);

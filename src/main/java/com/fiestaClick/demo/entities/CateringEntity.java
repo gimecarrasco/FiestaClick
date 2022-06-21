@@ -20,6 +20,8 @@ public class CateringEntity {
     private Double price;
     private String description;
     private Boolean register;
+    
+    private Boolean bought;
 
     @OneToOne
     private PhotoEntity photoEntity;
@@ -27,13 +29,22 @@ public class CateringEntity {
     public CateringEntity() {
     }
 
-    public CateringEntity(String id, String name, Double price, String description, Boolean register, PhotoEntity photoEntity) {
+    public CateringEntity(String id, String name, Double price, String description, Boolean register, Boolean bought, PhotoEntity photoEntity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.register = register;
+        this.bought = bought;
         this.photoEntity = photoEntity;
+    }
+
+    public Boolean getBought() {
+        return bought;
+    }
+
+    public void setBought(Boolean bought) {
+        this.bought = bought;
     }
 
     public String getId() {
@@ -86,7 +97,7 @@ public class CateringEntity {
 
     @Override
     public String toString() {
-        return "CateringEntity{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", photoEntity=" + photoEntity + '}';
+        return "CateringEntity{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + ", register=" + register + ", bought=" + bought + ", photoEntity=" + photoEntity + '}';
     }
 
 }
