@@ -2,12 +2,11 @@ package com.fiestaClick.demo.service;
 
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.PhotoEntity;
-import com.fiestaClick.demo.enumerations.City;
 import com.fiestaClick.demo.repository.EventRoomRepository;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fiestaClick.demo.errors.ErrorService;
+import static java.lang.Boolean.TRUE;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +35,10 @@ public class EventRoomService {
 //        eventRoom.setDate(new Date());
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         eventRoom.setPrice(price);
+        eventRoom.setDescription(description);
+        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
+        eventRoom.setPhotoEntity(photo);
+        eventRoom.setRegister(Boolean.TRUE);
 
         return eventRoomRepository.save(eventRoom);
     }
@@ -53,6 +56,10 @@ public class EventRoomService {
             eventRoom.setDescription(description);
             eventRoom.setPhotoEntity(photoEntity);
             eventRoom.setPrice(price);
+            eventRoom.setDescription(description);
+            eventRoom.setRegister(register);
+
+            eventRoom.setPhotoEntity(photoEntity);
 
             return eventRoomRepository.save(eventRoom);
         } else {
@@ -118,6 +125,11 @@ public class EventRoomService {
     @Transactional
     public List<EventRoomEntity> listEventRoom() {
         return eventRoomRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public EventRoomEntity findById(String id) {
+        return eventRoomRepository.findById(id).get();
     }
 
     @Transactional

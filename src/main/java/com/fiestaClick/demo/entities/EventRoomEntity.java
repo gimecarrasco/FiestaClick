@@ -26,6 +26,8 @@ public class EventRoomEntity {
     private Boolean bought;
     private String description;
     private Double price;
+    private String description;
+    private Boolean register;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -63,12 +65,12 @@ public class EventRoomEntity {
         this.name = name;
     }
 
-    public Boolean getRegister() {
-        return register;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setRegister(Boolean register) {
-        this.register = register;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Boolean getBought() {
@@ -85,14 +87,6 @@ public class EventRoomEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Date getDate() {
@@ -115,5 +109,7 @@ public class EventRoomEntity {
     public String toString() {
         return "EventRoomEntity{" + "Id=" + Id + ", name=" + name + ", register=" + register + ", bought=" + bought + ", description=" + description + ", price=" + price + ", date=" + date + ", photoEntity=" + photoEntity + '}';
     }
+
+
 
 }

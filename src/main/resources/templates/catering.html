@@ -68,9 +68,8 @@
         <section id="cards">
             <div class="container__cards">
                 <div class="card" th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" >
-                    <div class="cover__card">
-                       <!-- <p th:each="cateringEntity:${caterings}" th:value="${cateringEntity.id}" th:text="${cateringEntity.id}"></p>-->
-                        <img th:if="${cateringEntity.photoEntity != null}" th:src="${'/photo/cateringEntity/${cateringEntity.id}'}"  alt="catering">
+                    <div class="cover__card">                      
+                        <!--                        <img th:if="${cateringEntity.photoEntity != null}" th:src="${'/photo/cateringEntity/${cateringEntity.id}'}"  alt="catering">-->
                     </div>
                     <h2 class="card-title" th:text="${cateringEntity.name}"></h2>
                     <p class="card-text" th:text="${cateringEntity.description}"></p>
@@ -86,7 +85,7 @@
         </section>
 
         <!-- Footer -->
-         <footer>
+        <footer>
             <div class="footer-dark">
                 <div class="container">
                     <div class="row">

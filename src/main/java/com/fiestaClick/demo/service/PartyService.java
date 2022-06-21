@@ -78,7 +78,7 @@ public class PartyService {
     }
     
     @Transactional
-    public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity, Date partyDate,String idEventRoom, String idCatering, String idExtraService) throws Exception{
+    public PartyEntity modify(String id, String idUser, CateringEntity cateringEntity, ExtraServiceEntity extraServiceEntity, EventRoomEntity eventRoomEntity) throws Exception{
         
         Optional<PartyEntity> answer = partyRepository.findById(id);
         

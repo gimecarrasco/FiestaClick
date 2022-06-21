@@ -21,6 +21,8 @@ public interface CateringRepository extends JpaRepository<CateringEntity, String
     
 
 
+    @Query("SELECT c FROM CateringEntity c WHERE c.id = :id")
+    public CateringEntity findCateringByID(@Param("id") String id);
 
 //     @Query("SELECT c FROM CateringEntity c WHERE c.price = :price")
 //    public CateringEntity findCateringbyprice(@Param("price") Integer price);
