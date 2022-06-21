@@ -29,16 +29,13 @@ public class EventRoomService {
 //        City city
 //        eventRoom.setCity(city);
         eventRoom.setName(name);
-        eventRoom.setRegister(Boolean.TRUE);
+        eventRoom.setRegister(TRUE);
         eventRoom.setBought(Boolean.FALSE);
         eventRoom.setDescription(description);
 //        eventRoom.setDate(new Date());
-        PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         eventRoom.setPrice(price);
-        eventRoom.setDescription(description);
         PhotoEntity photo = photoService.save((MultipartFile) photoEntity);
         eventRoom.setPhotoEntity(photo);
-        eventRoom.setRegister(Boolean.TRUE);
 
         return eventRoomRepository.save(eventRoom);
     }
@@ -129,11 +126,6 @@ public class EventRoomService {
 
     @Transactional(readOnly = true)
     public EventRoomEntity findById(String id) {
-        return eventRoomRepository.findById(id).get();
-    }
-
-    @Transactional
-   public EventRoomEntity findById(String id) {
         return eventRoomRepository.findById(id).get();
     }
    
