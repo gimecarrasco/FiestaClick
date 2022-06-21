@@ -86,5 +86,11 @@ public class BasketController {
 //          model.put ("priceParty", partyService.totalPartyPrice(idEventRoom, idCatering, idExtra).toString());
         return "pay.html";
     }
+    
+    @GetMapping("/confirmationOfPayment")
+    public String confirmationOfPayment() {
+//          model.put ("priceParty", partyService.totalPartyPrice(idEventRoom, idCatering, idExtra).toString());
+        return "confirmationOfPayment.html";
+    }
 
 }
