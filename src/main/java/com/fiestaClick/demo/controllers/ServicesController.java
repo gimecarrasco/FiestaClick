@@ -43,7 +43,7 @@ public class ServicesController {
         modelo.put("caterings", caterings);
         return "catering.html";
     }
-    
+
     @GetMapping("/extra")
     public String extra(ModelMap modelo) {
         List<ExtraServiceEntity> extras = extraService.listExtraService();
@@ -53,7 +53,7 @@ public class ServicesController {
         modelo.put("extras", extras);
         return "extra.html";
     }
-    
+
     @GetMapping("/eventRoom")
     public String eventRoom(ModelMap modelo) {
         List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
@@ -63,20 +63,18 @@ public class ServicesController {
         modelo.put("eventRooms", eventRooms);
         return "eventRoom.html";
     }
-    
-    
 
     @GetMapping("/persistCateringAndExtra")
     public String persistCateringAndExtra(ModelMap modelo) {
         return "persistCateringAndExtra.html";
     }
-    
+
     @GetMapping("/persistEventRoom")
     public String persistEventRoom(ModelMap modelo) {
         return "persistEventRoom.html";
     }
-    
-     @GetMapping("/persistExtra")
+
+    @GetMapping("/persistExtra")
     public String persistExtra(ModelMap modelo) {
         return "persistExtra.html";
     }
@@ -88,7 +86,6 @@ public class ServicesController {
             System.out.println("Precio: " + price);
             System.out.println("Descripción: " + description);
             System.out.println("Foto: " + photo);
-//            cateringService.save(name, price, description, photo);
             cateringService.save(name, price, description, photo);
             model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
@@ -102,7 +99,7 @@ public class ServicesController {
         }
         return "redirect:/servicios/catering";
     }
-    
+
     @PostMapping("/registerExtra")
     public String saveExtra(ModelMap model, @RequestParam String name, @RequestParam Double price, @RequestParam String description, MultipartFile photo) throws ErrorService {
         try {
@@ -110,7 +107,7 @@ public class ServicesController {
             System.out.println("Precio: " + price);
             System.out.println("Descripción: " + description);
             System.out.println("Foto: " + photo);
-//            cateringService.save(name, price, description, photo);
+
             extraService.save(name, price, description, photo);
             model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
@@ -126,22 +123,22 @@ public class ServicesController {
     }
 
     @PostMapping("/registerEventRoom")
-    public String saveEventRoom(ModelMap model, @RequestParam String name,  @RequestParam String description, MultipartFile photo, @RequestParam Double price) throws ErrorService {
+    public String saveEventRoom(ModelMap model, @RequestParam String name, @RequestParam String description, MultipartFile photo, @RequestParam Double price) throws ErrorService {
         try {
             System.out.println("Nombre: " + name);
-            System.out.println("Precio: " + price);
             System.out.println("Descripción: " + description);
             System.out.println("Foto: " + photo);
-//            cateringService.save(name, price, description, photo);
+            System.out.println("Precio: " + price);
+
             eventRoomService.save(name, description, photo, price);
             model.put("exito", "Ha sido cargado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();
             model.put("error", "Error al cargarse su servicio");
             model.put("name", name);
-            model.put("price", price);
             model.put("description", description);
             model.put("photo", photo);
+            model.put("price", price);
             return "redirect:/servicios/persistCateringAndExtra";
         }
         return "redirect:/servicios/eventRoom";
@@ -158,7 +155,7 @@ public class ServicesController {
         }
         return "redirect:/servicios/catering";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/notBoughtCatering")
     public String notBoughtCatering(ModelMap model, String id) {
@@ -167,9 +164,9 @@ public class ServicesController {
         } catch (ErrorService ex) {
             Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return "redirect:/shop/basket";
+        return "redirect:/shop/basket";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/boughtEventRoom")
     public String boughtEventRoom(ModelMap modelo, @RequestParam String id) {
@@ -182,7 +179,7 @@ public class ServicesController {
         }
         return "redirect:/servicios/eventRoom";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/notBoughtEventRoom")
     public String notBoughtEventRoom(ModelMap model, String id) {
@@ -191,9 +188,9 @@ public class ServicesController {
         } catch (ErrorService ex) {
             Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return "redirect:/shop/basket";
+        return "redirect:/shop/basket";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/boughtExtra")
     public String boughtExtra(ModelMap modelo, @RequestParam String id) {
@@ -206,7 +203,7 @@ public class ServicesController {
         }
         return "redirect:/servicios/extra";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/notBoughtExtra")
     public String notBoughtExtra(ModelMap model, String id) {

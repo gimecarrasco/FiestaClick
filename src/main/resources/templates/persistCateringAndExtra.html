@@ -12,40 +12,19 @@
     </head>
 
     <body>
-        <!-- NavBar -->
-        <header>
-            <div class="contenedor">
-                <a href="/">
-                    <h1>Fiesta Click</h1>
-                </a>
-                <input type="checkbox" id="menu-bar">
-                <label class="icon-th-list" for="menu-bar"></label>
-                <form class="form-inline" id="carrito">
-                    <input class="form-control" type="search" placeholder="Buscar">
-                    <button class="submit" id="lupa">
-                        <span class="icon-search"></span>
-                    </button>
-                </form>
-                <nav class="menu">
-                    <a href="salones.html"><span class="icon-home"></span> Salones</a>
-                    <a href="#"><span class="icon-food"></span> Caterings</a>
-                    <a href="/login"><span class="icon-user"></span>Usuario</a>
-                    <a href="#"><span class="icon-user"></span> Extras</a>
-                    <a href="/shop/basket"><span class="icon-basket"></span> Carrito</a>
-                </nav>
-            </div>
-        </header>
+        <!--       Head and NavBar-->            
+        <header th:replace="/fragments/header :: header"></header>
 
         <!-- Cards -->
         <section class="formulary">
             <br>
-              <br>
-                <br>
-                  <br>
+            <br>
+            <br>
+            <br>
             <div class="container-form">
                 <form  action="/servicios/registerCatering" method="POST"  class="formulario" enctype="multipart/form-data" >
                     <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>
-          
+
                     <br>  
                     <label>Nombre del Catering</label>              
                     <input class="form-control" type="text" name="name"required>
@@ -64,51 +43,7 @@
         </section>
 
         <!-- Footer -->
-        <footer>
-            <div class="footer-dark">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-3 item">
-                            <h3>Nuestros Servicios</h3>
-                            <ul>
-                                <li><a href="#">Salones</a></li>
-                                <li><a href="#">Caterings</a></li>
-                                <li><a href="#">Entretenimiento</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3 item">
-                            <h3>Sobre Nosotros</h3>
-                            <ul>
-                                <li><a href="#">¿Quiénes somos?</a></li>
-                                <li><a href="#">Contactános</a></li>
-                                <li><a href="#">¿Necesitas ayuda?</a></li>
-                                <li><a href="#">Política de Privacidad</a></li>
-                            </ul>
-                        </div>
-                        <div id="fiesta" class="col-md-6 item text">
-                            <h3>Fiesta Click</h3>
-                            <p>Somos un grupo de personas enfocadas en darte el mejor servicio para que puedas planear
-                                la fiesta que siempre quisiste, de la mejor manera y al mejor precio.</p>
-                        </div>
-                        <div id="iconos" class="container text-center">
-                            <span> <a href="https://es-la.facebook.com/login.php" id="facebook"
-                                      class="icon-facebook-squared"></a></span>
-                            <span> <a href="https://twitter.com/i/flow/login" id="twitter" class="icon-twitter"></a></span>
-                            <span> <a href="https://www.instagram.com/" id="instagram" class="icon-instagram"></a></span>
-                        </div>
-                    </div>
-                    <p class="copyright">FiestaClick © 2022</p>
-                </div>
-            </div>
-            <!-- Copyrights -->
-            <div class="bg-light py-4">
-                <div class="container text-center">
-                    <img src="/images/logo.png" alt="logo"> 
-                    <p class="text-muted mb-0 py-2">© 2022 FiestaClick.</p>
-                </div>
-            </div>
-        </footer>
-        <!-- End -->
+        <footer th:replace="/fragments/footer :: footer"></footer> 
 
     </body>
 </html>
