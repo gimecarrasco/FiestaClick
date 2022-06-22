@@ -37,17 +37,14 @@ public class ServicesController {
     public String catering(ModelMap model) {
         List<CateringEntity> caterings = cateringService.listCatering();
         model.put("caterings", caterings);
-       model.put("exito", "AÑADIDO AL CARRITO");
-//        model.put("error", "No se pudo agregar al carrito");
+        model.put("exito", "AÑADIDO AL CARRITO");
         return "catering.html";
     }
 
     @GetMapping("/extra")
     public String extra(ModelMap model) {
         List<ExtraServiceEntity> extras = extraService.listExtraService();
-        for (ExtraServiceEntity extra : extras) {
-            System.out.println(extra);
-        }
+        model.put("exito", "AÑADIDO AL CARRITO");
         model.put("extras", extras);
         return "extra.html";
     }
@@ -55,9 +52,7 @@ public class ServicesController {
     @GetMapping("/eventRoom")
     public String eventRoom(ModelMap model) {
         List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
-        for (EventRoomEntity eventRoom : eventRooms) {
-            System.out.println(eventRoom); //probando que funcione la línea 35
-        }
+        model.put("exito", "AÑADIDO AL CARRITO");
         model.put("eventRooms", eventRooms);
         return "eventRoom.html";
     }
