@@ -78,6 +78,11 @@
     margin: auto;
 }
 
+#message{
+    text-color: black;
+    font-size: 18px;
+}
+
 /* Card Button */
 .footer__card button {
     font-family:sans-serif;

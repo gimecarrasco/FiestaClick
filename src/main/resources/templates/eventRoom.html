@@ -28,7 +28,7 @@
             <div class="container__cards">
                 <div class="card" th:each="eventRoomEntity:${eventRooms}" th:value="${eventRoomEntity.id}">
                     <div class="cover__card">
-                        <img src="/images/sal2.jpg" alt="salon">
+                        <img  th:src="${'/photo/eventRoomEntity/'+ eventRoomEntity.id}"  alt="salón">
                     </div>
                     <h2 class="card-title" th:text="${eventRoomEntity.name}"></h2>
                     <p class="card-text" th:text="${eventRoomEntity.description}"></p>

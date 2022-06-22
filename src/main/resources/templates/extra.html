@@ -30,7 +30,7 @@
             <div class="container__cards">
                 <div class="card" th:each="extraServiceEntity:${extras}" th:value="${extraServiceEntity.id}">
                     <div class="cover__card">
-                        <img src="/images/mago3.jpg" alt="salon">
+                          <img  th:src="${'/photo/extraServiceEntity/'+ extraServiceEntity.id}"  alt="servicio">
                     </div>
                     <h2 class="card-title" th:text="${extraServiceEntity.name}"></h2>
                     <p class="card-text"th:text="${extraServiceEntity.description}"></p>
@@ -44,7 +44,6 @@
                 </div>
             </div>
         </section>
-
 
         <!-- Footer -->
         <footer th:replace="/fragments/footer :: footer"></footer> 
