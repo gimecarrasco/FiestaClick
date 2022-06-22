@@ -56,9 +56,9 @@ public class ExtraService {
     public ExtraServiceEntity bought(String id) throws ErrorService {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
         if (answer.isPresent()) {
-            ExtraServiceEntity eventRoom = answer.get();
-            eventRoom.setBought(Boolean.TRUE);
-            return extraServiceRepository.save(eventRoom);
+            ExtraServiceEntity extraEntity = answer.get();
+            extraEntity.setBought(Boolean.TRUE);
+            return extraServiceRepository.save(extraEntity);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
@@ -68,9 +68,9 @@ public class ExtraService {
     public ExtraServiceEntity notBought(String id) throws ErrorService {
         Optional<ExtraServiceEntity> answer = extraServiceRepository.findById(id);
         if (answer.isPresent()) {
-            ExtraServiceEntity eventRoom = answer.get();
-            eventRoom.setBought(Boolean.FALSE);
-            return extraServiceRepository.save(eventRoom);
+            ExtraServiceEntity extraEntity = answer.get();
+            extraEntity.setBought(Boolean.FALSE);
+            return extraServiceRepository.save(extraEntity);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
