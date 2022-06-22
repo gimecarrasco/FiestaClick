@@ -4,6 +4,7 @@ import com.fiestaClick.demo.entities.CateringEntity;
 import com.fiestaClick.demo.entities.EventRoomEntity;
 import com.fiestaClick.demo.entities.ExtraServiceEntity;
 import com.fiestaClick.demo.entities.PartyEntity;
+import com.fiestaClick.demo.errors.ErrorService;
 import com.fiestaClick.demo.repository.CateringRepository;
 import com.fiestaClick.demo.repository.EventRoomRepository;
 import com.fiestaClick.demo.repository.ExtraServiceRepository;
@@ -72,24 +73,30 @@ public class BasketController {
             PartyEntity party = partyService.save(catering, extra, eventRoom);
             System.out.println("El precio de la fiesta es: " + party.getTotalPrice());
             model.addAttribute("priceParty", party.getTotalPrice().toString());
-            
-            
+
             return "pay.html";
         } catch (Exception ex) {
             Logger.getLogger(BasketController.class.getName()).log(Level.SEVERE, null, ex);
             return "redirect:/shop/pay";
         }
     }
-    
+
     @GetMapping("/pay")
     public String pay() {
 //          model.put ("priceParty", partyService.totalPartyPrice(idEventRoom, idCatering, idExtra).toString());
         return "pay.html";
     }
-    
+
     @GetMapping("/confirmationOfPayment")
-    public String confirmationOfPayment() {
+    public String confirmationOfPayment(ModelMap model) throws ErrorService {
 //          model.put ("priceParty", partyService.totalPartyPrice(idEventRoom, idCatering, idExtra).toString());
+        CateringEntity catering = cateringRepository.cateringBought();
+        EventRoomEntity eventRoom = eventRoomRepository.eventRoomBought();
+        ExtraServiceEntity extra = extraServiceRepository.extraServiceBought();
+        cateringService.notBought(catering.getId());
+        eventRoomService.notBought(eventRoom.getId());
+        extraService.notBought(extra.getId());
+
         return "confirmationOfPayment.html";
     }
 

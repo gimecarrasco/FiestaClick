@@ -30,37 +30,35 @@ public class ServicesController {
     private CateringService cateringService;
     @Autowired
     private EventRoomService eventRoomService;
-
     @Autowired
     private ExtraService extraService;
 
     @GetMapping("/catering")
-    public String catering(ModelMap modelo) {
+    public String catering(ModelMap model) {
         List<CateringEntity> caterings = cateringService.listCatering();
-        for (CateringEntity catering : caterings) {
-            System.out.println(catering); //probando que funcione la línea 35
-        }
-        modelo.put("caterings", caterings);
+        model.put("caterings", caterings);
+       model.put("exito", "AÑADIDO AL CARRITO");
+//        model.put("error", "No se pudo agregar al carrito");
         return "catering.html";
     }
 
     @GetMapping("/extra")
-    public String extra(ModelMap modelo) {
+    public String extra(ModelMap model) {
         List<ExtraServiceEntity> extras = extraService.listExtraService();
         for (ExtraServiceEntity extra : extras) {
-            System.out.println(extra); //probando que funcione la línea 35
+            System.out.println(extra);
         }
-        modelo.put("extras", extras);
+        model.put("extras", extras);
         return "extra.html";
     }
 
     @GetMapping("/eventRoom")
-    public String eventRoom(ModelMap modelo) {
+    public String eventRoom(ModelMap model) {
         List<EventRoomEntity> eventRooms = eventRoomService.listEventRoom();
         for (EventRoomEntity eventRoom : eventRooms) {
             System.out.println(eventRoom); //probando que funcione la línea 35
         }
-        modelo.put("eventRooms", eventRooms);
+        model.put("eventRooms", eventRooms);
         return "eventRoom.html";
     }
 

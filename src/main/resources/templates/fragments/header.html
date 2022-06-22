@@ -46,7 +46,6 @@
                         </li>
                     </ul>
                 </li>   
-
                 <li>
                     <a href="#"><span class="icon-home"></span> Servicios</a>
                     <ul class="submenu">
@@ -57,13 +56,8 @@
                         <li><a href="/servicios/extra">Diversion</a>  
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <ul class="submenu">
-
-                    </ul>
-                </li>
-                <li th:if="${session.usersession!=null}"><a href="/shop/basket"><span class="icon-basket" id="basket">Carrito</span></a>
+                </li>        
+                <li th:if="${session.usersession!=null}"><a href="#"><span class="icon-basket" id="basket">Carrito</span></a>
                     <ul class="submenu">
                         <li><a href="/shop/basket">Ver Carrito</a></li>
                     </ul>
