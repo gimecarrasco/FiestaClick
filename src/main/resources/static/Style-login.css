@@ -39,7 +39,7 @@ body {
 
 .formulario {
     width: 350px;
-    height: 620px;
+    height: 670 px;
     margin: 10px;
     padding: 20px;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.9);
@@ -137,7 +137,7 @@ body {
 }
 
 form#inicio.formulario>button {
-    margin-top: 47.8%;
+    margin-top: 66.8%;
 }
 
 .formulario button:hover {

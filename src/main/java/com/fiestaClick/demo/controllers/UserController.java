@@ -25,9 +25,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password) throws ErrorService {
+    public String save(ModelMap model, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password, @RequestParam String password2) throws ErrorService {
         try {
-            userService.save(name, lastName, dateOfBirth, email, password);
+            userService.save(name, lastName, dateOfBirth, email, password, password2);
             model.put("exito", "Felicitaciones!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,6 +37,7 @@ public class UserController {
             model.put("dateOfBirth", dateOfBirth);
             model.put("email", email);
             model.put("password", password);
+            model.put("password", password2);
             //Logger.getLogger(MainController.class.getName().log(Level.SEVERE, null, e));
             return "login.html";
         }
@@ -63,7 +64,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/updateProfile")
-    public String updateProfile(HttpSession session, ModelMap model, @RequestParam String id, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password) {
+    public String updateProfile(HttpSession session, ModelMap model, @RequestParam String id, @RequestParam String name, @RequestParam String lastName, @RequestParam Date dateOfBirth, @RequestParam String email, @RequestParam String password, @RequestParam String password2) {
         UserEntity user = null;
 
         try {
@@ -73,7 +74,7 @@ public class UserController {
             }
 
             user = userService.findById(id);
-            userService.update(id, name, lastName, dateOfBirth, email, password);
+            userService.update(id, name, lastName, dateOfBirth, email, password, password2);
             session.setAttribute("usersession", user);
             return "redirect:/index";
             
@@ -83,6 +84,7 @@ public class UserController {
             model.put("dateOfBirth", dateOfBirth);
             model.put("email", email);
             model.put("password", password);
+            model.put("password", password2);
             return "editProfil.html";
         }
 
