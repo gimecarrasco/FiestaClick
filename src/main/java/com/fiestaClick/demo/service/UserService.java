@@ -43,18 +43,21 @@ public class UserService implements UserDetailsService {
     
     
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void save(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
+    public void save(String name, String lastName, Date dateOfBirth, String email, String password, String password2) throws Exception{
         
-        validate(name, lastName, dateOfBirth, email, password);
+        validate(name, lastName, dateOfBirth, email, password, password2);
         UserEntity userEntity = new UserEntity();
         
         userEntity.setName(name);
         userEntity.setLastName(lastName);
         userEntity.setDateOfBirth(dateOfBirth);
-        userEntity.setEmail(email);
+        userEntity.setEmail(email); 
         
         String encripted = new BCryptPasswordEncoder().encode(password);
         userEntity.setPassword(encripted); 
+        
+        String encripted2 = new BCryptPasswordEncoder().encode(password2);
+        userEntity.setPassword(encripted2); 
                 
         userEntity.setRegister(Boolean.TRUE);
         userEntity.setRole(Role.USER);
@@ -69,7 +72,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(userEntity);
     }
     
-    public void validate(String name, String lastName, Date dateOfBirth, String email, String password) throws Exception {
+    public void validate(String name, String lastName, Date dateOfBirth, String email, String password, String password2) throws Exception {
         if (name == null || name.trim().isEmpty()) {
             throw new ErrorService("El nombre no puede ser nulo el nombre ");
         }
@@ -81,6 +84,9 @@ public class UserService implements UserDetailsService {
         }
         if (password==null || password.trim().isEmpty()) {
             throw new ErrorService("La contraseña no puede ser nula.");
+        }
+        if (!password.equals(password2)) {
+            throw new ErrorService("Las contraseñas deben coincidir.");
         }
     }
 
@@ -107,8 +113,8 @@ public class UserService implements UserDetailsService {
     }
 
         @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void update(String id, String name, String lastName, Date dateOfBirth, String email, String password) throws Exception{
-        validate(name, lastName, dateOfBirth, email, password);
+    public void update(String id, String name, String lastName, Date dateOfBirth, String email, String password, String password2) throws Exception{
+        validate(name, lastName, dateOfBirth, email, password, password2);
 
         Optional<UserEntity> answer = userRepository.findById(id);
         if (answer.isPresent()) {
@@ -120,6 +126,9 @@ public class UserService implements UserDetailsService {
             
             String encripted = new BCryptPasswordEncoder().encode(password);
             user.setPassword(encripted); 
+            
+            String encripted2 = new BCryptPasswordEncoder().encode(password);
+            user.setPassword(encripted2); 
             
             userRepository.save(user);
         } else {
