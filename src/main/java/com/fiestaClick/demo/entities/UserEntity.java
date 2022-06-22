@@ -29,7 +29,7 @@ public class UserEntity {
     private Date dateOfBirth;
     private String email;
     private String password;
-    private String password2;
+    private String password2; 
     private Boolean register;
     
     @Enumerated(EnumType.STRING)
