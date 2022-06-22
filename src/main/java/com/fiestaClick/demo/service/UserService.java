@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
         userEntity.setName(name);
         userEntity.setLastName(lastName);
         userEntity.setDateOfBirth(dateOfBirth);
-        userEntity.setEmail(email);
+        userEntity.setEmail(email); 
         
         String encripted = new BCryptPasswordEncoder().encode(password);
         userEntity.setPassword(encripted); 
