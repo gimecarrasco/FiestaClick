@@ -54,9 +54,9 @@ public class CateringService {
     public CateringEntity bought(String id) throws ErrorService {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
-            CateringEntity eventRoom = answer.get();
-            eventRoom.setBought(Boolean.TRUE);
-            return cateringRepository.save(eventRoom);
+            CateringEntity cateringEntity = answer.get();
+            cateringEntity.setBought(Boolean.TRUE);
+            return cateringRepository.save(cateringEntity);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
@@ -66,9 +66,9 @@ public class CateringService {
     public CateringEntity notBought(String id) throws ErrorService {
         Optional<CateringEntity> answer = cateringRepository.findById(id);
         if (answer.isPresent()) {
-            CateringEntity eventRoom = answer.get();
-            eventRoom.setBought(Boolean.FALSE);
-            return cateringRepository.save(eventRoom);
+            CateringEntity cateringEntity = answer.get();
+            cateringEntity.setBought(Boolean.FALSE);
+            return cateringRepository.save(cateringEntity);
         } else {
             throw new ErrorService("No existe el salón solicitado");
         }
