@@ -36,11 +36,12 @@
                     <p class="card-text"th:text="${extraServiceEntity.description}"></p>
                     <p class="card-text" th:if="${session.usersession!=null}" th:text=" '$ ' + ${extraServiceEntity.price}"></p>
                     <hr>
-                    <div class="footer__card">
+                    <div class="footer__card" th:if="${extraServiceEntity.bought!=true || session.usersession==null}">
                         <a th:href="@{/servicios/boughtExtra(id=${extraServiceEntity.id})}">   
                             <button type="button" class="btn btn-dark">Agregar al carrito</button>
                         </a> 
                     </div>
+                       <p th:if="${extraServiceEntity.bought!=false && session.usersession!=null}" th:text="${exito}"  style="color: black; font-size: 26px" ></p>  
                 </div>
             </div>
         </section>
