@@ -62,9 +62,9 @@ public class ServicesController {
         return "eventRoom.html";
     }
 
-    @GetMapping("/persistCateringAndExtra")
+    @GetMapping("/persistCatering")
     public String persistCateringAndExtra(ModelMap modelo) {
-        return "persistCateringAndExtra.html";
+        return "persistCatering.html";
     }
 
     @GetMapping("/persistEventRoom")
@@ -115,7 +115,7 @@ public class ServicesController {
             model.put("price", price);
             model.put("description", description);
             model.put("photo", photo);
-            return "redirect:/servicios/persistCateringAndExtra";
+            return "redirect:/servicios/persistExtra";
         }
         return "redirect:/servicios/extra";
     }
@@ -137,7 +137,7 @@ public class ServicesController {
             model.put("description", description);
             model.put("photo", photo);
             model.put("price", price);
-            return "redirect:/servicios/persistCateringAndExtra";
+            return "redirect:/servicios/persistEventRoom";
         }
         return "redirect:/servicios/eventRoom";
     }

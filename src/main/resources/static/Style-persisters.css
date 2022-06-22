@@ -1,0 +1,32 @@
+@import url(Style-menu.css);
+@import url(Style-footer.css);
+@import url(Style-login.css);
+
+body {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/images/fiesta2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.formulario input {
+    width: 70%;
+    height: 3%;
+    display: block;
+    margin: auto;
+    margin-bottom: 2rem;
+    background-color: transparent;
+    border: white thin solid;
+/*    border-bottom: white thin solid;*/
+    text-align: center;
+    outline: none;
+    padding: 12px ;
+    font-size: .9rem;
+    color: antiquewhite;
+}
+#photo{
+    padding: 25px  0.5px;
+}

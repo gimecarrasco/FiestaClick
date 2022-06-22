@@ -6,8 +6,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-        <link rel="stylesheet" href="/../../Style-index.css">
-        <link rel="stylesheet" type="text/css" href="/../../fontello.css">
+        <link rel="stylesheet" href="/../../Style-persisters.css">
+        <link rel="stylesheet" type="text/css" href="/font/fontello.css">
         <title>Fiesta Click</title>
     </head>
 
@@ -24,20 +24,15 @@
             <br>
             <div class="container-form">
                 <form  action="/servicios/registerExtra" method="POST"  class="formulario" enctype="multipart/form-data" >
-                    <h2 class="create-account">Completa los siguientes registros de tu servicio</h2>
-
-                    <br>  
+                    <h2 class="create-account">Registrá tu Servicio de Entretenimiento</h2>         
                     <label>Nombre</label>              
-                    <input class="form-control" type="text" name="name"required>
+                    <input class="form-control" type="text" name="name" required autofocus>
                     <label>Descripción</label>
-                    <input class="form-control" type="text" name="description"  required>
-                    <br>
+                    <input class="form-control" type="text" name="description"  required autofocus>
                     <label>Foto</label>
-                    <input class="form-control"  type="file" name="photo" required><br>
+                    <input class="form-control" id="photo" type="file" name="photo" required autofocus>
                     <label>Precio</label>
-                    <input class="form-control" type="number" name="price" required>
-                    <br>
-                    <br>
+                    <input class="form-control" type="number" name="price" required autofocus>             
                     <button type="submit">Cargar</button>
                 </form>
             </div>
